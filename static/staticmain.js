@@ -1,4 +1,4 @@
-console.log("Loaded JavaScript snippet from API.");
+console.log("Loaded JavaScript Snippet from API.");
 
 function pushedMsg() {
 	var msg = document.createElement("p");
