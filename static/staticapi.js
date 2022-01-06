@@ -1,7 +1,7 @@
 console.log("Loaded JavaScript snippet from API.");
 
-function steamStoreMsg() {
-    document.body.innerHTML = "<p>请关注Steam商店在中国大陆遭受SNI阻断事件。<a href='https://jekyll.lwd-temp.top/article/steam-banned/'>详细信息</a></p>" + document.body.innerHTML;
+function pushedMsg() {
+    document.body.innerHTML = "<p>最近事可不少，若有闲心便点进去看看吧。<a href='https://jekyll.lwd-temp.top/article/script-of-a-dark-fairytale/'>详细信息</a></p>" + document.body.innerHTML;
 };
 
 function ready(fn){
@@ -21,4 +21,4 @@ function ready(fn){
 	}
 }
 
-ready(steamStoreMsg);
+ready(pushedMsg);
