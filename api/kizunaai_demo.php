@@ -1,4 +1,12 @@
 <?php
+
+    /*
+     * 绊爱日历项目云端API
+     * 参数：id = 0630 客户端ID
+     *     date = MM-DD格式，需要与服务器时间相同 例如01-01 02-22 12-31
+     * API返回：用于直接获取OSS（对象存储服务，可以理解为网盘）上文件的URL
+    */
+    
     /*
     error-00   没有请求id
     error-01   请求id不存在
@@ -8,7 +16,7 @@
 
     // 文件结构json，注意是字符串
     // 演示用，生产环境记得换上真的
-    $file_struct_str = '{"1-1": ["1.mp4","2.mp4"], "1-2": ["1.mp4","2.mp4"]}';
+    $file_struct_str = '{"02-28": ["1.mp4","2.mp4"], "02-29": ["1.mp4"]}';
     // OSS基础URL前部分
     $oss_base_url_a = 'https://drive.lwd-temp.top/api?path=';
     // OSS基础URL后部分
@@ -73,4 +81,3 @@
     {
         echo "error-00";
     }
-?>
