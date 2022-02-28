@@ -49,18 +49,18 @@
                     //if($client_date == $i)
                     //{
                         // $video=scandir($dir."/".$i);//获取视频分目录下所有文件
-                        $videos=array_values($file_struct[$i]);//直接根据日期获取视频列表
+                        $videos=$file_struct[$client_date];//直接根据日期获取视频列表
                         // $new_video=array_slice($video,2);//截取数组 // 不再需要，我们的json里不会出现'.'和'..'
                         if(count($videos) > 1)//count($new_video)获取数组长度
                         {
                             $rand_video=$videos[array_rand($videos)];//随机获取数组元素
-                            $abs_dir=$dir."/".$i."/".$rand_video;
+                            $abs_dir=$dir."/".$client_date."/".$rand_video;
                             $oss_url=$oss_base_url_a.$abs_dir.$oss_base_url_b;
                             echo $oss_url;
                         }
                         else
                         {
-                            $abs_dir=$dir."/".$i."/".$videos[0];
+                            $abs_dir=$dir."/".$client_date."/".$videos[0];
                             $oss_url=$oss_base_url_a.$abs_dir.$oss_base_url_b;
                             echo $oss_url;
                         }
