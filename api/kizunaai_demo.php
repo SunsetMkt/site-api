@@ -1,5 +1,5 @@
 <?php
-
+    header("Access-Control-Allow-Origin: *");
     /*
      * 绊爱日历项目云端API
      * 参数：id = 0630 客户端ID
