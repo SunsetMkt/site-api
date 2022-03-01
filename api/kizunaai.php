@@ -1,5 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");//cors，允许一切引用
+error_reporting(0);//禁止报错
 /*
      * 绊爱日历项目云端API
      * 参数：id = 63045280 Bilbili原作者ID
