@@ -9,7 +9,7 @@ if (isset($_GET['mid'])) {
 }
 
 $ch = curl_init('https://api.bilibili.com/x/space/acc/info?mid=' . $mid . '&jsonp=jsonp');
-
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $result = curl_exec($ch);
 
 //json转数组（多维数组）
