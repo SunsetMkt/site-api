@@ -1,5 +1,6 @@
 <?php
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: *"); //cors，允许一切引用
+error_reporting(0); //禁止报错
 
 //处理next和oid值
 if (isset($_GET['next'])) {
