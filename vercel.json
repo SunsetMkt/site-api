@@ -1,8 +1,5 @@
 {
     "functions": {
-      "api/ikialive.php": {
-        "runtime": "vercel-php@0.4.0"
-      },
       "api/33reply.php": {
         "runtime": "vercel-php@0.4.0"
       }
