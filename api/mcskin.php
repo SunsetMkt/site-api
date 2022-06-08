@@ -13,7 +13,7 @@ if (isset($_GET['format'])) {
 }
 
 if(empty($userid)) {
-    echo "Usage: index.php?id=[Player ID]&format=[url/json]";
+    print("Usage: index.php?id=[Player ID]&format=[url/json/image]");
     die();
 }
 
@@ -46,8 +46,10 @@ if($format == "image") {
 }
 else if($format == "json") {
     header("Content-Type: application/json");
-    print("{\"url\":\"".$skin."\"}");
+    $jsonDict = {"url": $skin, "profile": $profileJson};
+    print(json_encode($jsonDict));
 }
 else {
+    header("Content-Type: text/plain");
     print($skin);
 }
