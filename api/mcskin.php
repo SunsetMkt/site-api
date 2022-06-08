@@ -13,7 +13,7 @@ if (isset($_GET['format'])) {
 }
 
 if(empty($userid)) {
-    echo "Usage: index.php?id=[Player ID]&format=[url/json]"
+    echo "Usage: index.php?id=[Player ID]&format=[url/json]";
     die();
 }
 
