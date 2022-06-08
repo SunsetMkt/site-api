@@ -1,9 +1,19 @@
 <?php
+error_reporting(0);
 
-$userid = $_GET["id"];
-$format = $_GET["format"];
+if (isset($_GET['id'])) {
+    $userid = $_GET['id'];
+} else {
+    $userid = "";
+}
+if (isset($_GET['format'])) {
+    $format = $_GET['format'];
+} else {
+    $format = "url";
+}
 
 if(empty($userid)) {
+    echo "Usage: index.php?id=[Player ID]&format=[url/json]"
     die();
 }
 
