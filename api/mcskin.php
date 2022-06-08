@@ -12,24 +12,24 @@ if (isset($_GET['format'])) {
     $format = "url";
 }
 
-if(empty($userid)) {
+if (empty($userid)) {
     print("Usage: index.php?id=[Player ID]&format=[url/json/image]");
     die();
 }
 
 $API_PROFILE_URL = "https://api.mojang.com/users/profiles/minecraft/";
 
-$profile = file_get_contents($API_PROFILE_URL.$userid);
+$profile = file_get_contents($API_PROFILE_URL . $userid);
 $profileJson = json_decode($profile, true);
 
 $sessionId = $profileJson["id"];
 
 $API_SESSION_URL = "https://sessionserver.mojang.com/session/minecraft/profile/";
 
-$session = @file_get_contents($API_SESSION_URL.$sessionId);
+$session = @file_get_contents($API_SESSION_URL . $sessionId);
 $sessionJson = json_decode($session, true);
 
-if($session == null) {
+if ($session == null) {
     header("HTTP/1.1 426 TooManyRequests");
     die("426");
 }
@@ -40,16 +40,14 @@ $textureJson = json_decode($textureRaw, true);
 
 $skin = $textureJson["textures"]["SKIN"]["url"];
 
-if($format == "image") {
+if ($format == "image") {
     header("Content-Type: image/png");
     print(file_get_contents($skin, true));
-}
-else if($format == "json") {
+} else if ($format == "json") {
     header("Content-Type: application/json");
-    $jsonDict = {"url": $skin, "profile": $profileJson};
-    print(json_encode($jsonDict));
-}
-else {
+    $jsonArray = array("url" => $skin, "profile" => $profileJson);
+    print(json_encode($jsonArray));
+} else {
     header("Content-Type: text/plain");
     print($skin);
 }
