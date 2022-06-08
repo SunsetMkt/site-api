@@ -13,8 +13,7 @@ if (isset($_GET['format'])) {
 }
 
 if (empty($userid)) {
-    print("Usage: index.php?id=[Player ID]&format=[url/json/image]");
-    die();
+    die("Usage: index.php?id=[Player ID]&format=[url/json/image]");
 }
 
 $API_PROFILE_URL = "https://api.mojang.com/users/profiles/minecraft/";
@@ -30,8 +29,8 @@ $session = @file_get_contents($API_SESSION_URL . $sessionId);
 $sessionJson = json_decode($session, true);
 
 if ($session == null) {
-    header("HTTP/1.1 426 TooManyRequests");
-    die("426");
+    header($_SERVER['SERVER_PROTOCOL'] . " 404 Not Found", true);
+    die("404");
 }
 
 $textureB64 = $sessionJson["properties"][0]["value"];
