@@ -33,6 +33,9 @@ curl_close($ch);
 
 // Return the avatar
 if ($type == 'raw') {
+    // mime type
+    header('Content-Type: image/png');
+    // output
     echo $output;
 } else {
     header('Location: ' . $url);
