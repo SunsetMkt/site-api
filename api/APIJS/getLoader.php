@@ -3,9 +3,9 @@
 header('Access-Control-Allow-Origin: *');
 
 // Open file
-$file = fopen(__DIR__ . '/../static/staticmain.js', "r");
+$file = fopen(__DIR__ . '/../../static/staticapi.js', "r");
 // Read file
-$content = fread($file, filesize(__DIR__ . '/../static/staticmain.js'));
+$content = fread($file, filesize(__DIR__ . '/../../static/staticapi.js'));
 // Close file
 fclose($file);
 
