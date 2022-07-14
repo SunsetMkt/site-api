@@ -1,5 +1,6 @@
 <?php
-error_reporting(0);
+header("Access-Control-Allow-Origin: *"); //cors，允许一切引用
+error_reporting(0); //禁止报错
 
 if (isset($_GET['id'])) {
     $userid = $_GET['id'];

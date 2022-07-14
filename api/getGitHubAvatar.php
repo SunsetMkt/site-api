@@ -6,7 +6,8 @@
 // @param string $username The GitHub username
 // @param string $type Return raw image or redirect to avatar
 // @return string The avatar image or redirect
-
+header("Access-Control-Allow-Origin: *"); //cors，允许一切引用
+error_reporting(0); //禁止报错
 
 // Get the username, default to "octocat"
 $username = isset($_GET['username']) ? $_GET['username'] : 'octocat';
