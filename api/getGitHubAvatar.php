@@ -36,6 +36,8 @@ curl_close($ch);
 if ($type == 'raw') {
     // mime type
     header('Content-Type: image/png');
+    // cache for 10 minutes
+    header('Cache-Control: max-age=600');
     // output
     echo $output;
 } else {
