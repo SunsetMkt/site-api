@@ -119,6 +119,8 @@ def api_v1(path):
     # getGitHubAvatar api
     # GitHub Avatar Fetcher
     if path == "getGitHubAvatar":
+        # Allow all origins
+        flask.Response.headers.add("Access-Control-Allow-Origin", "*")
         # Get args: username, type
         username = flask.request.args.get("username")
         type = flask.request.args.get("type")
@@ -181,6 +183,8 @@ def api_v1(path):
     # kizunaai api
     # KizunaAI Directories List
     if path == "kizunaai":
+        # Allow all origins
+        flask.Response.headers.add("Access-Control-Allow-Origin", "*")
         # Get args: id, date
         id = flask.request.args.get("id")
         date = flask.request.args.get("date")
