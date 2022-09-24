@@ -1,5 +1,6 @@
 import base64
 import json
+import mimetypes
 import os
 import random
 import re
@@ -101,7 +102,7 @@ def api_v1(path):
             'plat': 1
         })
         # Return reply
-        return reply.json()
+        return flask.Response(reply.json(), mimetype='application/json')
 
     # getBiliUserInfo api
     # Bilibili User Info Fetcher
@@ -118,7 +119,7 @@ def api_v1(path):
             'jsonp': 'jsonp'
         })
         # Return user info
-        return reply.json()
+        return flask.Response(reply.json(), mimetype='application/json')
 
     # getGitHubAvatar api
     # GitHub Avatar Fetcher
@@ -138,14 +139,13 @@ def api_v1(path):
             # Get avatar url
             avatar_url = requests.get(
                 'https://api.github.com/users/' + username).json()["avatar_url"]
-            # Set mimetype
-            flask.Response.mimetype = "image/png"
+            rawimage = requests.get(avatar_url).content
             # Return raw image
-            return requests.get(avatar_url).content
+            return flask.Response(rawimage, mimetype="image/png")
         # If type is json
         if type == "json":
             # Return avatar url
-            return requests.get('https://api.github.com/users/' + username).json()["avatar_url"]
+            return flask.Response(requests.get('https://api.github.com/users/' + username).json()["avatar_url"], mimetype="application/json")
         # If type is redirect
         if type == "redirect":
             # Redirect to avatar url
@@ -251,13 +251,13 @@ def api_v1(path):
             return skinUrl
         elif format == "json":
             dict = {"url": skinUrl, 'profile': profile, 'session': session}
-            return json.dumps(dict)
+            return flask.Response(json.dumps(dict), mimetype='application/json')
         elif format == "image":
             # Get image
             image = requests.get(skinUrl).content
             return flask.Response(image, mimetype="image/png")
         else:
-            return skinUrl
+            return flask.Response(skinUrl, mimetype='text/plain')
 
     # bomb api
     # return a gzip bomb
