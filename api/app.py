@@ -1,6 +1,5 @@
 import base64
 import json
-import mimetypes
 import os
 import random
 import re
