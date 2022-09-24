@@ -10,7 +10,7 @@ import flask_gzipbomb
 import requests
 
 app = flask.Flask(__name__)
-app.config["DEBUG"] = True # It's open source, so why not?
+app.config["DEBUG"] = True  # It's open source, so why not?
 
 
 # CORS
@@ -262,6 +262,11 @@ def api_v1(path):
     # return a gzip bomb
     if path == "bomb":
         return flask_gzipbomb.GzipBombResponse(size='10G')
+
+    # ZeroDivisionError api
+    # Trigger a ZeroDivisionError on purpose
+    if path == "ZeroDivisionError":
+        return 1/0
 
     # If path is not found, return 404
     return "404 Not Found", 404
