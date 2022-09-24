@@ -10,8 +10,10 @@ import flask_gzipbomb
 import requests
 
 app = flask.Flask(__name__)
-app.config["DEBUG"] = True  # It's open source, so why not?
 
+app.config['ENV'] = 'development'  # It's open source, so why not?
+app.config['DEBUG'] = True
+app.config['TESTING'] = True
 
 # CORS
 flask_cors.CORS(app, resources={r"/*": {"origins": "*"}})
