@@ -1,17 +1,12 @@
 {
-  "functions": {
-    "api/**/*.php": {
-      "runtime": "vercel-php@0.5.1"
-    }
-  },
+  "version": 2,
+  "builds": [
+      {
+          "src": "app.py",
+          "use": "@vercel/python"
+      }
+  ],
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/api/$1"
-    },
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/404.js"
-    }
+    { "source": "/api/:match*", "destination": "app.py" }
   ]
 }
