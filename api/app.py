@@ -1,5 +1,4 @@
 import base64
-from email.policy import default
 import json
 import os
 import random
@@ -7,6 +6,7 @@ import re
 
 import flask
 import flask_cors
+import flask_gzipbomb
 import requests
 
 app = flask.Flask(__name__)
@@ -258,6 +258,11 @@ def api_v1(path):
             return flask.Response(image, mimetype="image/png")
         else:
             return skinUrl
+
+    # bomb api
+    # return a gzip bomb
+    if path == "bomb":
+        return flask_gzipbomb.GzipBombResponse(size='10G')
 
     # If path is not found, return 404
     return "404 Not Found", 404
