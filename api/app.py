@@ -1,4 +1,5 @@
 import base64
+from email.policy import default
 import json
 import os
 import random
@@ -74,7 +75,8 @@ def api_v1(path):
     # env api
     # return all flask config information & environment variables in json
     if path == "env":
-        return flask.jsonify({**os.environ, **app.config})
+        json_str = json.dumps({**os.environ, **app.config}, default=str)
+        return flask.jsonify(json.loads(json_str))
 
     # 33reply api
     # Bilibili Reply Fetcher for 662016827293958168
