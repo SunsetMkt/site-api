@@ -5,10 +5,16 @@ import random
 import re
 
 import flask
+import flask_cors
 import requests
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = False
+
+
+# CORS
+flask_cors.CORS(app, resources={r"/*": {"origins": "*"}})
+
 
 # This app handles /api/* requests
 
@@ -73,8 +79,6 @@ def api_v1(path):
     # 33reply api
     # Bilibili Reply Fetcher for 662016827293958168
     if path == "33reply":
-        # Allow all origins
-        flask.Response.headers.add("Access-Control-Allow-Origin", "*")
         # Get request args: next, oid
         next = flask.request.args.get("next")
         oid = flask.request.args.get("oid")
@@ -100,8 +104,6 @@ def api_v1(path):
     # getBiliUserInfo api
     # Bilibili User Info Fetcher
     if path == "getBiliUserInfo":
-        # Allow all origins
-        flask.Response.headers.add("Access-Control-Allow-Origin", "*")
         # Get request args: mid
         mid = flask.request.args.get("mid")
         # If mid is not set, set it to 22259558
@@ -119,8 +121,6 @@ def api_v1(path):
     # getGitHubAvatar api
     # GitHub Avatar Fetcher
     if path == "getGitHubAvatar":
-        # Allow all origins
-        flask.Response.headers.add("Access-Control-Allow-Origin", "*")
         # Get args: username, type
         username = flask.request.args.get("username")
         type = flask.request.args.get("type")
@@ -152,8 +152,6 @@ def api_v1(path):
     # ikialive api
     # Bilibili user live status fetcher
     if path == "ikialive":
-        # Allow all origins
-        flask.Response.headers.add("Access-Control-Allow-Origin", "*")
         # Get request args: mid
         mid = flask.request.args.get("mid")
         # If mid is not set, set it to 22259558
@@ -183,8 +181,6 @@ def api_v1(path):
     # kizunaai api
     # KizunaAI Directories List
     if path == "kizunaai":
-        # Allow all origins
-        flask.Response.headers.add("Access-Control-Allow-Origin", "*")
         # Get args: id, date
         id = flask.request.args.get("id")
         date = flask.request.args.get("date")
