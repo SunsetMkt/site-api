@@ -10,7 +10,7 @@ import flask_gzipbomb
 import requests
 
 app = flask.Flask(__name__)
-app.config["DEBUG"] = False
+app.config["DEBUG"] = True # It's open source, so why not?
 
 
 # CORS
