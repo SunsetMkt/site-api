@@ -460,7 +460,7 @@ def api_dir(path):
         # Get file
         file = open(path, "rb")
         # Return file
-        return flask.send_file(file, mimetype="octet-stream", as_attachment=True, attachment_filename=os.path.basename(path))
+        return flask.send_file(file, mimetype="octet-stream", as_attachment=True, download_name=os.path.basename(path))
     # If path is not a file or directory, return 404
     else:
         return path + " not found"
