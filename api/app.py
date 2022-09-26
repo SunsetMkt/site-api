@@ -287,7 +287,7 @@ def api_v1(path):
         # If type is json
         if type == "json":
             # Return avatar url
-            return flask.Response(requests.get('https://api.github.com/users/' + username).json(), mimetype="application/json")
+            return flask.jsonify(requests.get('https://api.github.com/users/' + username).text)
         # If type is redirect
         if type == "redirect":
             # Redirect to avatar url
@@ -428,8 +428,8 @@ def api_v1(path):
             return "Usage: ?username=[username]&password=[password]"
         return flask.Response(freenom.fnRenew(username, password), mimetype='text/plain')
 
-    # If path is not found, return 404
-    # return "404 Not Found", 404
+    # Raise 404
+    return flask.abort(404)
     # There's already a 404 handler
 
 
