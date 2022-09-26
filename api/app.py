@@ -462,7 +462,7 @@ def api_dir(path):
         html = "<html><head><title>Index of " + path + \
             "</title></head><body><h1>Index of " + path + "</h1><hr><ul>"
         for file in files:
-            html += "<li><a href=\"" + file + "\">" + file + "</a></li>"
+            html += "<li><a href=\"" + file + "/" + "\">" + file + "</a></li>"
         html += "</ul><hr></body></html>"
         return flask.Response(html, mimetype='text/html')
     # If path is a file, return it
@@ -471,6 +471,29 @@ def api_dir(path):
         file = open(path, "rb")
         # Return file
         return flask.send_file(file, mimetype="octet-stream", as_attachment=True, download_name=os.path.basename(path))
+    # If ends with /
+    elif path.endswith("/"):
+        # Remove the last / and check if it's a file
+        path = path[:-1]
+        # If path is a file, return it
+        if os.path.isfile(path):
+            # Get file
+            file = open(path, "rb")
+            # Return file
+            return flask.send_file(file, mimetype="octet-stream", as_attachment=True, download_name=os.path.basename(path))
+        # If path is a directory, return a list of files
+        elif os.path.isdir(path):
+            # Get files
+            files = os.listdir(path)
+            # Generate HTML code
+            html = "<html><head><title>Index of " + path + \
+                "</title></head><body><h1>Index of " + path + "</h1><hr><ul>"
+            for file in files:
+                html += "<li><a href=\"" + file + "/" + "\">" + file + "</a></li>"
+            html += "</ul><hr></body></html>"
+            return flask.Response(html, mimetype='text/html')
+        else:
+            return path + " not found"
     # If path is not a file or directory, return 404
     else:
         return path + " not found"
@@ -485,7 +508,7 @@ def api_dir_root1():
     # Generate HTML code
     html = "<html><head><title>Index of /</title></head><body><h1>Index of /</h1><hr><ul>"
     for file in files:
-        html += "<li><a href=\"" + file + "\">" + file + "</a></li>"
+        html += "<li><a href=\"" + file + "/" + "\">" + file + "</a></li>"
     html += "</ul><hr></body></html>"
     return flask.Response(html, mimetype='text/html')
 
