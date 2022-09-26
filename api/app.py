@@ -62,7 +62,7 @@ def redirect_v1_root2():
 
 
 @app.route("/api/v1/")
-def api_v1_root():
+def api_v1_root1():
     return flask.jsonify({
         "status": "success",
         "message": "API v1 root",
