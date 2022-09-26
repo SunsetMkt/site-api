@@ -443,40 +443,36 @@ def api_v1_root():
 
 
 # Handle /api/dir/*
-# /api/dir/a/b/ will list file in /a/b/
-# /api/dir/a/b will list file in /a/b
+# /api/dir/ list files in /
+# /api/dir/a/b/ list files in /a/b/
 # If it's a file, return it
 @app.route("/api/dir/<path:path>")
 def api_dir(path):
-    # Get args: raw
-    raw = flask.request.args.get("raw")
-    # If raw is empty, set raw to False
-    if raw == None:
-        raw = False
-    # If path is empty, return help message
-    if path == "":
-        return "Usage: ?raw=[true/false]"
-    # Get file path
-    file_path = os.path.join(path)
-    # If file_path is a file, return it
-    if os.path.isfile(file_path):
-        if raw == "true":
-            return flask.send_file(file_path)
-        else:
-            return flask.Response(file_path, mimetype='text/plain')
-    # If file_path is a directory, return file list
-    elif os.path.isdir(file_path):
-        # Get file list
-        file_list = os.listdir(file_path)
-        # If raw == "true", return file list
-        if raw == "true":
-            return flask.Response(json.dumps(file_list), mimetype='application/json')
-        # If raw == "false", return file list
-        else:
-            return flask.Response(file_list, mimetype='text/plain')
-    # If file_path is not a file or directory, return 404
+    # Get path
+    path = "/" + path
+    # If path is a directory, return a list of files
+    if os.path.isdir(path):
+        # Get files
+        files = os.listdir(path)
+        # Return files
+        return flask.jsonify(files)
+    # If path is a file, return it
+    elif os.path.isfile(path):
+        # Get file
+        file = open(path, "rb")
+        # Return file
+        return flask.send_file(file)
+    # If path is not a file or directory, return 404
     else:
         return flask.abort(404)
+
+# Handle /api/dir
+# Redirect to /api/dir/
+
+
+@app.route("/api/dir")
+def api_dir_root():
+    return flask.redirect("/api/dir/", code=302)
 
 
 # 404 handler
@@ -496,4 +492,4 @@ def internal_server_error(e):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=80)
+    app.run(host="0.0.0.0", port=80, debug=True)
