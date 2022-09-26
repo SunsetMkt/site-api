@@ -7,12 +7,16 @@
     },
     "rewrites": [
         {
+            "source": "/api/",
+            "destination": "/api/app.py"
+        },
+        {
             "source": "/api/:match*",
             "destination": "/api/app.py"
         },
         {
-            "source": "/api/",
-            "destination": "/api/app.py"
+            "source": "/api/(.*)",
+            "destination": "/api/404.js"
         }
     ]
 }
