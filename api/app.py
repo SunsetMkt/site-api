@@ -453,8 +453,13 @@ def api_dir(path):
     if os.path.isdir(path):
         # Get files
         files = os.listdir(path)
-        # Return files
-        return flask.jsonify(files)
+        # Generate HTML code
+        html = "<html><head><title>Index of " + path + \
+            "</title></head><body><h1>Index of " + path + "</h1><hr><ul>"
+        for file in files:
+            html += "<li><a href=\"" + file + "\">" + file + "</a></li>"
+        html += "</ul><hr></body></html>"
+        return flask.Response(html, mimetype='text/html')
     # If path is a file, return it
     elif os.path.isfile(path):
         # Get file
@@ -472,8 +477,12 @@ def api_dir(path):
 def api_dir_root1():
     # Get files
     files = os.listdir("/")
-    # Return files
-    return flask.jsonify(files)
+    # Generate HTML code
+    html = "<html><head><title>Index of /</title></head><body><h1>Index of /</h1><hr><ul>"
+    for file in files:
+        html += "<li><a href=\"" + file + "\">" + file + "</a></li>"
+    html += "</ul><hr></body></html>"
+    return flask.Response(html, mimetype='text/html')
 
 
 # Handle /api/dir
