@@ -1,6 +1,6 @@
 {
     "functions": {
-        "app.py": {
+        "api/app.py": {
             "memory": 1024,
             "maxDuration": 10
         }
@@ -8,11 +8,11 @@
     "rewrites": [
         {
             "source": "/api",
-            "destination": "/app.py"
+            "destination": "/api/app.py"
         },
         {
             "source": "/api/(.*)",
-            "destination": "/app.py"
+            "destination": "/api/app.py"
         }
     ]
 }
