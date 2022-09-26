@@ -374,7 +374,7 @@ def api_v1(path):
         format = flask.request.args.get("format")
         # If id is empty, return help message
         if id == None:
-            return "Usage: index.php?id=[Player ID]&format=[url/json/image]"
+            return "Usage: ?id=[Player ID]&format=[url/json/image]"
         # If format is empty, set format to "url"
         if format == None:
             format = "url"
