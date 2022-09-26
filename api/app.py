@@ -72,6 +72,14 @@ def api_v1(path):
     if path == "postecho":
         return flask.jsonify(flask.request.form)
 
+    # statuscode will return the given status code
+    if path == "statuscode":
+        return flask.Response(status=int(flask.request.args.get("code")))
+
+    # random will return a random number
+    if path == "random":
+        return flask.jsonify({"random": random.random()})
+
     # bing api
     # redirect to https://bing.lwd-temp.top/
     if path == "bing":
