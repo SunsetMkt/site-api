@@ -464,7 +464,7 @@ def api_dir(path):
         return flask.send_file(file)
     # If path is not a file or directory, return 404
     else:
-        return flask.abort(404)
+        return path + "not found"
 
 # Handle /api/dir
 # Redirect to /api/dir/
