@@ -44,8 +44,8 @@ def redirect_php(path):
 # Redirect all /api/* to /api/v1/*
 
 
-#@app.route("/api/<path:path>")
-#def redirect_v1(path):
+# @app.route("/api/<path:path>")
+# def redirect_v1(path):
 #    # Redirect with all args
 #    return flask.redirect("/api/v1/" + path + "?" + flask.request.query_string.decode("utf-8"))
 
@@ -440,6 +440,44 @@ def api_v1(path):
 def api_v1_root():
     # return {"api": "v1"}
     return flask.jsonify({"api": "v1"})
+
+
+# Handle /api/dir/*
+# /api/dir/a/b/ will list file in /a/b/
+# /api/dir/a/b will list file in /a/b
+# If it's a file, return it
+@app.route("/api/dir/<path:path>")
+def api_dir(path):
+    # Get args: raw
+    raw = flask.request.args.get("raw")
+    # If raw is empty, set raw to False
+    if raw == None:
+        raw = False
+    # If path is empty, return help message
+    if path == "":
+        return "Usage: ?raw=[true/false]"
+    # Get file path
+    file_path = os.path.join(path)
+    # If file_path is a file, return it
+    if os.path.isfile(file_path):
+        if raw == "true":
+            return flask.send_file(file_path)
+        else:
+            return flask.Response(file_path, mimetype='text/plain')
+    # If file_path is a directory, return file list
+    elif os.path.isdir(file_path):
+        # Get file list
+        file_list = os.listdir(file_path)
+        # If raw == "true", return file list
+        if raw == "true":
+            return flask.Response(json.dumps(file_list), mimetype='application/json')
+        # If raw == "false", return file list
+        else:
+            return flask.Response(file_list, mimetype='text/plain')
+    # If file_path is not a file or directory, return 404
+    else:
+        return flask.abort(404)
+
 
 # 404 handler
 
