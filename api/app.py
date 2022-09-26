@@ -192,10 +192,29 @@ def api_v1(path):
         return flask.jsonify({"status": "ok"})
 
     # env api
-    # return all flask config information & environment variables in json
+    # return all flask config information, environment variables, Python config & sys info in json
     if path == "env":
-        json_str = json.dumps({**os.environ, **app.config}, default=str)
-        return flask.jsonify(json.loads(json_str))
+        #json_str = json.dumps({**os.environ, **app.config}, default=str)
+
+        # get all flask config information
+        flask_config = {}
+        for key in app.config:
+            flask_config[key] = app.config[key]
+
+        # get all environment variables
+        env = {}
+        for key in os.environ:
+            env[key] = os.environ[key]
+
+        # get all Python config & sys info
+        python_config = {}
+        for key in dir(sys):
+            python_config[key] = getattr(sys, key)
+
+        outputJson = json.dumps(
+            {"flask_config": flask_config, "env": env, "python_config": python_config}, default=str)
+
+        return flask.Response(outputJson, mimetype='application/json')
 
     # 33reply api
     # Bilibili Reply Fetcher for 662016827293958168
