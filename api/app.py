@@ -507,7 +507,7 @@ def api_v1(path):
         # If username or password is empty, return help message
         if username == None or password == None:
             return "Usage: ?username=[username]&password=[password]"
-        return flask.Response(freenom.fnRenew(username, password), mimetype='text/plain')
+        return flask.Response(fnRenew(username, password), mimetype='text/plain')
 
     # Raise 404
     return flask.abort(404)
