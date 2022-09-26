@@ -13,6 +13,8 @@ import flask_cors
 import flask_gzipbomb
 import requests
 
+import freenom
+
 app = flask.Flask(__name__)
 
 # app.config['ENV'] = 'development'  # It's open source, so why not?
@@ -410,6 +412,17 @@ def api_v1(path):
     # Trigger a ZeroDivisionError on purpose
     if path == "ZeroDivisionError":
         return 1/0
+
+    # freenom api
+    # Call freenom.fnRenew(username, password)
+    if path == "freenom":
+        # Get args: username, password
+        username = flask.request.args.get("username")
+        password = flask.request.args.get("password")
+        # If username or password is empty, return help message
+        if username == None or password == None:
+            return "Usage: ?username=[username]&password=[password]"
+        return flask.Response(freenom.fnRenew(username, password), mimetype='text/plain')
 
     # If path is not found, return 404
     return "404 Not Found", 404
