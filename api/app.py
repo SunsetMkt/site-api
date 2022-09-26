@@ -4,6 +4,7 @@ import math
 import os
 import random
 import re
+import sys
 import time
 import traceback
 
@@ -162,7 +163,18 @@ def api_v1(path):
             sqrtC = sqrt(10005*one, one)
             return (Q*426880*sqrtC) // T
 
-        return flask.jsonify({"pi": str(pi_chudnovsky_bs(int(flask.request.args.get("n"))))})
+        try:
+            sys.set_int_max_str_digits(0)
+        except:
+            pass
+
+        # Start calculating and record time
+        start = time.time()
+        pi = pi_chudnovsky_bs(int(flask.request.args.get("n")))
+        end = time.time()
+        delta = end - start
+
+        return flask.jsonify({"pi": pi, "time": delta})
 
     # bing api
     # redirect to https://bing.lwd-temp.top/
