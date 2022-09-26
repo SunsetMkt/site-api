@@ -13,7 +13,7 @@ import flask_cors
 import flask_gzipbomb
 import requests
 
-import freenom
+import api.utils.freenom as freenom
 
 app = flask.Flask(__name__)
 
