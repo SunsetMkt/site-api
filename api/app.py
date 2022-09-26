@@ -11,13 +11,16 @@ import requests
 
 app = flask.Flask(__name__)
 
-app.config['ENV'] = 'development'  # It's open source, so why not?
-app.config['DEBUG'] = True
-app.config['TESTING'] = True
+# app.config['ENV'] = 'development'  # It's open source, so why not?
+# app.config['DEBUG'] = True
+# app.config['TESTING'] = True
+# Low performance.
 
 # CORS
-flask_cors.CORS(app, resources={r"/*": {"origins": "*"}})
-
+# flask_cors.CORS(app, resources={r"/*": {"origins": "*"}})
+# Allow *.lwd-temp.top and *.lwd-temp.top:port
+flask_cors.CORS(app, resources={
+                r"/*": {"origins": r"^(https?://)?(\w+\.)?lwd-temp\.top(:\d+)?$"}})
 
 # This app handles /api/* requests
 
@@ -43,6 +46,12 @@ def redirect_v1(path):
 @app.route("/api")
 def redirect_v1_root():
     return flask.redirect("/api/v1")
+
+
+@app.route("/api/")
+def redirect_v1_root2():
+    return flask.redirect("/api/v1")
+
 
 # Handle /api/v1/*
 
