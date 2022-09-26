@@ -58,6 +58,20 @@ def redirect_v1_root():
 def redirect_v1_root2():
     return flask.redirect("/api/v1")
 
+# Handle /api/v1/
+
+
+@app.route("/api/v1/")
+def api_v1_root():
+    return flask.jsonify({
+        "status": "success",
+        "message": "API v1 root",
+        "data": {
+            "version": "v1",
+            "description": "API v1 root",
+            "endpoints": "who cares?"
+        }
+    })
 
 # Handle /api/v1/*
 
