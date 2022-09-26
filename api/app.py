@@ -443,7 +443,6 @@ def api_v1_root():
 
 
 # Handle /api/dir/*
-# /api/dir/ list files in /
 # /api/dir/a/b/ list files in /a/b/
 # If it's a file, return it
 @app.route("/api/dir/<path:path>")
@@ -461,10 +460,21 @@ def api_dir(path):
         # Get file
         file = open(path, "rb")
         # Return file
-        return flask.send_file(file)
+        return flask.send_file(file, mimetype="octet-stream", as_attachment=True, attachment_filename=os.path.basename(path))
     # If path is not a file or directory, return 404
     else:
-        return path + "not found"
+        return path + " not found"
+
+
+# Handle /api/dir/
+# List files in /
+@app.route("/api/dir/")
+def api_dir_root1():
+    # Get files
+    files = os.listdir("/")
+    # Return files
+    return flask.jsonify(files)
+
 
 # Handle /api/dir
 # Redirect to /api/dir/
