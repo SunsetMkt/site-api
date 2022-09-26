@@ -509,6 +509,24 @@ def api_v1(path):
             return "Usage: ?username=[username]&password=[password]"
         return flask.Response(fnRenew(username, password), mimetype='text/plain')
 
+    """
+    # DANGEROUS! DO NOT USE IT!
+    # exec api
+    # Get posted Python code and execute it.
+    # Return the result.
+    if path == "exec":
+        # Get posted code
+        code = flask.request.data.decode("utf-8")
+        try:
+            # Execute code with exec()
+            exec(code)
+        except:
+            # Return traceback
+            return flask.Response(traceback.format_exc(), mimetype='text/plain')
+        # Return Done if code didn't return anything
+        return flask.Response("Done", mimetype='text/plain')
+    """
+
     # Raise 404
     return flask.abort(404)
     # There's already a 404 handler
