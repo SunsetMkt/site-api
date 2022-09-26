@@ -167,11 +167,15 @@ def api_v1(path):
         # If type is json
         if type == "json":
             # Return avatar url
-            return flask.Response(requests.get('https://api.github.com/users/' + username).json()["avatar_url"], mimetype="application/json")
+            return flask.Response(requests.get('https://api.github.com/users/' + username).json(), mimetype="application/json")
         # If type is redirect
         if type == "redirect":
             # Redirect to avatar url
             return flask.redirect(requests.get('https://api.github.com/users/' + username).json()["avatar_url"])
+        if type == "text":
+            # Return avatar url
+            return flask.Response(requests.get('https://api.github.com/users/' + username).json()["avatar_url"], mimetype="text/plain")
+        return flask.Response(requests.get('https://api.github.com/users/' + username).json()["avatar_url"], mimetype="text/plain")
 
     # ikialive api
     # Bilibili user live status fetcher
