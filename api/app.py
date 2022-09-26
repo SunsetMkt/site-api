@@ -56,7 +56,7 @@ def redirect_v1_root2():
 # Handle /api/v1/*
 
 
-@app.route("/api/v1/<path:path>")
+@app.route("/api/v1/<path:path>", methods=["GET", "POST"])
 def api_v1(path):
     # if path is empty, redirect to /api/v1
     if path == "":
@@ -67,6 +67,10 @@ def api_v1(path):
     # will return {"text": "hello"}
     if path == "echo":
         return flask.jsonify({"text": flask.request.args.get("text")})
+
+    # postecho will return the post data
+    if path == "postecho":
+        return flask.jsonify(flask.request.form)
 
     # bing api
     # redirect to https://bing.lwd-temp.top/
