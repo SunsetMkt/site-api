@@ -415,6 +415,7 @@ def api_v1(path):
 
     # freenom api
     # Call freenom.fnRenew(username, password)
+    # Check Freenom Domain Expiration Info
     if path == "freenom":
         # Get args: username, password
         username = flask.request.args.get("username")

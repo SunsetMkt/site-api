@@ -74,9 +74,9 @@ def fnRenew(username, password):
                               'paymentmethod': 'credit'
                           })
             if r.text.find('Order Confirmation') != -1:
-                log += domain + '续期成功'
+                log += domain + '续期成功' + '\n'
             else:
-                log += domain + '续期失败'
-        log += f'{domain} 还有 {days} 天续期'
+                log += domain + '续期失败' + '\n'
+        log += f'{domain} 还有 {days} 天续期' + '\n'
 
     return log
