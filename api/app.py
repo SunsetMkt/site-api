@@ -429,7 +429,8 @@ def api_v1(path):
         return flask.Response(freenom.fnRenew(username, password), mimetype='text/plain')
 
     # If path is not found, return 404
-    return "404 Not Found", 404
+    # return "404 Not Found", 404
+    # There's already a 404 handler
 
 
 # Handle /api/v1
