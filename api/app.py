@@ -287,7 +287,7 @@ def api_v1(path):
         # If type is json
         if type == "json":
             # Return avatar url
-            return flask.jsonify(requests.get('https://api.github.com/users/' + username).text)
+            return flask.jsonify(requests.get('https://api.github.com/users/' + username).json())
         # If type is redirect
         if type == "redirect":
             # Redirect to avatar url
