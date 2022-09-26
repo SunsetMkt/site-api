@@ -174,7 +174,7 @@ def api_v1(path):
         end = time.time()
         delta = end - start
 
-        return flask.jsonify({"pi": pi, "time": delta})
+        return flask.jsonify({"pi": str(pi), "time": delta})
 
     # bing api
     # redirect to https://bing.lwd-temp.top/
