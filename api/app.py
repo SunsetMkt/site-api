@@ -3,6 +3,7 @@ import json
 import os
 import random
 import re
+import traceback
 
 import flask
 import flask_cors
@@ -175,6 +176,7 @@ def api_v1(path):
         if type == "text":
             # Return avatar url
             return flask.Response(requests.get('https://api.github.com/users/' + username).json()["avatar_url"], mimetype="text/plain")
+        # If type is not raw, json, redirect, text, return text
         return flask.Response(requests.get('https://api.github.com/users/' + username).json()["avatar_url"], mimetype="text/plain")
 
     # ikialive api
@@ -312,7 +314,15 @@ def api_v1_root():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return flask.jsonify({"error": "not found"}), 404
+    trace = traceback.format_exc()
+    return flask.jsonify({"error": "not found", "trace": trace}), 404
+
+
+# 500 handler
+@app.errorhandler(500)
+def internal_server_error(e):
+    trace = traceback.format_exc()
+    return flask.jsonify({"error": "internal server error", "trace": trace}), 500
 
 
 if __name__ == "__main__":
