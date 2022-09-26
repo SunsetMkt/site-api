@@ -13,7 +13,10 @@ import flask_cors
 import flask_gzipbomb
 import requests
 
-import api.utils.freenom as freenom
+try:
+    import api.utils.freenom as freenom
+except ImportError:
+    import utils.freenom as freenom
 
 app = flask.Flask(__name__)
 
@@ -41,10 +44,10 @@ def redirect_php(path):
 # Redirect all /api/* to /api/v1/*
 
 
-@app.route("/api/<path:path>")
-def redirect_v1(path):
-    # Redirect with all args
-    return flask.redirect("/api/v1/" + path + "?" + flask.request.query_string.decode("utf-8"))
+#@app.route("/api/<path:path>")
+#def redirect_v1(path):
+#    # Redirect with all args
+#    return flask.redirect("/api/v1/" + path + "?" + flask.request.query_string.decode("utf-8"))
 
 # Redirect all /api to /api/v1
 
@@ -58,20 +61,6 @@ def redirect_v1_root():
 def redirect_v1_root2():
     return flask.redirect("/api/v1")
 
-# Handle /api/v1/
-
-
-@app.route("/api/v1/")
-def api_v1_root1():
-    return flask.jsonify({
-        "status": "success",
-        "message": "API v1 root",
-        "data": {
-            "version": "v1",
-            "description": "API v1 root",
-            "endpoints": "who cares?"
-        }
-    })
 
 # Handle /api/v1/*
 
