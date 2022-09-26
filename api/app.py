@@ -39,7 +39,7 @@ flask_cors.CORS(app, resources={
 @app.route("/api/<path:path>.php")
 def redirect_php(path):
     # Redirect with all args
-    return flask.redirect("/api/" + path + "?" + flask.request.query_string.decode("utf-8"))
+    return flask.redirect("/api/v1/" + path + "?" + flask.request.query_string.decode("utf-8"))
 
 # Redirect all /api/* to /api/v1/*
 
