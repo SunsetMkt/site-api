@@ -269,11 +269,15 @@ def api_v1_root():
 
 @app.route("/api/url/<path:path>")
 def api_url(path):
-    # Get path
+    # Get full request url
+    url = flask.request.url
+    # Remove host/api/url/
+    url = url.replace(flask.request.host_url + "api/url/", "")
+    print(url)
     # If path is empty, redirect to 404
-    if path == "":
+    if url == "":
         return flask.abort(404)
-    return myutils.strange_url.handle_url(path)
+    return myutils.strange_url.handle_url(url)
 
 
 """
