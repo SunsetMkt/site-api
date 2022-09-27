@@ -63,12 +63,14 @@ def index():
                                  time=nowtime,
                                  flask_version=flask_version)
 
+
+"""
+# static is a built-in feature of Flask. No need to write a function.
 # Handle /static/<path:filename>
-
-
 @app.route('/static/<path:filename>')
 def static_file(filename):
     return flask.send_from_directory('static', filename)
+"""
 
 
 # Handle /api/* requests
