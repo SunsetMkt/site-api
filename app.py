@@ -9,6 +9,7 @@ import random
 import sys
 import time
 import traceback
+import urllib
 
 import coolname
 import flask
@@ -264,20 +265,35 @@ def api_v1_root():
 
 
 # Handle /api/url/*
-# This is a url shortener
+# This is a url strange-ifier
+@app.route("/api/url")
+def api_url_root():
+    # Get all args
+    args = flask.request.args
+    # If have no args
+    if len(args) == 0:
+        # 404
+        return flask.abort(404)
+    # Try to get arg "url"
+    url = flask.request.args.get("url")
+    # if url is empty, get request url
+    if url == None:
+        url = flask.request.url
+        # decode url
+        url = urllib.parse.unquote(url)
+        # Remove host/api/url? from url
+        url = url.replace(flask.request.host_url + "api/url?", "")
+    return myutils.strange_url.toB(url)
 
 
 @app.route("/api/url/<path:path>")
 def api_url(path):
-    # Get full request url
-    url = flask.request.url
-    # Remove host/api/url/
-    url = url.replace(flask.request.host_url + "api/url/", "")
-    print(url)
-    # If path is empty, redirect to 404
-    if url == "":
+    # Get path
+    # If path is empty, 404
+    if path == "":
         return flask.abort(404)
-    return myutils.strange_url.handle_url(url)
+    else:
+        return myutils.strange_url.fromB(path)
 
 
 """
