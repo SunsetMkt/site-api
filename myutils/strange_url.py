@@ -8,5 +8,7 @@ def toB(url):
 
 def fromB(url):
     # 302
-    print(url)
-    return flask.Response(pybs.decode_string(url), status=302, headers={'Location': pybs.decode_string(url)})
+    try:
+        return flask.Response(pybs.decode_string(url), status=302, headers={'Location': pybs.decode_string(url)})
+    except:
+        raise Exception(url)
