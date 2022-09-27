@@ -13,13 +13,14 @@ import sys
 import time
 import traceback
 
+import coolname
 import flask
 import flask_cors
 import flask_gzipbomb
 import requests
 
 import myutils.freenom as freenom
-
+import myutils.bing as bing
 
 app = flask.Flask(__name__)
 
@@ -219,11 +220,6 @@ def api_v1(path):
         delta = end - start
 
         return flask.jsonify({"pi": str(pi), "time": delta})
-
-    # bing api
-    # redirect to https://bing.lwd-temp.top/
-    if path == "bing":
-        return flask.redirect("https://bing.lwd-temp.top/")
 
     # hello api
     # return {"hello": "world"}
@@ -484,6 +480,16 @@ def api_v1(path):
         # Return Done if code didn't return anything
         return flask.Response("Done", mimetype='text/plain')
     """
+
+    # word api
+    # Call coolname.generate_slug()
+    # Generate a random word
+    if path == "word":
+        return flask.Response(coolname.generate_slug(), mimetype='text/plain')
+
+    # bing api
+    if path == "bing":
+        return bing.get()
 
     # Raise 404
     return flask.abort(404)
