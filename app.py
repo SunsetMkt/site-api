@@ -112,7 +112,40 @@ app = flask.Flask(__name__)
 flask_cors.CORS(app, resources={
                 r"/*": {"origins": r"^(https?://)?(\w+\.)?lwd-temp\.top(:\d+)?$"}})
 
-# This app handles /api/* requests
+# Handle /favicon.ico
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return flask.send_from_directory(os.path.join(app.root_path, 'static'),
+                                     'favicon.ico',
+                                     mimetype='image/vnd.microsoft.icon')
+
+# Handle /robots.txt
+
+
+@app.route('/robots.txt')
+def robots():
+    return flask.send_from_directory(os.path.join(app.root_path, 'static'),
+                                     'robots.txt',
+                                     mimetype='text/plain')
+
+
+# Handle / (index)
+@app.route('/')
+def index():
+    nowtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    # From templates
+    return flask.render_template('index.html', nowtime=nowtime)
+
+
+# Handle /static/<path:filename>
+@app.route('/static/<path:filename>')
+def static_file(filename):
+    return flask.send_from_directory('static', filename)
+
+
+# Handle /api/* requests
 
 # Redirect all /api/*.php to /api/*
 
