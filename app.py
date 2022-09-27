@@ -263,6 +263,19 @@ def api_v1_root():
     return flask.jsonify({"api": "v1"})
 
 
+# Handle /api/url/*
+# This is a url shortener
+
+
+@app.route("/api/url/<path:path>")
+def api_url(path):
+    # Get path
+    # If path is empty, redirect to 404
+    if path == "":
+        return flask.abort(404)
+    return myutils.strange_url.handle_url(path)
+
+
 """
 # Handle /api/dir/*
 # /api/dir/a/b/ list files in /a/b/
