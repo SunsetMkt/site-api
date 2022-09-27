@@ -23,7 +23,7 @@ def threethreeReply():
         'plat': 1
     })
     # Return reply
-    return flask.Response(reply.json(), mimetype='application/json')
+    return flask.jsonify(reply.json())
 
 
 def getBiliUserInfo():
@@ -39,7 +39,7 @@ def getBiliUserInfo():
         'jsonp': 'jsonp'
     })
     # Return user info
-    return flask.Response(reply.json(), mimetype='application/json')
+    return flask.jsonify(reply.json())
 
 
 def ikialive():

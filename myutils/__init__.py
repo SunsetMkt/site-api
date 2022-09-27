@@ -1,7 +1,11 @@
-import bili
-import bing
-import freenom
-import github
-import kizunaai
-import mc
-import pi
+from . import bili, bing, freenom, github, kizunaai, mc, pi
+
+__all__ = [
+    'bili',
+    'bing',
+    'freenom',
+    'github',
+    'kizunaai',
+    'mc',
+    'pi',
+]
