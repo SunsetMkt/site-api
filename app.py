@@ -14,6 +14,7 @@ import coolname
 import flask
 import flask_cors
 import flask_gzipbomb
+import lorem
 
 import myutils
 
@@ -56,7 +57,9 @@ def index():
     flask_version = "Flask "+flask.__version__
     return flask.render_template('index.html',
                                  time=nowtime,
-                                 flask_version=flask_version)
+                                 flask_version=flask_version,
+                                 coolname=coolname.generate_slug()+"!",
+                                 paragraph=lorem.get_paragraph(count=1, comma=(0, 2), word_range=(4, 8), sentence_range=(5, 10), sep=os.linesep))
 
 
 """
