@@ -63,6 +63,8 @@ def index():
     development_mode = app.config['ENV'] == 'development'
     # Get production mode
     production_mode = app.config['ENV'] == 'production'
+    # timestamp
+    timestamp = time.time()
     if production_mode:
         env = "Production"
     if development_mode or debug_mode:
@@ -71,6 +73,7 @@ def index():
                                  time=nowtime,
                                  flask_version=flask_version,
                                  environment=env,
+                                 timestamp=timestamp,
                                  coolname=coolname.generate_slug()+"!",
                                  paragraph=lorem.get_paragraph(count=1, comma=(0, 2), word_range=(4, 8), sentence_range=(5, 10), sep=os.linesep))
 
