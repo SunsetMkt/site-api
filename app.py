@@ -74,6 +74,7 @@ def index():
                                    time=nowtime,
                                    whathappened="You have accessed the index page of this app.",
                                    whatcanido="You can do anything you want.",
+                                   ip=myutils.cfstyle.get_ip(),
                                    footer="This app is running on " + flask_version + " in " + env + " mode. Timestamp: " + str(timestamp))
     """
     return flask.render_template('index.html',

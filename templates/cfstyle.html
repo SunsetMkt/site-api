@@ -424,6 +424,26 @@
             }
         }
 
+        .cf-icon-browser {
+            background-image: url(/cdn-cgi/images/cf-icon-browser.png)
+        }
+
+        .cf-icon-cloud {
+            background-image: url(/cdn-cgi/images/cf-icon-cloud.png)
+        }
+
+        .cf-icon-server {
+            background-image: url(/cdn-cgi/images/cf-icon-server.png)
+        }
+
+        .cf-icon-ok {
+            background-image: url(/cdn-cgi/images/cf-icon-ok.png)
+        }
+
+        .cf-icon-error {
+            background-image: url(/cdn-cgi/images/cf-icon-error.png)
+        }
+
         #cf-wrapper .feedback-hidden {
             display: none
         }
@@ -644,7 +664,6 @@
             }
         }
     </style>
-
 </head>
 
 <body>
@@ -653,9 +672,12 @@
             <header class="mx-auto pt-10 lg:pt-6 lg:px-8 w-240 lg:w-full mb-15 antialiased">
                 <h1
                     class="inline-block md:block mr-2 md:mb-2 font-light text-60 md:text-3xl text-black-dark leading-tight">
-                    <span>{{status}}</span>
+                    <span data-translate="error">{{status}}</span>
                     <span>{{statuscode}}</span>
                 </h1>
+                <!--
+                <span class="inline-block md:block heading-ray-id font-mono text-15 lg:text-sm lg:leading-relaxed">Ray
+                    ID: Unknown &bull;</span>-->
                 <span
                     class="inline-block md:block heading-ray-id font-mono text-15 lg:text-sm lg:leading-relaxed">{{time}}</span>
                 <h2 class="text-gray-600 leading-1.3 text-3xl lg:text-2xl font-light">{{msg}}</h2>
@@ -663,7 +685,8 @@
 
             <section class="w-240 lg:w-full mx-auto mb-8 lg:px-8">
                 <div id="what-happened-section" class="w-1/2 md:w-full">
-                    <h2 class="text-3xl leading-tight font-normal mb-4 text-black-dark antialiased">发生了什么？</h2>
+                    <h2 class="text-3xl leading-tight font-normal mb-4 text-black-dark antialiased"
+                        data-translate="what_happened">发生了什么？</h2>
                     <p>{{whathappened}}</p>
                 </div>
 
@@ -680,14 +703,38 @@
             <div
                 class="cf-error-footer cf-wrapper w-240 lg:w-full py-10 sm:py-4 sm:px-8 mx-auto text-center sm:text-left border-solid border-0 border-t border-gray-300">
                 <p class="text-13">
+                    <!--
+                    <span class="cf-footer-item sm:block sm:mb-1">Cloudflare Ray ID: <strong
+                            class="font-semibold">Unknown</strong></span>-->
+                    <span class="cf-footer-separator sm:hidden">&bull;</span>
+                    <span id="cf-footer-item-ip" class="cf-footer-item hidden sm:block sm:mb-1">
+                        您的IP地址：
+                        <button type="button" id="cf-footer-ip-reveal" class="cf-footer-ip-reveal-btn">点击显示</button>
+                        <span class="hidden" id="cf-footer-ip">{{ip}}</span>
+                        <span class="cf-footer-separator sm:hidden">&bull;</span>
+                    </span>
                     <span class="cf-footer-item sm:block sm:mb-1">{{footer}}</span>
+
                 </p>
+                <script>
+                    (function () {
+                        function d() {
+                            var b = a.getElementById("cf-footer-item-ip"),
+                                c = a.getElementById("cf-footer-ip-reveal");
+                            b && "classList" in b && (b.classList.remove("hidden"), c.addEventListener("click", function () {
+                                c.classList.add("hidden");
+                                a.getElementById("cf-footer-ip").classList.remove("hidden")
+                            }))
+                        }
+                        var a = document;
+                        document.addEventListener && a.addEventListener("DOMContentLoaded", d)
+                    })();
+                </script>
             </div><!-- /.error-footer -->
 
 
         </div><!-- /#cf-error-details -->
     </div><!-- /#cf-wrapper -->
-
 </body>
 
 </html>
