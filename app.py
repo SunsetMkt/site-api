@@ -3,6 +3,7 @@
 # **Do NOT run this on a server!**
 # **Do NOT run this on a server!**
 # **Do NOT run this on a server!**
+import http
 import json
 import os
 import random
@@ -13,7 +14,6 @@ import traceback
 import coolname
 import flask
 import flask_cors
-import flask_debugtoolbar
 import flask_gzipbomb
 
 import myutils
@@ -374,44 +374,39 @@ def api_dir_root():
  """
 
 
-# 404 handler
-@app.errorhandler(404)
-def page_not_found(e):
+# Handle Any Exception
+@app.errorhandler(Exception)
+def handle_exception(e):
+    # whatcanido dict
+    whatcanido = {
+        '200': '你可以做任何你想做的事。',
+        '404': '在服务器上没有找到所要求的URL。如果您是手动输入的，请检查您的拼写并重试。',
+        '500': '服务器遇到了内部错误或配置错误，无法完成您的请求。',
+        'other': '服务器遇到了内部错误或配置错误，无法完成您的请求。'
+    }
+    # Get Exception code, description and traceback
+    code = e.code if hasattr(e, "code") else 500
+    description = e.description if hasattr(
+        e, "description") else str(e)
+    # Get name of the status code
+    status = http.HTTPStatus(code).phrase
     trace = traceback.format_exc()
-    # return flask.jsonify({"error": "not found", "trace": trace}), 404
-    # Convert trace to HTML
-    # trace = trace.replace("\n", "<br>")
-    # trace = trace.replace(" ", "&nbsp;")
+    # Get whatcanido
+    whatcanido = whatcanido[str(code)] if str(
+        code) in whatcanido else whatcanido['other']
     # If client is expecting JSON, return JSON
     if flask.request.headers.get("Accept") == "application/json":
-        return flask.jsonify({"error": "not found", "trace": trace}), 404
+        return flask.jsonify({"error": description, "trace": trace}), code
     else:
         trace = "<pre>" + trace + "</pre>"
         return myutils.cfstyle.cfstyle(
-            title="404 Not Found",
-            msg="在服务器上没有找到所要求的URL。如果您是手动输入的，请检查您的拼写并重试。",
-            status="Not Found",
-            statuscode=404,
+            title=str(code) + " " + status,
+            msg=description,
+            status=status,
+            statuscode=code,
             whathappened=trace,
-        ), 404
-
-
-# 500 handler
-@app.errorhandler(500)
-def internal_server_error(e):
-    trace = traceback.format_exc()
-    # return flask.jsonify({"error": "internal server error", "trace": trace}), 500
-    if flask.request.headers.get("Accept") == "application/json":
-        return flask.jsonify({"error": "internal server error", "trace": trace}), 500
-    else:
-        trace = "<pre>" + trace + "</pre>"
-        return myutils.cfstyle.cfstyle(
-            title="500 Internal Server Error",
-            msg="服务器遇到了内部错误或配置错误，无法完成您的请求。",
-            status="Internal Server Error",
-            statuscode=500,
-            whathappened=trace,
-        ), 500
+            whatcanido=whatcanido
+        ), code
 
 
 if __name__ == "__main__":
