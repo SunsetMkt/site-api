@@ -377,7 +377,7 @@ def page_not_found(e):
     # trace = trace.replace("\n", "<br>")
     # trace = trace.replace(" ", "&nbsp;")
     # If client is expecting JSON, return JSON
-    if flask.request.accept_mimetypes.accept_json:
+    if flask.request.headers.get("Accept") == "application/json":
         return flask.jsonify({"error": "not found", "trace": trace}), 404
     else:
         trace = "<textarea>" + trace + "</textarea>"
@@ -395,7 +395,7 @@ def page_not_found(e):
 def internal_server_error(e):
     trace = traceback.format_exc()
     # return flask.jsonify({"error": "internal server error", "trace": trace}), 500
-    if flask.request.accept_mimetypes.accept_json:
+    if flask.request.headers.get("Accept") == "application/json":
         return flask.jsonify({"error": "internal server error", "trace": trace}), 500
     else:
         trace = "<textarea>" + trace + "</textarea>"
