@@ -14,7 +14,6 @@ import coolname
 import flask
 import flask_cors
 import flask_gzipbomb
-import lorem
 
 import myutils
 
@@ -53,7 +52,7 @@ def robots():
 # Handle / (index)
 @app.route('/')
 def index():
-    nowtime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    nowtime = time.strftime("%Y-%m-%d %H:%M:%S %Z", time.localtime())
     # flask_version = "Flask "+flask.__version__
     flask_version = "Flask "+flask.__version__ + \
         " ("+flask.__file__+")" + " on Python " + sys.version
@@ -69,6 +68,14 @@ def index():
         env = "Production"
     if development_mode or debug_mode:
         env = "Development"
+    return myutils.cfstyle.cfstyle(msg="Hello, world!",
+                                   status="OK",
+                                   statuscode="200",
+                                   time=nowtime,
+                                   whathappened="You have accessed the index page of this app.",
+                                   whatcanido="You can do anything you want.",
+                                   footer="This app is running on " + flask_version + " in " + env + " mode. Timestamp: " + str(timestamp))
+    """
     return flask.render_template('index.html',
                                  time=nowtime,
                                  flask_version=flask_version,
@@ -76,6 +83,7 @@ def index():
                                  timestamp=timestamp,
                                  coolname=coolname.generate_slug()+"!",
                                  paragraph=lorem.get_paragraph(count=1, comma=(0, 2), word_range=(4, 8), sentence_range=(5, 10), sep=os.linesep))
+    """
 
 
 """
