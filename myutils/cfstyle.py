@@ -1,4 +1,10 @@
+import sys
+import time
+
 import flask
+
+# Get flask app
+app = flask.current_app
 
 
 def get_ip():
@@ -17,20 +23,35 @@ def get_ip():
     return ip
 
 
-def cfstyle(msg='未知消息',
+def cfstyle(title='标题',
+            msg='未知消息',
             status='未知状态',
             statuscode='200',
-            time='未知时间',
             whathappened='不知道。',
-            whatcanido='不知道。',
-            ip='未知',
-            footer=''):
+            whatcanido='不知道。'):
+    nowtime = time.strftime("%Y-%m-%d %H:%M:%S %Z", time.localtime())
+    # flask_version = "Flask "+flask.__version__
+    flask_version = "Flask "+flask.__version__ + \
+        " ("+flask.__file__+")" + " on Python " + sys.version
+    # Get Debug mode
+    debug_mode = app.config['DEBUG']
+    # Get develpoment mode
+    development_mode = app.config['ENV'] == 'development'
+    # Get production mode
+    production_mode = app.config['ENV'] == 'production'
+    # timestamp
+    timestamp = time.time()
+    if production_mode:
+        env = "Production"
+    if development_mode or debug_mode:
+        env = "Development"
     return flask.render_template('cfstyle.html',
+                                 title=title,
                                  msg=msg,
                                  status=status,
                                  statuscode=statuscode,
-                                 time=time,
+                                 time=nowtime + " " + str(timestamp),
                                  whathappened=whathappened,
                                  whatcanido=whatcanido,
-                                 ip=ip,
-                                 footer=footer)
+                                 ip=get_ip(),
+                                 footer="This app is running on " + flask_version + " in " + env + " mode.")

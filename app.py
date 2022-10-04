@@ -52,30 +52,12 @@ def robots():
 # Handle / (index)
 @app.route('/')
 def index():
-    nowtime = time.strftime("%Y-%m-%d %H:%M:%S %Z", time.localtime())
-    # flask_version = "Flask "+flask.__version__
-    flask_version = "Flask "+flask.__version__ + \
-        " ("+flask.__file__+")" + " on Python " + sys.version
-    # Get Debug mode
-    debug_mode = app.config['DEBUG']
-    # Get develpoment mode
-    development_mode = app.config['ENV'] == 'development'
-    # Get production mode
-    production_mode = app.config['ENV'] == 'production'
-    # timestamp
-    timestamp = time.time()
-    if production_mode:
-        env = "Production"
-    if development_mode or debug_mode:
-        env = "Development"
-    return myutils.cfstyle.cfstyle(msg="你好，世界！",
+    return myutils.cfstyle.cfstyle(title="你好，世界！",
+                                   msg="你好，世界！",
                                    status="OK",
                                    statuscode="200",
-                                   time=nowtime + " " + str(timestamp),
                                    whathappened="你已经访问了这个应用程序的索引页。",
-                                   whatcanido="你可以做任何你想做的事。",
-                                   ip=myutils.cfstyle.get_ip(),
-                                   footer="This app is running on " + flask_version + " in " + env + " mode.")
+                                   whatcanido="你可以做任何你想做的事。")
     """
     return flask.render_template('index.html',
                                  time=nowtime,
@@ -390,14 +372,40 @@ def api_dir_root():
 @app.errorhandler(404)
 def page_not_found(e):
     trace = traceback.format_exc()
-    return flask.jsonify({"error": "not found", "trace": trace}), 404
+    # return flask.jsonify({"error": "not found", "trace": trace}), 404
+    # Convert trace to HTML
+    # trace = trace.replace("\n", "<br>")
+    # trace = trace.replace(" ", "&nbsp;")
+    # If client is expecting JSON, return JSON
+    if flask.request.headers.get("Accept") == "application/json":
+        return flask.jsonify({"error": "not found", "trace": trace}), 404
+    else:
+        trace = "<textarea>" + trace + "</textarea>"
+        return myutils.cfstyle.cfstyle(
+            title="404 Not Found",
+            msg="在服务器上没有找到所要求的URL。如果您是手动输入的，请检查您的拼写并重试。",
+            status="Not Found",
+            statuscode=404,
+            whathappened=trace,
+        ), 404
 
 
 # 500 handler
 @app.errorhandler(500)
 def internal_server_error(e):
     trace = traceback.format_exc()
-    return flask.jsonify({"error": "internal server error", "trace": trace}), 500
+    # return flask.jsonify({"error": "internal server error", "trace": trace}), 500
+    if flask.request.headers.get("Accept") == "application/json":
+        return flask.jsonify({"error": "internal server error", "trace": trace}), 500
+    else:
+        trace = "<textarea>" + trace + "</textarea>"
+        return myutils.cfstyle.cfstyle(
+            title="500 Internal Server Error",
+            msg="服务器遇到了内部错误或配置错误，无法完成您的请求。",
+            status="Internal Server Error",
+            statuscode=500,
+            whathappened=trace,
+        ), 500
 
 
 if __name__ == "__main__":

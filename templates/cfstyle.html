@@ -7,7 +7,7 @@
 <!--<![endif]-->
 
 <head>
-    <title>{{msg}}</title>
+    <title>{{title}}</title>
     <meta charset="UTF-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
@@ -687,7 +687,9 @@
                 <div id="what-happened-section" class="w-1/2 md:w-full">
                     <h2 class="text-3xl leading-tight font-normal mb-4 text-black-dark antialiased"
                         data-translate="what_happened">发生了什么？</h2>
+                    {% autoescape false %}
                     <p>{{whathappened}}</p>
+                    {% endautoescape %}
                 </div>
 
 
