@@ -64,7 +64,7 @@ def index():
                                    status="OK",
                                    statuscode="200",
                                    whathappened="你已经访问了这个应用程序的索引页。",
-                                   whatcanido="你可以做任何你想做的事。")
+                                   whatcanido="一切正常，你可以做任何你想做的事。")
     """
     return flask.render_template('index.html',
                                  time=nowtime,
@@ -226,6 +226,19 @@ def api_v1(path):
     if path == "ZeroDivisionError":
         return 1/0
 
+    # raiseException api
+    # Trigger a Exception on purpose
+    if path == "raiseException":
+        raise Exception("This is a test exception.")
+
+    # raiseHTTPError api
+    # Trigger a HTTPError on purpose
+    if path == "raiseHTTPError":
+        # Get status
+        status = flask.request.args.get("status")
+        # raise
+        flask.abort(int(status))
+
     # freenom api
     # Call freenom.fnRenew(username, password)
     # Check Freenom Domain Expiration Info
@@ -379,10 +392,10 @@ def api_dir_root():
 def handle_exception(e):
     # whatcanido dict
     whatcanido = {
-        '200': '你可以做任何你想做的事。',
+        '200': '一切正常，你可以做任何你想做的事。',
         '404': '在服务器上没有找到所要求的URL。如果您是手动输入的，请检查您的拼写并重试。',
-        '500': '服务器遇到了内部错误或配置错误，无法完成您的请求。',
-        'other': '服务器遇到了内部错误或配置错误，无法完成您的请求。'
+        '500': '服务器遇到了内部错误，无法完成你的请求。要么是服务器过载，要么是应用程序有错误。',
+        'other': '服务器遇到了内部错误，无法完成你的请求。要么是服务器过载，要么是应用程序有错误。'
     }
     # Get Exception code, description and traceback
     code = e.code if hasattr(e, "code") else 500
