@@ -68,14 +68,14 @@ def index():
         env = "Production"
     if development_mode or debug_mode:
         env = "Development"
-    return myutils.cfstyle.cfstyle(msg="Hello, world!",
+    return myutils.cfstyle.cfstyle(msg="你好，世界！",
                                    status="OK",
                                    statuscode="200",
-                                   time=nowtime,
-                                   whathappened="You have accessed the index page of this app.",
-                                   whatcanido="You can do anything you want.",
+                                   time=nowtime + " " + str(timestamp),
+                                   whathappened="你已经访问了这个应用程序的索引页。",
+                                   whatcanido="你可以做任何你想做的事。",
                                    ip=myutils.cfstyle.get_ip(),
-                                   footer="This app is running on " + flask_version + " in " + env + " mode. Timestamp: " + str(timestamp))
+                                   footer="This app is running on " + flask_version + " in " + env + " mode.")
     """
     return flask.render_template('index.html',
                                  time=nowtime,
