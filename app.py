@@ -23,13 +23,13 @@ app = flask.Flask(__name__)
 # Flask-DebugToolbar
 # the toolbar is only enabled in debug mode:
 # app.debug = True  # It's open source, so why not?
-app.config['DEBUG_TB_ENABLED'] = True
+# app.config['DEBUG_TB_ENABLED'] = True
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 # set a 'SECRET_KEY' to enable the Flask session cookies
 app.config['SECRET_KEY'] = '<replace with a secret key>'
 
-toolbar = flask_debugtoolbar.DebugToolbarExtension(app)
+# toolbar = flask_debugtoolbar.DebugToolbarExtension(app)
 
 # CORS
 # flask_cors.CORS(app, resources={r"/*": {"origins": "*"}})
