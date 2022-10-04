@@ -380,7 +380,7 @@ def page_not_found(e):
     if flask.request.headers.get("Accept") == "application/json":
         return flask.jsonify({"error": "not found", "trace": trace}), 404
     else:
-        trace = "<textarea>" + trace + "</textarea>"
+        trace = "<pre>" + trace + "</pre>"
         return myutils.cfstyle.cfstyle(
             title="404 Not Found",
             msg="在服务器上没有找到所要求的URL。如果您是手动输入的，请检查您的拼写并重试。",
@@ -398,7 +398,7 @@ def internal_server_error(e):
     if flask.request.headers.get("Accept") == "application/json":
         return flask.jsonify({"error": "internal server error", "trace": trace}), 500
     else:
-        trace = "<textarea>" + trace + "</textarea>"
+        trace = "<pre>" + trace + "</pre>"
         return myutils.cfstyle.cfstyle(
             title="500 Internal Server Error",
             msg="服务器遇到了内部错误或配置错误，无法完成您的请求。",
