@@ -110,7 +110,7 @@ Form:
                                    status="OK",
                                    statuscode="200",
                                    whathappened="你已经访问了这个应用程序的索引页。"+'<br>'+html,
-                                   whatcanido="一切正常，你可以做任何你想做的事。")
+                                   whatcanido=myutils.cfstyle.whatcanido["200"])
     """
     return flask.render_template('index.html',
                                  time=nowtime,
