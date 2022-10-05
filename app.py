@@ -89,9 +89,9 @@ def index():
     url = flask.request.url
     # Get request remote addr
     remote_addr = flask.request.remote_addr
-    # Generate <pre> from request
-    # html = "<pre>" + method + "\n" + headers_str + "\n" + content_str + "</pre>"
-    html = f"""<pre>
+    # Generate <textarea> from request
+    # html = "<textarea>" + method + "\n" + headers_str + "\n" + content_str + "</textarea>"
+    html = f"""<textarea>
 Method: {method}
 Path: {path}
 URL: {url}
@@ -104,7 +104,7 @@ Args:
 {args_str}
 Form:
 {form_str}
-</pre>"""
+</textarea>"""
     return myutils.cfstyle.cfstyle(title="你好，世界！",
                                    msg="你好，世界！",
                                    status="OK",
@@ -457,7 +457,7 @@ def handle_exception(e):
     if flask.request.headers.get("Accept") == "application/json":
         return flask.jsonify({"error": description, "trace": trace}), code
     else:
-        trace = "<pre>" + trace + "</pre>"
+        trace = "<textarea>" + trace + "</textarea>"
         return myutils.cfstyle.cfstyle(
             title=str(code) + " " + status,
             msg=description,
