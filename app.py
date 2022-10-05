@@ -59,11 +59,23 @@ def robots():
 # Handle / (index)
 @app.route('/')
 def index():
+    # Get request header
+    headers = flask.request.headers
+    # Get request content
+    content = flask.request.get_data()
+    # Stringfy headers
+    headers_str = ""
+    for key, value in headers.items():
+        headers_str += f"{key}: {value}" + "\n"
+    # Stringfy content
+    content_str = content.decode('utf-8')
+    # Generate html
+    html = "<pre>" + headers_str + "\n" + content_str + "</pre>"
     return myutils.cfstyle.cfstyle(title="你好，世界！",
                                    msg="你好，世界！",
                                    status="OK",
                                    statuscode="200",
-                                   whathappened="你已经访问了这个应用程序的索引页。",
+                                   whathappened="你已经访问了这个应用程序的索引页。"+'<br>'+html,
                                    whatcanido="一切正常，你可以做任何你想做的事。")
     """
     return flask.render_template('index.html',
