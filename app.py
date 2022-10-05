@@ -437,12 +437,7 @@ def api_dir_root():
 @app.errorhandler(Exception)
 def handle_exception(e):
     # whatcanido dict
-    whatcanido = {
-        '200': '一切正常，你可以做任何你想做的事。',
-        '404': '在服务器上没有找到所要求的URL。如果您是手动输入的，请检查您的拼写并重试。',
-        '500': '服务器遇到了内部错误，无法完成你的请求。要么是服务器过载，要么是应用程序有错误。',
-        'other': '服务器遇到了内部错误，无法完成你的请求。要么是服务器过载，要么是应用程序有错误。'
-    }
+    whatcanido = myutils.cfstyle.whatcanido
     # Get Exception code, description and traceback
     code = e.code if hasattr(e, "code") else 500
     description = e.description if hasattr(
