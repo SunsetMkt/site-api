@@ -59,52 +59,7 @@ def robots():
 # Handle / (index)
 @app.route('/', methods=["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS", "TRACE", "CONNECT"])
 def index():
-    # Get request method
-    method = flask.request.method
-    # Get request header
-    headers = flask.request.headers
-    # Get request content
-    content = flask.request.get_data()
-    # Get request args
-    args = flask.request.args
-    # Get request form
-    form = flask.request.form
-    # Stringfy headers
-    headers_str = ""
-    for key, value in headers.items():
-        headers_str += f"{key}: {value}" + "\n"
-    # Stringfy content
-    content_str = content.decode('utf-8')
-    # Stringfy args
-    args_str = ""
-    for key, value in args.items():
-        args_str += f"{key}={value}" + "&"
-    # Stringfy form
-    form_str = ""
-    for key, value in form.items():
-        form_str += f"{key}={value}" + "&"
-    # Get request path
-    path = flask.request.path
-    # Get request url
-    url = flask.request.url
-    # Get request remote addr
-    remote_addr = flask.request.remote_addr
-    # Generate <textarea> from request
-    # html = "<textarea>" + method + "\n" + headers_str + "\n" + content_str + "</textarea>"
-    html = f"""<textarea>
-Method: {method}
-Path: {path}
-URL: {url}
-Remote Addr: {remote_addr}
-Headers:
-{headers_str}
-Content:
-{content_str}
-Args:
-{args_str}
-Form:
-{form_str}
-</textarea>"""
+    html = '<textarea>' + myutils.cfstyle.get_request_info() + '</textarea>'
     return myutils.cfstyle.cfstyle(title="你好，世界！",
                                    msg="你好，世界！",
                                    status="OK",
@@ -452,7 +407,8 @@ def handle_exception(e):
     if flask.request.headers.get("Accept") == "application/json":
         return flask.jsonify({"error": description, "trace": trace}), code
     else:
-        trace = "<textarea>" + trace + "</textarea>"
+        trace = "<textarea>" + trace + myutils.cfstyle.get_request_info() + '\n' + \
+            "</textarea>"
         return myutils.cfstyle.cfstyle(
             title=str(code) + " " + status,
             msg=description,
