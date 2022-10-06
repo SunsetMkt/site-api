@@ -407,7 +407,7 @@ def handle_exception(e):
     if flask.request.headers.get("Accept") == "application/json":
         return flask.jsonify({"error": description, "trace": trace}), code
     else:
-        trace = "<textarea>" + trace + myutils.cfstyle.get_request_info() + '\n' + \
+        trace = "<textarea>" + trace + '\n' + myutils.cfstyle.get_request_info() + \
             "</textarea>"
         return myutils.cfstyle.cfstyle(
             title=str(code) + " " + status,
