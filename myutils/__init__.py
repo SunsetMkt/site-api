@@ -1,4 +1,4 @@
-from . import (bili, bing, cfstyle, freenom, github, kizunaai, mc, pi,
+from . import (bili, bing, cfstyle, freenom, github, kizunaai, mc, pi, randerr,
                strange_url)
 
 __all__ = [
@@ -11,4 +11,5 @@ __all__ = [
     'pi',
     'strange_url',
     'cfstyle',
+    'randerr',
 ]

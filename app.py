@@ -280,6 +280,10 @@ def api_v1(path):
     if path == "bing":
         return myutils.bing.get()
 
+    # randerr api
+    if path == "randerr":
+        return myutils.randerr.randerr()
+
     # Raise 404
     return flask.abort(404)
     # There's already a 404 handler
