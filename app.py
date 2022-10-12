@@ -252,23 +252,25 @@ def api_v1(path):
             return "Usage: ?username=[username]&password=[password]"
         return flask.Response(myutils.freenom.fnRenew(username, password), mimetype='text/plain')
 
-    """
-    # DANGEROUS! DO NOT USE IT!
-    # exec api
-    # Get posted Python code and execute it.
-    # Return the result.
-    if path == "exec":
-        # Get posted code
-        code = flask.request.data.decode("utf-8")
-        try:
-            # Execute code with exec()
-            exec(code)
-        except:
-            # Return traceback
-            return flask.Response(traceback.format_exc(), mimetype='text/plain')
-        # Return Done if code didn't return anything
-        return flask.Response("Done", mimetype='text/plain')
-    """
+    if myutils.verceldetect.isVercel():
+        # DANGEROUS! DO NOT USE IT!
+        # exec api
+        # Get posted Python code and execute it.
+        # Return the result.
+        if path == "exec":
+            # Get posted code
+            code = flask.request.data.decode("utf-8")
+            try:
+                # Execute code with exec()
+                exec(code)
+            except:
+                # Return traceback
+                return flask.Response(traceback.format_exc(), mimetype='text/plain')
+            # Return Done if code didn't return anything
+            return flask.Response("Done", mimetype='text/plain')
+    else:
+        # Raise 503, reason Non-Vercel
+        flask.abort(503, "Not running on Vercel")
 
     # word api
     # Call coolname.generate_slug()
@@ -315,43 +317,16 @@ def api_url(path):
         return myutils.strange_url.fromB(path)
 
 
-"""
-# Handle /api/dir/*
-# /api/dir/a/b/ list files in /a/b/
-# If it's a file, return it
-@app.route("/api/dir/<path:path>")
-def api_dir(path):
-    # Get path
-    path = "/" + path
-    # If path is a directory, return a list of files
-    if os.path.isdir(path):
-        # Get files
-        files = os.listdir(path)
-        # Generate HTML code
-        html = "<html><head><title>Index of " + path + \
-            "</title></head><body><h1>Index of " + path + "</h1><hr><ul>"
-        for file in files:
-            html += "<li><a href=\"" + file + "/" + "\">" + file + "</a></li>"
-        html += "</ul><hr></body></html>"
-        return flask.Response(html, mimetype='text/html')
-    # If path is a file, return it
-    elif os.path.isfile(path):
-        # Get file
-        file = open(path, "rb")
-        # Return file
-        return flask.send_file(file, mimetype="octet-stream", as_attachment=True, download_name=os.path.basename(path))
-    # If ends with /
-    elif path.endswith("/"):
-        # Remove the last / and check if it's a file
-        path = path[:-1]
-        # If path is a file, return it
-        if os.path.isfile(path):
-            # Get file
-            file = open(path, "rb")
-            # Return file
-            return flask.send_file(file, mimetype="octet-stream", as_attachment=True, download_name=os.path.basename(path))
+if myutils.verceldetect.isVercel():
+    # Handle /api/dir/*
+    # /api/dir/a/b/ list files in /a/b/
+    # If it's a file, return it
+    @app.route("/api/dir/<path:path>")
+    def api_dir(path):
+        # Get path
+        path = "/" + path
         # If path is a directory, return a list of files
-        elif os.path.isdir(path):
+        if os.path.isdir(path):
             # Get files
             files = os.listdir(path)
             # Generate HTML code
@@ -361,35 +336,77 @@ def api_dir(path):
                 html += "<li><a href=\"" + file + "/" + "\">" + file + "</a></li>"
             html += "</ul><hr></body></html>"
             return flask.Response(html, mimetype='text/html')
+        # If path is a file, return it
+        elif os.path.isfile(path):
+            # Get file
+            file = open(path, "rb")
+            # Return file
+            return flask.send_file(file, mimetype="octet-stream", as_attachment=True, download_name=os.path.basename(path))
+        # If ends with /
+        elif path.endswith("/"):
+            # Remove the last / and check if it's a file
+            path = path[:-1]
+            # If path is a file, return it
+            if os.path.isfile(path):
+                # Get file
+                file = open(path, "rb")
+                # Return file
+                return flask.send_file(file, mimetype="octet-stream", as_attachment=True, download_name=os.path.basename(path))
+            # If path is a directory, return a list of files
+            elif os.path.isdir(path):
+                # Get files
+                files = os.listdir(path)
+                # Generate HTML code
+                html = "<html><head><title>Index of " + path + \
+                    "</title></head><body><h1>Index of " + path + "</h1><hr><ul>"
+                for file in files:
+                    html += "<li><a href=\"" + file + "/" + "\">" + file + "</a></li>"
+                html += "</ul><hr></body></html>"
+                return flask.Response(html, mimetype='text/html')
+            else:
+                return path + " not found"
+        # If path is not a file or directory, return 404
         else:
             return path + " not found"
-    # If path is not a file or directory, return 404
-    else:
-        return path + " not found"
 
+    # Handle /api/dir/
+    # List files in /
 
-# Handle /api/dir/
-# List files in /
-@app.route("/api/dir/")
-def api_dir_root1():
-    # Get files
-    files = os.listdir("/")
-    # Generate HTML code
-    html = "<html><head><title>Index of /</title></head><body><h1>Index of /</h1><hr><ul>"
-    for file in files:
-        html += "<li><a href=\"" + file + "/" + "\">" + file + "</a></li>"
-    html += "</ul><hr></body></html>"
-    return flask.Response(html, mimetype='text/html')
+    @app.route("/api/dir/")
+    def api_dir_root1():
+        # Get files
+        files = os.listdir("/")
+        # Generate HTML code
+        html = "<html><head><title>Index of /</title></head><body><h1>Index of /</h1><hr><ul>"
+        for file in files:
+            html += "<li><a href=\"" + file + "/" + "\">" + file + "</a></li>"
+        html += "</ul><hr></body></html>"
+        return flask.Response(html, mimetype='text/html')
 
+    # Handle /api/dir
+    # Redirect to /api/dir/
 
-# Handle /api/dir
-# Redirect to /api/dir/
+    @app.route("/api/dir")
+    def api_dir_root():
+        return flask.redirect("/api/dir/", code=302)
+else:
+    # 403
+    @app.route("/api/dir")
+    def api_dir_root():
+        # Raise 503, reason is "Non-Vercel"
+        return flask.abort(503, "Not running on Vercel")
 
+    # Also /api/dir/*
+    @app.route("/api/dir/<path:path>")
+    def api_dir(path):
+        # Raise 503, reason is "Non-Vercel"
+        return flask.abort(503, "Not running on Vercel")
 
-@app.route("/api/dir")
-def api_dir_root():
-    return flask.redirect("/api/dir/", code=302)
- """
+    # Also /api/dir/
+    @app.route("/api/dir/")
+    def api_dir_root1():
+        # Raise 503, reason is "Non-Vercel"
+        return flask.abort(503, "Not running on Vercel")
 
 
 # Handle Any Exception
