@@ -271,9 +271,10 @@ def api_v1(path):
             # Return Done if code didn't return anything
             return flask.Response("Done", mimetype='text/plain')
     else:
-        # Raise 503, reason Non-Vercel
-        flask.abort(
-            503, "This API has security issues and should be used on Serverless Platform only.")
+        if path == "exec":
+            # Raise 503, reason Non-Vercel
+            flask.abort(
+                503, "This API has security issues and should be used on Serverless Platform only.")
 
     # word api
     # Call coolname.generate_slug()
