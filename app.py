@@ -428,7 +428,8 @@ def handle_exception(e):
     whatcanido = whatcanido[str(code)] if str(
         code) in whatcanido else whatcanido['other']
     # If client is expecting JSON, return JSON
-    if flask.request.headers.get("Accept") == "application/json":
+    # Or if jsonerror in url, return JSON
+    if flask.request.headers.get("Accept") == "application/json" or "jsonerror" in flask.request.url:
         return flask.jsonify({"error": description, "trace": trace}), code
     else:
         trace = "<textarea>" + trace + '\n' + myutils.cfstyle.get_request_info() + \
