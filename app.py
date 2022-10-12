@@ -253,6 +253,8 @@ def api_v1(path):
         return flask.Response(myutils.freenom.fnRenew(username, password), mimetype='text/plain')
 
     if myutils.verceldetect.isVercel():
+        flask.abort(
+            503, "Sorry, but this API has potential security issues and has been temporarily disabled on this deployment.")
         # DANGEROUS! DO NOT USE IT!
         # exec api
         # Get posted Python code and execute it.
