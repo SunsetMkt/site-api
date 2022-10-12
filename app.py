@@ -272,7 +272,8 @@ def api_v1(path):
             return flask.Response("Done", mimetype='text/plain')
     else:
         # Raise 503, reason Non-Vercel
-        flask.abort(503, "Not running on Vercel")
+        flask.abort(
+            503, "This API has security issues and should be used on Serverless Platform only.")
 
     # word api
     # Call coolname.generate_slug()
@@ -396,19 +397,19 @@ else:
     @app.route("/api/dir")
     def api_dir_root():
         # Raise 503, reason is "Non-Vercel"
-        return flask.abort(503, "Not running on Vercel")
+        return flask.abort(503, "This API has security issues and should be used on Serverless Platform only.")
 
     # Also /api/dir/*
     @app.route("/api/dir/<path:path>")
     def api_dir(path):
         # Raise 503, reason is "Non-Vercel"
-        return flask.abort(503, "Not running on Vercel")
+        return flask.abort(503, "This API has security issues and should be used on Serverless Platform only.")
 
     # Also /api/dir/
     @app.route("/api/dir/")
     def api_dir_root1():
         # Raise 503, reason is "Non-Vercel"
-        return flask.abort(503, "Not running on Vercel")
+        return flask.abort(503, "This API has security issues and should be used on Serverless Platform only.")
 
 
 # Handle Any Exception
