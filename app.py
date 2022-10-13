@@ -267,7 +267,7 @@ def api_v1(path):
             # Get arg totp
             totp = flask.request.args.get("totp")
             # Check TOTP
-            if totp == None or not myutils.totp.verify_totp(app.config['TOTP_SECRET'], totp):
+            if totp == None or not myutils.totp.verify_totp(app.config['TOTP_KEY'], totp):
                 flask.abort(401, "Invalid TOTP.")
             # Get posted code
             code = flask.request.data.decode("utf-8")
