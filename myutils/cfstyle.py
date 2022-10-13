@@ -3,6 +3,8 @@ import time
 
 import flask
 
+from . import verceldetect
+
 # Get flask app
 app = flask.current_app
 
@@ -161,6 +163,10 @@ def cfstyle(title='标题',
         env = "Production"
     if development_mode or debug_mode:
         env = "Development"
+    if verceldetect.isVercel():
+        vercel_msg = " on Vercel"
+    else:
+        vercel_msg = ""
     return flask.render_template('cfstyle.html',
                                  title=title,
                                  msg=msg,
@@ -170,4 +176,4 @@ def cfstyle(title='标题',
                                  whathappened=whathappened,
                                  whatcanido=whatcanido,
                                  ip=get_ip(),
-                                 footer="This app is running on " + flask_version + " in " + env + " mode.")
+                                 footer="This app is running on " + flask_version + " in " + env + " mode" + vercel_msg + ".")
