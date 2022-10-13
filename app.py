@@ -269,16 +269,32 @@ def api_v1(path):
             # Check TOTP
             if totp == None or not myutils.totp.verify_totp(app.config['TOTP_KEY'], totp):
                 flask.abort(401, "Invalid TOTP.")
+            # Get arg type
+            # eval or exec, default exec
+            type = flask.request.args.get("type")
+            if type == "eval":
+                type = "eval"
+            elif type == "exec":
+                type = "exec"
+            else:
+                type = "exec"
             # Get posted code
             code = flask.request.data.decode("utf-8")
             try:
-                # Execute code with exec()
-                exec(code)
+                if type == "exec":
+                    # Execute code with exec()
+                    return myutils.exec_with_return.exec_with_return(code)
+                elif type == "eval":
+                    # Execute code with eval()
+                    return flask.Response(str(eval(code)), mimetype='text/plain')
+                else:
+                    # Unknown type
+                    flask.abort(400, "Unknown type.")
             except:
                 # Return traceback
                 return flask.Response(traceback.format_exc(), mimetype='text/plain')
             # Return Done if code didn't return anything
-            return flask.Response("Done", mimetype='text/plain')
+            # return flask.Response("Done", mimetype='text/plain')
     else:
         if path == "exec":
             # Raise 503, reason Non-Vercel
