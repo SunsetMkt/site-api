@@ -1,5 +1,5 @@
 from . import (bili, bing, cfstyle, freenom, github, kizunaai, mc, pi, randerr,
-               strange_url, verceldetect)
+               strange_url, totp, verceldetect)
 
 __all__ = [
     'bili',
@@ -13,4 +13,5 @@ __all__ = [
     'cfstyle',
     'randerr',
     'verceldetect',
+    'totp',
 ]

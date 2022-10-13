@@ -15,6 +15,7 @@ import coolname
 import flask
 import flask_cors
 import flask_gzipbomb
+import lorem
 
 import myutils
 
@@ -30,6 +31,9 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['SECRET_KEY'] = '<replace with a secret key>'
 
 # toolbar = flask_debugtoolbar.DebugToolbarExtension(app)
+
+# Example TOTP secret
+app.config['TOTP_KEY'] = 'base32secret3232'
 
 # CORS
 # flask_cors.CORS(app, resources={r"/*": {"origins": "*"}})
@@ -258,8 +262,13 @@ def api_v1(path):
         # Get posted Python code and execute it.
         # Return the result.
         if path == "exec":
-            flask.abort(
-                503, "Sorry, but this API has potential security issues and has been temporarily disabled on this deployment.")
+            # flask.abort(
+            #     503, "Sorry, but this API has potential security issues and has been temporarily disabled on this deployment.")
+            # Get arg totp
+            totp = flask.request.args.get("totp")
+            # Check TOTP
+            if totp == None or not myutils.totp.verify_totp(app.config['TOTP_SECRET'], totp):
+                flask.abort(401, "Invalid TOTP.")
             # Get posted code
             code = flask.request.data.decode("utf-8")
             try:
@@ -289,6 +298,10 @@ def api_v1(path):
     # randerr api
     if path == "randerr":
         return myutils.randerr.randerr()
+
+    # lorem api
+    if path == "lorem":
+        return flask.Response(lorem.get_paragraph(), mimetype='text/plain')
 
     # Raise 404
     return flask.abort(404)
