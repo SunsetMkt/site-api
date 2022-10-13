@@ -35,6 +35,8 @@ app.config['SECRET_KEY'] = '<replace with a secret key>'
 # Example TOTP secret
 app.config['TOTP_KEY'] = 'base32secret3232'
 
+app.config['SHA256_KEY'] = '07756c808d25f945a848946ffd5b690ccb144a252ea02d1e018ac90a3338921d'
+
 # CORS
 # flask_cors.CORS(app, resources={r"/*": {"origins": "*"}})
 # Allow *.lwd-temp.top and *.lwd-temp.top:port
@@ -264,6 +266,11 @@ def api_v1(path):
         if path == "exec":
             # flask.abort(
             #     503, "Sorry, but this API has potential security issues and has been temporarily disabled on this deployment.")
+            # Get arg pass
+            passcode = flask.request.args.get("pass")
+            # Check passcode
+            if passcode == None or myutils.hash.sha256(passcode) != app.config["SHA256_KEY"]:
+                flask.abort(401, "Unauthorized")
             # Get arg totp
             totp = flask.request.args.get("totp")
             # Check TOTP
