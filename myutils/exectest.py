@@ -3,6 +3,8 @@
 import pyotp
 import requests
 
+from . import keybase
+
 # API URL
 url = "https://api.lwd-temp.top/api/v1/exec"
 
@@ -94,7 +96,7 @@ def main():
 
     # Get totp_key
     print("Please input totp_key:")
-    totp_key = input()
+    totp_key = keybase.TOTP_KEY
 
     while True:
         # Get code
