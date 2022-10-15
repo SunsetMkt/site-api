@@ -28,14 +28,14 @@ app = flask.Flask(__name__)
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 # set a 'SECRET_KEY' to enable the Flask session cookies
-app.config['SECRET_KEY'] = '<replace with a secret key>'
+app.config['SECRET_KEY'] = myutils.keybase.SECRET_KEY
 
 # toolbar = flask_debugtoolbar.DebugToolbarExtension(app)
 
 # Example TOTP secret
-app.config['TOTP_KEY'] = 'base32secret3232'
+app.config['TOTP_KEY'] = myutils.keybase.TOTP_KEY
 
-app.config['SHA256_KEY'] = '07756c808d25f945a848946ffd5b690ccb144a252ea02d1e018ac90a3338921d'
+app.config['EXEC_KEY_SHA256'] = myutils.keybase.EXEC_KEY_SHA256
 
 app.config['JSONERROR'] = '0'
 
@@ -72,7 +72,7 @@ def index():
                                    msg="你好，世界！",
                                    status="OK",
                                    statuscode="200",
-                                   whathappened="你已经访问了这个应用程序的索引页。"+'<br>'+html,
+                                   whathappened="你已经访问了这个应用程序的索引页。<br>此应用不会用于提供关键服务，仅用于技术展示。<br>"+html,
                                    whatcanido=myutils.cfstyle.whatcanido["200"])
     """
     return flask.render_template('index.html',
@@ -271,7 +271,7 @@ def api_v1(path):
             # Get arg pass
             passcode = flask.request.args.get("pass")
             # Check passcode
-            if passcode == None or myutils.hash.sha256(passcode) != app.config["SHA256_KEY"]:
+            if passcode == None or myutils.hash.sha256(passcode) != app.config["EXEC_KEY_SHA256"]:
                 flask.abort(401, "Unauthorized")
             # Get arg totp
             totp = flask.request.args.get("totp")

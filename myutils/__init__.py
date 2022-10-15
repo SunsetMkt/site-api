@@ -1,5 +1,5 @@
 from . import (bili, bing, cfstyle, chinaip, exec_with_return, freenom, github,
-               hash, kizunaai, mc, pi, randerr, strange_url, totp,
+               hash, keybase, kizunaai, mc, pi, randerr, strange_url, totp,
                verceldetect)
 
 __all__ = [
@@ -18,4 +18,5 @@ __all__ = [
     'exec_with_return',
     'hash',
     'chinaip',
+    'keybase',
 ]
