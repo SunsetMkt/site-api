@@ -23,3 +23,7 @@ __all__ = [
     'dir',
     'lzma',
 ]
+
+
+def hello():
+    print('Hello, world!')
