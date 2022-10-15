@@ -33,3 +33,14 @@ def check(lang=False):
     if lang and check_zhcn():
         return True
     return False
+
+
+def check_and_abort(lang=False, json=False):
+    if check(lang):
+        if json:
+            # Get current flask app
+            app = flask.current_app
+            # Set app.config['JSONERROR'] = '1'
+            app.config['JSONERROR'] = '1'
+
+        flask.abort(451, "Sorry, but you are in China.")

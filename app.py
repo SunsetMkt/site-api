@@ -37,6 +37,8 @@ app.config['TOTP_KEY'] = 'base32secret3232'
 
 app.config['SHA256_KEY'] = '07756c808d25f945a848946ffd5b690ccb144a252ea02d1e018ac90a3338921d'
 
+app.config['JSONERROR'] = '0'
+
 # CORS
 # flask_cors.CORS(app, resources={r"/*": {"origins": "*"}})
 # Allow *.lwd-temp.top and *.lwd-temp.top:port
@@ -475,7 +477,7 @@ def handle_exception(e):
         code) in whatcanido else whatcanido['other']
     # If client is expecting JSON, return JSON
     # Or if jsonerror in url, return JSON
-    if flask.request.headers.get("Accept") == "application/json" or "jsonerror" in flask.request.url:
+    if flask.request.headers.get("Accept") == "application/json" or "jsonerror" in flask.request.url or app.config['JSONERROR'] == '1':
         return flask.jsonify({"error": description, "trace": trace}), code
     else:
         trace = "<textarea>" + trace + '\n' + myutils.cfstyle.get_request_info() + \
