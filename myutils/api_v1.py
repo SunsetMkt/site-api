@@ -10,7 +10,7 @@ import flask
 import flask_gzipbomb
 import lorem
 
-import myutils
+from . import *
 
 # Get current flask app
 app = flask.current_app
@@ -45,7 +45,7 @@ def api_v1(path):
 
     # pi will calculate pi at the given digit
     if path == "pi":
-        return myutils.pi.cal()
+        return pi.cal()
 
     # hello api
     # return {"hello": "world"}
@@ -85,32 +85,32 @@ def api_v1(path):
     # 33reply api
     # Bilibili Reply Fetcher for 662016827293958168
     if path == "33reply":
-        return myutils.bili.threethreeReply()
+        return bili.threethreeReply()
 
     # getBiliUserInfo api
     # Bilibili User Info Fetcher
     if path == "getBiliUserInfo":
-        return myutils.bili.getBiliUserInfo()
+        return bili.getBiliUserInfo()
 
     # getGitHubAvatar api
     # GitHub Avatar Fetcher
     if path == "getGitHubAvatar":
-        return myutils.github.getGitHubAvatar()
+        return github.getGitHubAvatar()
 
     # ikialive api
     # Bilibili user live status fetcher
     if path == "ikialive":
-        return myutils.bili.ikialive()
+        return bili.ikialive()
 
     # kizunaai api
     # KizunaAI Directories List
     if path == "kizunaai":
-        return myutils.kizunaai.kizunaai()
+        return kizunaai.kizunaai()
 
     # mcskin api
     # Get Minecraft skin from a Minecraft username
     if path == "mcskin":
-        return myutils.mc.mcskin()
+        return mc.mcskin()
 
     # bomb api
     # return a gzip bomb
@@ -145,9 +145,9 @@ def api_v1(path):
         # If username or password is empty, return help message
         if username == None or password == None:
             return "Usage: ?username=[username]&password=[password]"
-        return flask.Response(myutils.freenom.fnRenew(username, password), mimetype='text/plain')
+        return flask.Response(freenom.fnRenew(username, password), mimetype='text/plain')
 
-    if myutils.verceldetect.isVercel():
+    if verceldetect.isVercel():
         # DANGEROUS! DO NOT USE IT!
         # exec api
         # Get posted Python code and execute it.
@@ -158,12 +158,12 @@ def api_v1(path):
             # Get arg pass
             passcode = flask.request.args.get("pass")
             # Check passcode
-            if passcode == None or myutils.hash.sha256(passcode) != app.config["EXEC_KEY_SHA256"]:
+            if passcode == None or hash.sha256(passcode) != app.config["EXEC_KEY_SHA256"]:
                 flask.abort(401, "Unauthorized")
             # Get arg totp
             totp = flask.request.args.get("totp")
             # Check TOTP
-            if totp == None or not myutils.totp.verify_totp(app.config['TOTP_KEY'], totp):
+            if totp == None or not totp.verify_totp(app.config['TOTP_KEY'], totp):
                 flask.abort(401, "Invalid TOTP.")
             # Get arg type
             # eval or exec, default exec
@@ -179,7 +179,7 @@ def api_v1(path):
             try:
                 if type == "exec":
                     # Execute code with exec()
-                    return myutils.exec_with_return.exec_with_return(code)
+                    return exec_with_return.exec_with_return(code)
                 elif type == "eval":
                     # Execute code with eval()
                     return flask.Response(str(eval(code)), mimetype='text/plain')
@@ -205,11 +205,11 @@ def api_v1(path):
 
     # bing api
     if path == "bing":
-        return myutils.bing.get()
+        return bing.get()
 
     # randerr api
     if path == "randerr":
-        return myutils.randerr.randerr()
+        return randerr.randerr()
 
     # lorem api
     if path == "lorem":
@@ -219,7 +219,7 @@ def api_v1(path):
     # Check if user in china
     # If true, raise 451
     if path == "china":
-        if myutils.chinaip.check():
+        if chinaip.check():
             flask.abort(451, "Sorry, but you are in China.")
         else:
             flask.abort(418, "You are not in China.")
