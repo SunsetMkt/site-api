@@ -326,6 +326,15 @@ def api_v1(path):
     if path == "lorem":
         return flask.Response(lorem.get_paragraph(), mimetype='text/plain')
 
+    # china api
+    # Check if user in china
+    # If true, raise 451
+    if path == "china":
+        if myutils.chinaip.check():
+            flask.abort(451, "Sorry, but you are in China.")
+        else:
+            flask.abort(418, "You are not in China.")
+
     # Raise 404
     return flask.abort(404)
     # There's already a 404 handler
