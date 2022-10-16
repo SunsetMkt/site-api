@@ -408,7 +408,7 @@ def api_v1_raiseHTTPError():
 # Check Freenom Domain Expiration Info
 
 
-@urls_blueprint.route('/freenom')
+@urls_blueprint.route('/freenom', methods=['GET', 'POST'])
 def api_v1_freenom():
     """
     Return freenom
