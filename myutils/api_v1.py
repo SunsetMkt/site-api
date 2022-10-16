@@ -415,21 +415,22 @@ def api_v1_freenom():
     Check Freenom Domain Expiration Info
     ---
     parameters:
-        - name: username
+        - name: username (GET)
           in: query
-          type: string
-          required: true
-          description: Freenom username
-        - name: password
-          in: query
-          type: string
-          required: true
-          description: Freenom password
-        - name: json
-          in: body
           type: string
           required: false
-          description: POST {\"username\": \"[username]\", \"password\": \"[password]\"}
+          description: Freenom username
+        - name: password (GET)
+          in: query
+          type: string
+          required: false
+          description: Freenom password
+        - name: json (POST)
+          in: body
+          type: json
+          required: false
+          description: JSON data
+          example: {"username": "username", "password": "password"}
     responses:
         200:
             description: Freenom domain expiration info"""
