@@ -146,13 +146,16 @@ def api_v1(path):
             password = flask.request.args.get("password")
         # if POST
         elif flask.request.method == "POST":
-            username = flask.request.form.get("username")
-            password = flask.request.form.get("password")
+            # Get json from request
+            json_data = flask.request.get_json()
+            # Get username & password
+            username = json_data["username"]
+            password = json_data["password"]
         else:
             flask.abort(405)
         # If username or password is empty, return help message
         if username == None or password == None:
-            return "Usage: ?username=[username]&password=[password]"
+            return flask.Response("Usage: \nGET ?username=[username]&password=[password]\nPOST {\"username\": \"[username]\", \"password\": \"[password]\"}", mimetype='text/plain', status=400)
         return flask.Response(myutils.freenom.fnRenew(username, password), mimetype='text/plain')
 
     if myutils.verceldetect.isVercel():
