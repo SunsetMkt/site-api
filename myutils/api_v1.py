@@ -453,7 +453,7 @@ if myutils.verceldetect.isVercel():
     # exec api
     # Get posted Python code and execute it.
     # Return the result.
-    @urls_blueprint.route('/exec')
+    @urls_blueprint.route('/exec', methods=['POST'])
     def api_v1_exec():
         """
         Return exec
