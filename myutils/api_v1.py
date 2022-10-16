@@ -87,7 +87,10 @@ def api_v1_statuscode():
           in: query
           type: integer
           required: true
-          description: Status code to return"""
+          description: Status code to return
+    responses:
+        200:
+            description: Return status code"""
     return flask.Response(status=int(flask.request.args.get("code")))
 
 # random will return a random number
@@ -265,7 +268,10 @@ def api_v1_getBiliUserInfo():
           type: integer
           required: false
           description: Bilibili mid
-          default: 22259558"""
+          default: 22259558
+    responses:
+        200:
+            description: BiliUserInfo"""
     return myutils.bili.getBiliUserInfo()
 
 # getGitHubAvatar api
@@ -293,7 +299,10 @@ def api_v1_getGitHubAvatar():
           required: false
           description: Response type
           enum: [raw, json, redirect, text]
-          default: raw"""
+          default: raw
+    responses:
+        200:
+            description: GitHubAvatar"""
     return myutils.github.getGitHubAvatar()
 
 # ikialive api
@@ -363,7 +372,7 @@ def api_v1_mcskin():
     parameters:
         - name: id
           in: query
-          type: integer
+          type: string
           required: true
           description: Player Name
         - name: format
@@ -447,7 +456,10 @@ def api_v1_raiseHTTPError():
           in: query
           type: integer
           required: true
-          description: HTTP status code"""
+          description: HTTP status code
+    responses:
+        500:
+            description: HTTPError"""
     # Get status
     status = flask.request.args.get("status")
     # raise
@@ -647,7 +659,10 @@ def api_v1_randerr():
     Get a random error
     ---
     tags:
-        - debug"""
+        - debug
+    responses:
+        500:
+            description: Random error"""
     return myutils.randerr.randerr()
 
 # lorem api

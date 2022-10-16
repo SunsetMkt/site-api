@@ -1,6 +1,11 @@
 import flask
 import requests
 
+# UserAgent
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36'
+}
+
 
 def threethreeReply():
     # Get request args: next, oid
@@ -21,7 +26,7 @@ def threethreeReply():
         'oid': oid,
         'mode': 2,
         'plat': 1
-    })
+    }, headers=headers)
     # Return reply
     return flask.jsonify(reply.json())
 
@@ -37,7 +42,7 @@ def getBiliUserInfo():
     reply = requests.get('https://api.bilibili.com/x/space/acc/info', params={
         'mid': mid,
         'jsonp': 'jsonp'
-    })
+    }, headers=headers)
     # Return user info
     return flask.jsonify(reply.json())
 
@@ -53,7 +58,7 @@ def ikialive():
     reply = requests.get('https://api.bilibili.com/x/space/acc/info', params={
         'mid': mid,
         'jsonp': 'jsonp'
-    })
+    }, headers=headers)
     # Return live status
     if reply.json()["data"]["live_room"] == "null":
         return "-1"
