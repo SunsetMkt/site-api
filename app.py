@@ -52,6 +52,8 @@ def favicon():
     Handle /favicon.ico
     Return favicon.ico
     ---
+    tags:
+        - favicon
     responses:
         200:
           description: favicon.ico"""
@@ -90,7 +92,7 @@ def index():
                                    msg="你好，世界！",
                                    status="OK",
                                    statuscode="200",
-                                   whathappened="你已经访问了这个应用程序的索引页。<br>此应用不会用于提供关键服务，仅用于技术展示。<br><a href=\"/apidocs\">API Docs</a><br>"+html,
+                                   whathappened="你已经访问了这个应用程序的索引页。<br>此应用不会用于提供关键服务，仅用于技术展示。<br>"+html,
                                    whatcanido=myutils.cfstyle.whatcanido["200"])
 
 
