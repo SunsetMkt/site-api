@@ -224,6 +224,12 @@ def api_v1(path):
         else:
             flask.abort(418, "You are not in China.")
 
+    # china strict api
+    # Check if user in china
+    if path == "chinastrict":
+        myutils.chinaip.check_and_abort(lang=True)
+        flask.abort(418, "You are not in China.")
+
     # Raise 404
     return flask.abort(404)
     # There's already a 404 handler
