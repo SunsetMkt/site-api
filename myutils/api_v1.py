@@ -140,8 +140,16 @@ def api_v1(path):
     # Check Freenom Domain Expiration Info
     if path == "freenom":
         # Get args: username, password
-        username = flask.request.args.get("username")
-        password = flask.request.args.get("password")
+        # if GET
+        if flask.request.method == "GET":
+            username = flask.request.args.get("username")
+            password = flask.request.args.get("password")
+        # if POST
+        elif flask.request.method == "POST":
+            username = flask.request.form.get("username")
+            password = flask.request.form.get("password")
+        else:
+            flask.abort(405)
         # If username or password is empty, return help message
         if username == None or password == None:
             return "Usage: ?username=[username]&password=[password]"
