@@ -15,7 +15,14 @@ import myutils
 import myutils.api_v1
 
 app = flask.Flask(__name__)
-swagger = flasgger.Swagger(app)
+swagger_template = {
+    "info": {
+        "title": "site-api",
+        "description": "Site API for Example",
+        "version": "0.0.1"
+    }
+}
+swagger = flasgger.Swagger(app, template=swagger_template)
 
 # Flask-DebugToolbar
 # the toolbar is only enabled in debug mode:
