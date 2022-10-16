@@ -425,6 +425,11 @@ def api_v1_freenom():
           type: string
           required: true
           description: Freenom password
+        - name: json
+          in: body
+          type: string
+          required: false
+          description: POST {\"username\": \"[username]\", \"password\": \"[password]\"}
     responses:
         200:
             description: Freenom domain expiration info"""
