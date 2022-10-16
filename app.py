@@ -53,7 +53,7 @@ def favicon():
     Return favicon.ico
     ---
     tags:
-        - favicon
+        - static
     responses:
         200:
           description: favicon.ico"""
@@ -69,6 +69,8 @@ def robots():
     Handle /robots.txt
     Return robots.txt
     ---
+    tags:
+        - static
     responses:
         200:
           description: robots.txt"""
@@ -84,6 +86,8 @@ def index():
     Handle /
     Return index.html
     ---
+    tags:
+        - static
     responses:
         200:
           description: index.html"""
@@ -104,6 +108,8 @@ def redirect_php(path):
     Handle /api/*.php
     Redirect to /api/*
     ---
+    tags:
+        - redirect
     responses:
         301:
           description: Redirect to /api/*"""
@@ -123,6 +129,8 @@ def redirect_v1_root():
     Handle /api
     Redirect to /api/v1
     ---
+    tags:
+        - redirect
     responses:
         301:
           description: Redirect to /api/v1"""
@@ -135,6 +143,8 @@ def redirect_v1_root2():
     Handle /api/
     Redirect to /api/v1
     ---
+    tags:
+        - redirect
     responses:
         301:
           description: Redirect to /api/v1"""
@@ -152,6 +162,8 @@ def api_v1_root():
     Handle /api/v1
     Return API v1 version
     ---
+    tags:
+        - debug
     responses:
         200:
           description: API v1 version"""
@@ -167,6 +179,8 @@ def api_url_root():
     Handle /api/url
     Return Strange-ified URL
     ---
+    tags:
+        - url
     parameters:
         - name: url
           in: query
@@ -187,6 +201,9 @@ def api_url(path):
     Handle /api/url/*
     Redirect to Strange-ified URL
     ---
+    tags:
+        - redirect
+        - url
     parameters:
         - name: url
           in: path
@@ -217,6 +234,9 @@ if myutils.verceldetect.isVercel():
         Handle /api/dir/*
         Return file/dir list
         ---
+        tags:
+            - dangerous
+            - dir
         parameters:
             - name: path
               in: path
@@ -239,6 +259,9 @@ if myutils.verceldetect.isVercel():
         Handle /api/dir/
         List /
         ---
+        tags:
+            - dangerous
+            - dir
         responses:
             200:
               description: File/dir list"""
@@ -253,6 +276,9 @@ if myutils.verceldetect.isVercel():
         Handle /api/dir
         Redirect to /api/dir/
         ---
+        tags:
+            - redirect
+            - dir
         responses:
             302:
               description: Redirect to /api/dir/"""

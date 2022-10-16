@@ -21,6 +21,15 @@ urls_blueprint = flask.Blueprint("v1", __name__)
 # if path is empty, redirect to /api/v1
 @urls_blueprint.route('/')
 def api_v1_root():
+    """
+    Handle /api/v1
+    Redirect to /api/v1
+    ---
+    tags:
+        - redirect
+    responses:
+        301:
+          description: Redirect to /api/v1"""
     return flask.redirect("/api/v1")
 
 # if path is not empty, use different api
@@ -34,6 +43,8 @@ def api_v1_echo():
     Echo text
     Return json with text
     ---
+    tags:
+        - echo
     parameters:
         - name: text
           in: query
@@ -53,6 +64,8 @@ def api_v1_postecho():
     Echo post data
     Return json with post data
     ---
+    tags:
+        - echo
     responses:
         200:
             description: Echo jsonified flask.request.form"""
@@ -67,6 +80,8 @@ def api_v1_statuscode():
     Return status code
     Return status code
     ---
+    tags:
+        - debug
     parameters:
         - name: code
           in: query
@@ -84,6 +99,8 @@ def api_v1_random():
     Return random number
     Return random number
     ---
+    tags:
+        - debug
     responses:
         200:
             description: Random number"""
@@ -98,6 +115,8 @@ def api_v1_time():
     Return timestamp
     Return timestamp
     ---
+    tags:
+        - debug
     responses:
         200:
             description: Timestamp"""
@@ -112,6 +131,9 @@ def api_v1_pi():
     Calculate pi
     Calculate pi at the given digit
     ---
+    tags:
+        - pi
+        - debug
     parameters:
         - name: n
           in: query
@@ -120,7 +142,7 @@ def api_v1_pi():
           description: Number of digits to calculate pi to
     responses:
         200:
-            description: Pi"""
+            description: Pi and calculate time"""
     return myutils.pi.cal()
 
 # hello api
@@ -133,6 +155,8 @@ def api_v1_hello():
     Return hello world
     return {"hello": "world"}
     ---
+    tags:
+        - debug
     responses:
         200:
             description: Hello world"""
@@ -148,6 +172,8 @@ def api_v1_status():
     Return status
     return {"status": "ok"}
     ---
+    tags:
+        - debug
     responses:
         200:
             description: Status"""
@@ -163,6 +189,9 @@ def api_v1_env():
     Return env
     return all flask config information, environment variables, Python config & sys info in json
     ---
+    tags:
+        - debug
+        - dangerous
     responses:
         200:
             description: Env"""
@@ -198,6 +227,8 @@ def api_v1_33reply():
     Return 33reply
     Bilibili Reply Fetcher for 662016827293958168
     ---
+    tags:
+        - bili
     parameters:
         - name: next
           in: query
@@ -226,6 +257,8 @@ def api_v1_getBiliUserInfo():
     Return BiliUserInfo
     Bilibili User Info Fetcher
     ---
+    tags:
+        - bili
     parameters:
         - name: mid
           in: query
@@ -245,6 +278,8 @@ def api_v1_getGitHubAvatar():
     Return GitHubAvatar
     GitHub Avatar Fetcher
     ---
+    tags:
+        - github
     parameters:
         - name: username
           in: query
@@ -271,6 +306,8 @@ def api_v1_ikialive():
     Return ikialive
     Bilibili user live status fetcher
     ---
+    tags:
+        - bili
     parameters:
         - name: mid
           in: query
@@ -293,6 +330,8 @@ def api_v1_kizunaai():
     Return kizunaai
     KizunaAI Directories List
     ---
+    tags:
+        - kizunaai
     parameters:
         - name: id
           in: query
@@ -319,6 +358,8 @@ def api_v1_mcskin():
     Return mcskin
     Get Minecraft skin from a Minecraft username
     ---
+    tags:
+        - mc
     parameters:
         - name: id
           in: query
@@ -347,6 +388,9 @@ def api_v1_bomb():
     Return bomb
     return a gzip bomb
     ---
+    tags:
+        - debug
+        - dangerous
     responses:
         200:
             description: Bomb"""
@@ -362,6 +406,8 @@ def api_v1_ZeroDivisionError():
     Return ZeroDivisionError
     Trigger a ZeroDivisionError on purpose
     ---
+    tags:
+        - debug
     responses:
         500:
             description: ZeroDivisionError"""
@@ -377,6 +423,8 @@ def api_v1_raiseException():
     Return raiseException
     Trigger a Exception on purpose
     ---
+    tags:
+        - debug
     responses:
         500:
             description: Exception"""
@@ -392,6 +440,8 @@ def api_v1_raiseHTTPError():
     Return raiseHTTPError
     Trigger a HTTPError on purpose
     ---
+    tags:
+        - debug
     parameters:
         - name: status
           in: query
@@ -414,6 +464,8 @@ def api_v1_freenom():
     Return freenom
     Check Freenom Domain Expiration Info
     ---
+    tags:
+        - freenom
     parameters:
         - name: username (GET)
           in: query
@@ -466,6 +518,9 @@ if myutils.verceldetect.isVercel():
         Get posted Python code and execute it.
         Return the result.
         ---
+        tags:
+            - dangerous
+            - debug
         parameters:
             - name: pass
               in: query
@@ -548,6 +603,8 @@ def api_v1_word():
     Return word
     Generate a random word
     ---
+    tags:
+        - fun
     responses:
         200:
             description: Random word"""
@@ -564,6 +621,8 @@ def api_v1_bing():
     Return bing
     Get Bing Image of the Day
     ---
+    tags:
+        - bing
     parameters:
         - name: daysago
           in: query
@@ -586,7 +645,9 @@ def api_v1_randerr():
     """
     Return randerr
     Get a random error
-    ---"""
+    ---
+    tags:
+        - debug"""
     return myutils.randerr.randerr()
 
 # lorem api
@@ -599,6 +660,8 @@ def api_v1_lorem():
     Return lorem
     Get a random lorem ipsum text
     ---
+    tags:
+        - fun
     responses:
         200:
             description: Random lorem ipsum text"""
@@ -616,6 +679,8 @@ def api_v1_china():
     Check if user in china
     If true, raise 451
     ---
+    tags:
+        - debug
     responses:
         451:
             description: User in China
@@ -639,6 +704,8 @@ def api_v1_china_strict():
     Check if user in china, strict mode, checks for zh-CN in Accept-Language
     If true, raise 451
     ---
+    tags:
+        - debug
     responses:
         451:
             description: User in China
