@@ -7,3 +7,4 @@ pybase16384==0.3.1
 python-lorem==1.1.2
 Flask-DebugToolbar==0.13.1
 pyotp==2.7.0
+flasgger==0.9.5
