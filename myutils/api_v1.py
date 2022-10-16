@@ -478,7 +478,6 @@ if myutils.verceldetect.isVercel():
               enum: [eval, exec]
               default: exec
               description: Code type
-        payloads:
             - name: code
               in: body
               type: string
