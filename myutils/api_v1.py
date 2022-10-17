@@ -78,7 +78,7 @@ def api_v1_postecho():
               description: text to echo
     responses:
         200:
-            description: Echo jsonified flask.request.form"""
+            description: Echo jsonified request body"""
     return flask.jsonify(flask.request.json)
 
 # statuscode will return the given status code
