@@ -30,6 +30,11 @@ def get_git_revision(base_path):
         return git_hash.readline().strip()
 
 
+try:
+    app.config['GIT_HASH'] = get_git_revision(os.path.dirname(__file__))
+except Exception:
+    app.config['GIT_HASH'] = 'unknown'
+
 swagger_config = flasgger.Swagger.DEFAULT_CONFIG
 swagger_config['swagger_ui_bundle_js'] = '//unpkg.com/swagger-ui-dist@3/swagger-ui-bundle.js'
 swagger_config['swagger_ui_standalone_preset_js'] = '//unpkg.com/swagger-ui-dist@3/swagger-ui-standalone-preset.js'
@@ -39,7 +44,7 @@ swagger_template = {
     "info": {
         "title": "site-api",
         "description": "Site API for Example",
-        "version": "v1-" + str(get_git_revision(".")),
+        "version": "v1-" + str(app.config['GIT_HASH']),
     }
 }
 swagger = flasgger.Swagger(app, template=swagger_template)
