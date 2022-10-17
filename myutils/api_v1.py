@@ -560,6 +560,7 @@ def api_v1_freenompost():
           in: body
           type: json
           description: Freenom login info
+          required: true
           schema:
             id: FreenomLogin
             properties:
