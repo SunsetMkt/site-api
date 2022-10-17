@@ -825,5 +825,18 @@ def api_v1_dxx():
     if redirect == None:
         redirect = "false"
     if redirect.lower() == "true":
-        return flask.redirect(url)
-    return flask.render_template('dxx.html', title=title, image=icon, url=url)
+        # return flask.redirect(url)
+        # No origin or referer
+        return flask.Response(
+            """
+            <html>
+            <head>
+            <meta http-equiv="refresh" content="0;url=%s">
+            </head>
+            <body>
+            <a href="%s">Redirecting...</a>
+            </body>
+            </html>
+            """ % (url, url),
+            mimetype='text/html')
+    return flask.render_template('dxx.html', title=title, image=icon, link=url)
