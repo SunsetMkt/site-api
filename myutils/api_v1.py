@@ -795,3 +795,20 @@ def api_v1_china_strict():
             description: User not in China"""
     myutils.chinaip.check_and_abort(lang=True)
     flask.abort(418, "You are not in China.")
+
+
+# dxx api
+# Return the latest fake dxx share page
+@urls_blueprint.route('/dxx')
+def api_v1_dxx():
+    """
+    Return the latest fake dxx share page
+    Return the latest fake dxx share page
+    ---
+    tags:
+        - dxx
+    responses:
+        200:
+            description: Fake dxx share page"""
+    title, icon, url = myutils.dxx.get()
+    return flask.render_template('dxx.html', title=title, image=icon, url=url)
