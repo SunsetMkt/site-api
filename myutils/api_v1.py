@@ -66,10 +66,20 @@ def api_v1_postecho():
     ---
     tags:
         - echo
+    parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          id: postecho
+          properties:
+            text:
+              type: string
+              description: text to echo
     responses:
         200:
             description: Echo jsonified flask.request.form"""
-    return flask.jsonify(flask.request.form)
+    return flask.jsonify(flask.request.json)
 
 # statuscode will return the given status code
 
@@ -506,7 +516,7 @@ def api_v1_raiseHTTPError():
 # Check Freenom Domain Expiration Info
 
 
-@urls_blueprint.route('/freenom', methods=['GET', 'POST'])
+@urls_blueprint.route('/freenom', methods=['GET'])
 def api_v1_freenom():
     """
     Check Freenom Domain Expiration Info
@@ -515,39 +525,59 @@ def api_v1_freenom():
     tags:
         - freenom
     parameters:
-        - name: username (GET)
+        - name: username
           in: query
           type: string
-          required: false
+          required: true
           description: Freenom username
-        - name: password (GET)
+        - name: password
           in: query
           type: string
-          required: false
+          required: true
           description: Freenom password
-        - name: json (POST)
-          in: body
-          type: json
-          required: false
-          description: JSON data
-          example: {"username": "username", "password": "password"}
     responses:
         200:
             description: Freenom domain expiration info"""
     # Get args: username, password
-    # if GET
-    if flask.request.method == "GET":
-        username = flask.request.args.get("username")
-        password = flask.request.args.get("password")
-    # if POST
-    elif flask.request.method == "POST":
-        # Get json from request
-        json_data = flask.request.get_json()
-        # Get username & password
-        username = json_data["username"]
-        password = json_data["password"]
-    else:
-        flask.abort(405)
+    username = flask.request.args.get("username")
+    password = flask.request.args.get("password")
+    # If username or password is empty, return help message
+    if username == None or password == None:
+        return flask.Response("Usage: \nGET ?username=[username]&password=[password]\nPOST {\"username\": \"[username]\", \"password\": \"[password]\"}", mimetype='text/plain', status=400)
+    return flask.Response(myutils.freenom.fnRenew(username, password), mimetype='text/plain')
+
+
+@urls_blueprint.route('/freenompost', methods=['POST'])
+def api_v1_freenompost():
+    """
+    Check Freenom Domain Expiration Info
+    Check Freenom Domain Expiration Info
+    ---
+    tags:
+        - freenom
+    parameters:
+        - name: FreenomLogin
+          in: body
+          type: json
+          description: Freenom login info
+          schema:
+            id: FreenomLogin
+            properties:
+                username:
+                    type: string
+                    description: Freenom username
+                password:
+                    type: string
+                    description: Freenom password
+    responses:
+        200:
+            description: Freenom domain expiration info"""
+    # Get args: username, password
+    # Get json from request
+    json_data = flask.request.get_json()
+    # Get username & password
+    username = json_data["username"]
+    password = json_data["password"]
     # If username or password is empty, return help message
     if username == None or password == None:
         return flask.Response("Usage: \nGET ?username=[username]&password=[password]\nPOST {\"username\": \"[username]\", \"password\": \"[password]\"}", mimetype='text/plain', status=400)
