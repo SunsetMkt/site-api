@@ -816,9 +816,7 @@ def api_v1_dxx():
           description: Redirect to the latest real dxx share page
     responses:
         200:
-            description: Fake dxx share page
-        302:
-            description: Redirect to the latest real dxx share page"""
+            description: Fake dxx share page or redirect page"""
     title, icon, url = myutils.dxx.get()
     # Get param redirect
     redirect = flask.request.args.get("redirect")
