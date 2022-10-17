@@ -6,21 +6,29 @@
 # **Do NOT run this on a server!**
 import http
 import os
+import pathlib
 import traceback
 
 import flasgger
 import flask
 import flask_cors
-import git
 
 import myutils
 import myutils.api_v1
 
 app = flask.Flask(__name__)
 
-# Get git commit hash
-repo = git.Repo(search_parent_directories=True)
-sha = repo.head.object.hexsha
+
+# Get git commit hash without git executable or GitPython
+# https://stackoverflow.com/a/56245722
+def get_git_revision(base_path):
+    git_dir = pathlib.Path(base_path) / '.git'
+    with (git_dir / 'HEAD').open('r') as head:
+        ref = head.readline().split(' ')[-1].strip()
+
+    with (git_dir / ref).open('r') as git_hash:
+        return git_hash.readline().strip()
+
 
 swagger_config = flasgger.Swagger.DEFAULT_CONFIG
 swagger_config['swagger_ui_bundle_js'] = '//unpkg.com/swagger-ui-dist@3/swagger-ui-bundle.js'
@@ -31,7 +39,7 @@ swagger_template = {
     "info": {
         "title": "site-api",
         "description": "Site API for Example",
-        "version": "v1-" + str(sha),
+        "version": "v1-" + str(get_git_revision(".")),
     }
 }
 swagger = flasgger.Swagger(app, template=swagger_template)
