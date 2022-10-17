@@ -11,11 +11,16 @@ import traceback
 import flasgger
 import flask
 import flask_cors
+import git
 
 import myutils
 import myutils.api_v1
 
 app = flask.Flask(__name__)
+
+# Get git commit hash
+repo = git.Repo(search_parent_directories=True)
+sha = repo.head.object.hexsha
 
 swagger_config = flasgger.Swagger.DEFAULT_CONFIG
 swagger_config['swagger_ui_bundle_js'] = '//unpkg.com/swagger-ui-dist@3/swagger-ui-bundle.js'
@@ -26,7 +31,7 @@ swagger_template = {
     "info": {
         "title": "site-api",
         "description": "Site API for Example",
-        "version": "0.0.1"
+        "version": "v1-" + str(sha),
     }
 }
 swagger = flasgger.Swagger(app, template=swagger_template)
@@ -51,9 +56,9 @@ app.config['JSONERROR'] = '0'
 
 # CORS
 # flask_cors.CORS(app, resources={r"/*": {"origins": "*"}})
-# Allow *.lwd-temp.top and *.lwd-temp.top:port
+# Allow *.lwd-temp.top and *.lwd-temp.top:port, also ikia.top and cedaros.top
 flask_cors.CORS(app, resources={
-                r"/*": {"origins": r"^(https?://)?(\w+\.)?lwd-temp\.top(:\d+)?$"}})
+                r"/*": {"origins": r"^(https?://)?(\w+\.)?(lwd-temp|ikia|cedaros)\.top(:\d+)?$"}})
 
 # API v1
 app.register_blueprint(myutils.api_v1.urls_blueprint, url_prefix="/api/v1")
