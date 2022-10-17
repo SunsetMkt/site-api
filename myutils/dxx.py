@@ -27,11 +27,11 @@ def get_title_and_icon(url):
     title = html.xpath('/html/head/title/text()')[0]
     icon_url = url.split('m.html')[0] + "images/icon.jpg"
     # fetch icon
-    r = requests.get(icon_url, headers=headers)
-    icon = base64.b64encode(r.content).decode()
+    # r = requests.get(icon_url, headers=headers)
+    # icon = base64.b64encode(r.content).decode()
     # base64 with mime type
-    icon = "data:image/jpeg;base64," + icon
-    return title, icon, url
+    # icon = "data:image/jpeg;base64," + icon
+    return title, icon_url, url
 
 
 def get():

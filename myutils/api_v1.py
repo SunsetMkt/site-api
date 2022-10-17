@@ -807,8 +807,23 @@ def api_v1_dxx():
     ---
     tags:
         - dxx
+    parameters:
+        - name: redirect
+          in: query
+          type: string
+          required: false
+          default: false
+          description: Redirect to the latest real dxx share page
     responses:
         200:
-            description: Fake dxx share page"""
+            description: Fake dxx share page
+        302:
+            description: Redirect to the latest real dxx share page"""
     title, icon, url = myutils.dxx.get()
+    # Get param redirect
+    redirect = flask.request.args.get("redirect")
+    if redirect == None:
+        redirect = "false"
+    if redirect.lower() == "true":
+        return flask.redirect(url)
     return flask.render_template('dxx.html', title=title, image=icon, url=url)
