@@ -1,13 +1,8 @@
 import random
 import re
 
-import flask
 
-
-def kizunaai():
-    # Get args: id, date
-    id = flask.request.args.get("id")
-    date = flask.request.args.get("date")
+def kizunaai(id, date):
     # Check if id = "63045280" to anti piracy
     if id != "63045280":
         return "error-01"

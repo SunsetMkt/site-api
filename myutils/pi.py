@@ -3,8 +3,6 @@ import math
 import sys
 import time
 
-import flask
-
 
 def sqrt(n, one):
     """
@@ -80,7 +78,7 @@ def pi_chudnovsky_bs(digits):
     return (Q*426880*sqrtC) // T
 
 
-def cal():
+def cal(n):
     try:
         sys.set_int_max_str_digits(0)
     except:
@@ -88,8 +86,8 @@ def cal():
 
     # Start calculating and record time
     start = time.time()
-    pi = pi_chudnovsky_bs(int(flask.request.args.get("n")))
+    pi = pi_chudnovsky_bs(int(n))
     end = time.time()
     delta = end - start
 
-    return flask.jsonify({"pi": str(pi), "time": delta})
+    return {"pi": str(pi), "time": delta}

@@ -4,7 +4,7 @@ import flask
 import requests
 
 # 是否使用在 URL 后添加 daysago 参数的方法指定时间，若关闭则可在下一条设置项中设置时间
-useUrl = False
+useUrl = True
 
 # 设置时间（几天前），将 0 修改为你需要的时间，1 为昨天，2 为前天，-1 为明天，以此类推
 daysAgo = '-1'
@@ -14,6 +14,9 @@ def bg():
     if useUrl:
         # Get arg: daysago
         daysAgoQuery = flask.request.args.get('daysago')
+        # If daysago is empty, set daysago to -1
+        if daysAgoQuery == None:
+            daysAgoQuery = '-1'
         data = req(daysAgoQuery)
     else:
         data = req(daysAgo)

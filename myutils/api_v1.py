@@ -146,7 +146,8 @@ def api_v1_pi():
     responses:
         200:
             description: Pi and calculate time"""
-    return myutils.pi.cal()
+    n = flask.request.args.get("n")
+    return flask.jsonify(myutils.pi.cal(str(n)))
 
 # hello api
 # return {"hello": "world"}
@@ -248,7 +249,16 @@ def api_v1_33reply():
     responses:
         200:
             description: 33reply"""
-    return myutils.bili.threethreeReply()
+    # Get request args: next, oid
+    next = flask.request.args.get("next")
+    oid = flask.request.args.get("oid")
+    # If next is not set, set it to 0
+    if next == None:
+        next = 0
+    # If oid is not set, set it to 662016827293958168
+    if oid == None:
+        oid = 662016827293958168
+    return flask.jsonify(myutils.bili.threethreeReply(next, oid))
 
 # getBiliUserInfo api
 # Bilibili User Info Fetcher
@@ -272,7 +282,12 @@ def api_v1_getBiliUserInfo():
     responses:
         200:
             description: BiliUserInfo"""
-    return myutils.bili.getBiliUserInfo()
+    # Get request args: mid
+    mid = flask.request.args.get("mid")
+    # If mid is not set, set it to 22259558
+    if mid == None:
+        mid = 22259558
+    return flask.jsonify(myutils.bili.getBiliUserInfo(mid))
 
 # getGitHubAvatar api
 # GitHub Avatar Fetcher
@@ -303,7 +318,16 @@ def api_v1_getGitHubAvatar():
     responses:
         200:
             description: GitHubAvatar"""
-    return myutils.github.getGitHubAvatar()
+    # Get args: username, type
+    username = flask.request.args.get("username")
+    type = flask.request.args.get("type")
+    # If username is not set, set it to octocat
+    if username == None:
+        username = "octocat"
+    # If type is not set, set it to raw
+    if type == None:
+        type = "raw"
+    return myutils.github.getGitHubAvatar(username, type)
 
 # ikialive api
 # Bilibili user live status fetcher
@@ -327,7 +351,12 @@ def api_v1_ikialive():
     responses:
         200:
             description: ikialive status"""
-    return myutils.bili.ikialive()
+    # Get request args: mid
+    mid = flask.request.args.get("mid")
+    # If mid is not set, set it to 22259558
+    if mid == None:
+        mid = 22259558
+    return flask.Response(myutils.bili.ikialive(mid), mimetype='text/plain')
 
 # kizunaai api
 # KizunaAI Directories List
@@ -355,7 +384,10 @@ def api_v1_kizunaai():
     responses:
         200:
             description: Resource URL or error code"""
-    return myutils.kizunaai.kizunaai()
+    # Get args: id, date
+    id = flask.request.args.get("id")
+    date = flask.request.args.get("date")
+    return flask.Response(myutils.kizunaai.kizunaai(id, date), mimetype='text/plain')
 
 # mcskin api
 # Get Minecraft skin from a Minecraft username
@@ -385,7 +417,10 @@ def api_v1_mcskin():
     responses:
         200:
             description: Skin URL, player info json or skin image"""
-    return myutils.mc.mcskin()
+    # Get args: id, format
+    id = flask.request.args.get("id")
+    format = flask.request.args.get("format")
+    return myutils.mc.mcskin(id, format)
 
 # bomb api
 # return a gzip bomb

@@ -5,10 +5,7 @@ import flask
 import requests
 
 
-def mcskin():
-    # Get args: id, format
-    id = flask.request.args.get("id")
-    format = flask.request.args.get("format")
+def mcskin(id='notch', format='image'):
     # If id is empty, return help message
     if id == None:
         return "Usage: ?id=[Player ID]&format=[url/json/image]"

@@ -2,16 +2,7 @@ import flask
 import requests
 
 
-def getGitHubAvatar():
-    # Get args: username, type
-    username = flask.request.args.get("username")
-    type = flask.request.args.get("type")
-    # If username is not set, set it to octocat
-    if username == None:
-        username = "octocat"
-    # If type is not set, set it to raw
-    if type == None:
-        type = "raw"
+def getGitHubAvatar(username, type='raw'):
     # Fetch avatar
     # If type is raw, return raw image
     if type == "raw":

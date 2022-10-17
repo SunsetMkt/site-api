@@ -1,4 +1,3 @@
-import flask
 import requests
 
 # UserAgent
@@ -7,16 +6,7 @@ headers = {
 }
 
 
-def threethreeReply():
-    # Get request args: next, oid
-    next = flask.request.args.get("next")
-    oid = flask.request.args.get("oid")
-    # If next is not set, set it to 0
-    if next == None:
-        next = 0
-    # If oid is not set, set it to 662016827293958168
-    if oid == None:
-        oid = 662016827293958168
+def threethreeReply(next, oid):
     # Fetch reply
     # 'https://api.bilibili.com/x/v2/reply/main' + '?jsonp=jsonp&next=' + next + '&type=17&oid=' + oid + '&mode=2&plat=1'
     reply = requests.get('https://api.bilibili.com/x/v2/reply/main', params={
@@ -28,15 +18,10 @@ def threethreeReply():
         'plat': 1
     }, headers=headers)
     # Return reply
-    return flask.jsonify(reply.json())
+    return reply.json()
 
 
-def getBiliUserInfo():
-    # Get request args: mid
-    mid = flask.request.args.get("mid")
-    # If mid is not set, set it to 22259558
-    if mid == None:
-        mid = 22259558
+def getBiliUserInfo(mid):
     # Fetch user info
     # 'https://api.bilibili.com/x/space/acc/info?mid=' + mid + '&jsonp=jsonp'
     reply = requests.get('https://api.bilibili.com/x/space/acc/info', params={
@@ -44,15 +29,10 @@ def getBiliUserInfo():
         'jsonp': 'jsonp'
     }, headers=headers)
     # Return user info
-    return flask.jsonify(reply.json())
+    return reply.json()
 
 
-def ikialive():
-    # Get request args: mid
-    mid = flask.request.args.get("mid")
-    # If mid is not set, set it to 22259558
-    if mid == None:
-        mid = 22259558
+def ikialive(mid):
     # Fetch live status
     # 'https://api.bilibili.com/x/space/acc/info?mid=' + mid + '&jsonp=jsonp'
     reply = requests.get('https://api.bilibili.com/x/space/acc/info', params={
