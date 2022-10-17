@@ -11,9 +11,9 @@ def threethreeReply(next, oid):
     # 'https://api.bilibili.com/x/v2/reply/main' + '?jsonp=jsonp&next=' + next + '&type=17&oid=' + oid + '&mode=2&plat=1'
     reply = requests.get('https://api.bilibili.com/x/v2/reply/main', params={
         'jsonp': 'jsonp',
-        'next': next,
+        'next': str(next),
         'type': 17,
-        'oid': oid,
+        'oid': str(oid),
         'mode': 2,
         'plat': 1
     }, headers=headers)
@@ -25,7 +25,7 @@ def getBiliUserInfo(mid):
     # Fetch user info
     # 'https://api.bilibili.com/x/space/acc/info?mid=' + mid + '&jsonp=jsonp'
     reply = requests.get('https://api.bilibili.com/x/space/acc/info', params={
-        'mid': mid,
+        'mid': str(mid),
         'jsonp': 'jsonp'
     }, headers=headers)
     # Return user info
@@ -36,7 +36,7 @@ def ikialive(mid):
     # Fetch live status
     # 'https://api.bilibili.com/x/space/acc/info?mid=' + mid + '&jsonp=jsonp'
     reply = requests.get('https://api.bilibili.com/x/space/acc/info', params={
-        'mid': mid,
+        'mid': str(mid),
         'jsonp': 'jsonp'
     }, headers=headers)
     # Return live status

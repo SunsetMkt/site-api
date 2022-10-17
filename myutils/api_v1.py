@@ -190,7 +190,7 @@ def api_v1_status():
 @urls_blueprint.route('/env')
 def api_v1_env():
     """
-    Return env
+    Return environment information
     return all flask config information, environment variables, Python config & sys info in json
     ---
     tags:
@@ -228,7 +228,7 @@ def api_v1_env():
 @urls_blueprint.route('/33reply')
 def api_v1_33reply():
     """
-    Return 33reply
+    Bilibili Reply Fetcher
     Bilibili Reply Fetcher for 662016827293958168
     ---
     tags:
@@ -242,10 +242,10 @@ def api_v1_33reply():
           default: 0
         - name: oid
           in: query
-          type: integer
+          type: string
           required: false
           description: Bilibili oid
-          default: 662016827293958168
+          default: '662016827293958168'
     responses:
         200:
             description: 33reply"""
@@ -267,7 +267,7 @@ def api_v1_33reply():
 @urls_blueprint.route('/getBiliUserInfo')
 def api_v1_getBiliUserInfo():
     """
-    Return BiliUserInfo
+    Bilibili User Info Fetcher
     Bilibili User Info Fetcher
     ---
     tags:
@@ -275,10 +275,10 @@ def api_v1_getBiliUserInfo():
     parameters:
         - name: mid
           in: query
-          type: integer
+          type: string
           required: false
           description: Bilibili mid
-          default: 22259558
+          default: '22259558'
     responses:
         200:
             description: BiliUserInfo"""
@@ -296,7 +296,7 @@ def api_v1_getBiliUserInfo():
 @urls_blueprint.route('/getGitHubAvatar')
 def api_v1_getGitHubAvatar():
     """
-    Return GitHubAvatar
+    GitHub Avatar Fetcher
     GitHub Avatar Fetcher
     ---
     tags:
@@ -336,7 +336,7 @@ def api_v1_getGitHubAvatar():
 @urls_blueprint.route('/ikialive')
 def api_v1_ikialive():
     """
-    Return ikialive
+    Bilibili user live status fetcher
     Bilibili user live status fetcher
     ---
     tags:
@@ -344,10 +344,10 @@ def api_v1_ikialive():
     parameters:
         - name: mid
           in: query
-          type: integer
+          type: string
           required: false
           description: Bilibili mid
-          default: 22259558
+          default: '22259558'
     responses:
         200:
             description: ikialive status"""
@@ -365,7 +365,7 @@ def api_v1_ikialive():
 @urls_blueprint.route('/kizunaai')
 def api_v1_kizunaai():
     """
-    Return kizunaai
+    KizunaAI Resource Path List
     KizunaAI Directories List
     ---
     tags:
@@ -376,6 +376,7 @@ def api_v1_kizunaai():
           type: integer
           required: true
           description: Must be 63045280
+          default: 63045280
         - name: date
           in: query
           type: string
@@ -396,7 +397,7 @@ def api_v1_kizunaai():
 @urls_blueprint.route('/mcskin')
 def api_v1_mcskin():
     """
-    Return mcskin
+    Get Minecraft skin from a Minecraft username
     Get Minecraft skin from a Minecraft username
     ---
     tags:
@@ -429,7 +430,7 @@ def api_v1_mcskin():
 @urls_blueprint.route('/bomb')
 def api_v1_bomb():
     """
-    Return bomb
+    Return Gzip Bomb
     return a gzip bomb
     ---
     tags:
@@ -464,7 +465,7 @@ def api_v1_ZeroDivisionError():
 @urls_blueprint.route('/raiseException')
 def api_v1_raiseException():
     """
-    Return raiseException
+    Trigger a Exception on purpose
     Trigger a Exception on purpose
     ---
     tags:
@@ -481,8 +482,8 @@ def api_v1_raiseException():
 @urls_blueprint.route('/raiseHTTPError')
 def api_v1_raiseHTTPError():
     """
-    Return raiseHTTPError
-    Trigger a HTTPError on purpose
+    Trigger a HTTP Error on purpose
+    Trigger a HTTP Error on purpose
     ---
     tags:
         - debug
@@ -508,7 +509,7 @@ def api_v1_raiseHTTPError():
 @urls_blueprint.route('/freenom', methods=['GET', 'POST'])
 def api_v1_freenom():
     """
-    Return freenom
+    Check Freenom Domain Expiration Info
     Check Freenom Domain Expiration Info
     ---
     tags:
@@ -561,7 +562,7 @@ if myutils.verceldetect.isVercel():
     @urls_blueprint.route('/exec', methods=['POST'])
     def api_v1_exec():
         """
-        Return exec
+        Get posted Python code and execute it.
         Get posted Python code and execute it.
         Return the result.
         ---
@@ -647,7 +648,7 @@ else:
 @urls_blueprint.route('/word')
 def api_v1_word():
     """
-    Return word
+    Generate a random word
     Generate a random word
     ---
     tags:
@@ -665,7 +666,7 @@ def api_v1_word():
 @urls_blueprint.route('/bing')
 def api_v1_bing():
     """
-    Return bing
+    Get Bing Image of the Day
     Get Bing Image of the Day
     ---
     tags:
@@ -690,7 +691,7 @@ def api_v1_bing():
 @urls_blueprint.route('/randerr')
 def api_v1_randerr():
     """
-    Return randerr
+    Get a random error
     Get a random error
     ---
     tags:
@@ -707,7 +708,7 @@ def api_v1_randerr():
 @urls_blueprint.route('/lorem')
 def api_v1_lorem():
     """
-    Return lorem
+    Get a random lorem ipsum text
     Get a random lorem ipsum text
     ---
     tags:
@@ -725,7 +726,7 @@ def api_v1_lorem():
 @urls_blueprint.route('/china')
 def api_v1_china():
     """
-    Return china
+    Check if user in china
     Check if user in china
     If true, raise 451
     ---
@@ -750,7 +751,7 @@ def api_v1_china():
 @urls_blueprint.route('/china/strict')
 def api_v1_china_strict():
     """
-    Return china strict
+    Check if user in china, strict mode
     Check if user in china, strict mode, checks for zh-CN in Accept-Language
     If true, raise 451
     ---

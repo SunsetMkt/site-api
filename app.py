@@ -1,3 +1,4 @@
+# site-api/app.py
 # **Do NOT run this on a server!**
 # **Do NOT run this on a server!**
 # **Do NOT run this on a server!**
@@ -60,7 +61,7 @@ def favicon():
     Return favicon.ico
     ---
     tags:
-        - static
+        - fakestatic
     responses:
         200:
           description: favicon.ico"""
@@ -77,7 +78,7 @@ def robots():
     Return robots.txt
     ---
     tags:
-        - static
+        - fakestatic
     responses:
         200:
           description: robots.txt"""
@@ -87,14 +88,14 @@ def robots():
 
 
 # Handle / (index)
-@app.route('/', methods=["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS", "TRACE", "CONNECT"])
+@app.route('/', methods=["GET", "POST"])
 def index():
     """
     Handle /
     Return index.html
     ---
     tags:
-        - static
+        - fakestatic
     responses:
         200:
           description: index.html"""
@@ -103,7 +104,7 @@ def index():
                                    msg="你好，世界！",
                                    status="OK",
                                    statuscode="200",
-                                   whathappened="你已经访问了这个应用程序的索引页。<br>此应用不会用于提供关键服务，仅用于技术展示。<br>"+html,
+                                   whathappened="你已经访问了这个应用程序的索引页。<br>此应用不会用于提供关键服务，仅用于技术展示。<br><a href=\"/apidocs\">API Documentation</a><br><br>"+html,
                                    whatcanido=myutils.cfstyle.whatcanido["200"])
 
 
@@ -183,7 +184,7 @@ def api_v1_root():
 @app.route("/api/url")
 def api_url_root():
     """
-    Handle /api/url
+    Strange-ify URL
     Return Strange-ified URL
     ---
     tags:
@@ -205,7 +206,7 @@ def api_url_root():
 @app.route("/api/url/<path:path>")
 def api_url(path):
     """
-    Handle /api/url/*
+    Redirect to Strange-ified URL
     Redirect to Strange-ified URL
     ---
     tags:
@@ -238,7 +239,7 @@ if myutils.verceldetect.isVercel():
     @app.route("/api/dir/<path:path>")
     def api_dir(path):
         """
-        Handle /api/dir/*
+        List files in directory
         Return file/dir list
         ---
         tags:
@@ -263,7 +264,7 @@ if myutils.verceldetect.isVercel():
     @app.route("/api/dir/")
     def api_dir_root1():
         """
-        Handle /api/dir/
+        List files in /
         List /
         ---
         tags:
