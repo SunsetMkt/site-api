@@ -149,7 +149,7 @@ def redirect_php(path):
           required: true
     responses:
         301:
-          description: Redirect to /api/*"""
+          description: Redirect to /api/v1/*"""
     # Redirect with all args
     return flask.redirect("/api/v1/" + path + "?" + flask.request.query_string.decode("utf-8"))
 
