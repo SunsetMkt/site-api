@@ -133,12 +133,12 @@ def index():
 
 
 # Handle /api/* requests
-# Redirect all /api/*.php to /api/*
+# Redirect all /api/*.php to /api/v1/*
 @app.route("/api/<path:path>.php")
 def redirect_php(path):
     """
     Handle /api/*.php
-    Redirect to /api/*
+    Redirect to /api/v1/*
     ---
     tags:
         - redirect
