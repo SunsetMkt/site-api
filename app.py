@@ -142,6 +142,11 @@ def redirect_php(path):
     ---
     tags:
         - redirect
+    parameters:
+        - name: path
+          in: path
+          type: string
+          required: true
     responses:
         301:
           description: Redirect to /api/*"""
@@ -237,7 +242,7 @@ def api_url(path):
         - redirect
         - url
     parameters:
-        - name: url
+        - name: path
           in: path
           type: string
           required: true
