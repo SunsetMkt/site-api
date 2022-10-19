@@ -114,6 +114,7 @@ def api_v1_random():
     ---
     tags:
         - debug
+        - random
     responses:
         200:
             description: Random number"""
@@ -684,6 +685,7 @@ def api_v1_word():
     ---
     tags:
         - fun
+        - random
     responses:
         200:
             description: Random word"""
@@ -727,6 +729,7 @@ def api_v1_randerr():
     ---
     tags:
         - debug
+        - random
     responses:
         500:
             description: Random error"""
@@ -744,6 +747,7 @@ def api_v1_lorem():
     ---
     tags:
         - fun
+        - random
     responses:
         200:
             description: Random lorem ipsum text"""
@@ -763,6 +767,7 @@ def api_v1_china():
     ---
     tags:
         - debug
+        - china
     responses:
         451:
             description: User in China
@@ -788,6 +793,7 @@ def api_v1_china_strict():
     ---
     tags:
         - debug
+        - china
     responses:
         451:
             description: User in China
@@ -807,6 +813,8 @@ def api_v1_dxx():
     ---
     tags:
         - dxx
+        - fun
+        - china
     parameters:
         - name: redirect
           in: query
