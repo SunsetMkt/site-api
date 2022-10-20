@@ -46,4 +46,4 @@ def render_gist(encoded):
     encoded = urllib.parse.unquote(encoded)
     gist_id = decode(encoded)
     gist = get_first_gist(gist_id)
-    return flask.render_template_string(title=encoded, gist=gist)
+    return flask.render_template_string("gist.html", title=encoded, gist=gist)
