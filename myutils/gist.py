@@ -37,7 +37,7 @@ def get_first_gist(gist_id):
     if gist_info:
         files = gist_info['files']
         for i in files:  # Who cares?
-            return i['content']
+            return files[i]['content']
     else:
         return "# Error"
 
