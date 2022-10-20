@@ -9,6 +9,7 @@ import coolname
 import flask
 import flask_gzipbomb
 import lorem
+import pybase16384 as pybs
 
 import myutils
 
@@ -846,3 +847,49 @@ def api_v1_dxx():
             """ % (url, url),
             mimetype='text/html')
     return flask.render_template('dxx.html', title=title, image=icon, link=url)
+
+
+# base16384 api
+# encode or decode posted string
+# default encode
+@urls_blueprint.route('/base16384', methods=['POST'])
+def api_v1_base16384():
+    """
+    Encode or decode posted string
+    Encode or decode posted string
+    ---
+    tags:
+        - base16384
+        - fun
+    parameters:
+        - name: type
+          in: query
+          type: string
+          required: false
+          default: encode
+          description: Encode or decode
+        - name: string
+          in: body
+          type: string
+          required: true
+          description: String to encode or decode
+    responses:
+        200:
+            description: Encoded or decoded string
+        400:
+            description: Unknown type"""
+    # Get param type
+    type = flask.request.args.get("type")
+    if type == None:
+        type = "encode"
+    # Get posted string
+    string = flask.request.data.decode("utf-8")
+    if type.lower() == "encode":
+        # Encode
+        return flask.Response(pybs.encode_string(string), mimetype='text/plain')
+    elif type.lower() == "decode":
+        # Decode
+        return flask.Response(pybs.decode_string(string), mimetype='text/plain')
+    else:
+        # Unknown type
+        flask.abort(400, "Unknown type.")

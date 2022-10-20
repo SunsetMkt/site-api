@@ -260,6 +260,34 @@ def api_url(path):
         return myutils.strange_url.fromB(path)
 
 
+@app.route("/api/text/<path:path>")
+def api_text(path):
+    """
+    Get text from gist
+    Accept Base16384 encoded gist id
+    ---
+    tags:
+        - gist
+        - text
+    parameters:
+        - name: path
+          in: path
+          type: string
+          required: true
+          description: Base16384 encoded gist id
+    responses:
+        200:
+            description: HTML Document
+        404:
+            description: Gist not found"""
+    # Get path
+    # If path is empty, 404
+    if path == "":
+        return flask.abort(404)
+    else:
+        return myutils.gist.render_gist(path)
+
+
 # Handle /api/dir/*
 if myutils.verceldetect.isVercel():
     # Handle /api/dir/*

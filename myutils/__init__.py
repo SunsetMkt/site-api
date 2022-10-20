@@ -1,6 +1,6 @@
 from . import (bili, bing, cfstyle, chinaip, dir, dxx, exec_with_return,
-               freenom, github, hash, keybase, kizunaai, lzma, mc, pi, randerr,
-               strange_url, totp, verceldetect)
+               freenom, gist, github, hash, keybase, kizunaai, lzma, mc, pi,
+               randerr, strange_url, totp, verceldetect)
 
 __all__ = [
     'bili',
@@ -22,6 +22,7 @@ __all__ = [
     'dir',
     'lzma',
     'dxx',
+    'gist',
 ]
 
 

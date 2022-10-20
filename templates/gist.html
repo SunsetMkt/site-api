@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<data id="raw" style="display: none;">
+{% autoescape false %}
+{{gist}}
+{% endautoescape %}
+</data>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        #output {
+            padding: 1rem;
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            margin-bottom: 1rem;
+        }
+    </style>
+    <script src="https://unpkg.com/markdown-it@13.0.1/dist/markdown-it.min.js"></script>
+</head>
+
+<body>
+    <h1 id="title">{{title}}</h1>
+    <hr>
+    <div id="output" class="output"></div>
+    <script>
+        var md = window.markdownit();
+        var raw = document.getElementById('raw').innerHTML;
+        var output = document.getElementById('output');
+        output.innerHTML = md.render(raw);
+    </script>
+    <script>
+        // Onclick title, show raw data in textarea
+        var title = document.getElementById('title');
+        title.onclick = function () {
+            var raw = document.getElementById('raw').innerHTML;
+            var textarea = document.createElement('textarea');
+            textarea.value = raw;
+            textarea.style.width = '100%';
+            textarea.style.height = '100%';
+            textarea.style.position = 'fixed';
+            textarea.style.top = '0';
+            textarea.style.left = '0';
+            textarea.style.zIndex = '9999';
+            document.body.appendChild(textarea);
+        }
+    </script>
+</body>
+
+</html>
