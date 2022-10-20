@@ -1,3 +1,5 @@
+import urllib
+
 import flask
 import pybase16384 as pybs
 import requests
@@ -32,6 +34,7 @@ def get_first_gist(gist_id):
 
 
 def render_gist(encoded):
+    encoded = urllib.parse.unquote(encoded)
     gist_id = decode(encoded)
     gist = get_first_gist(gist_id)
     return flask.render_template_string(title=encoded, gist=gist)
