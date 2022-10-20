@@ -14,6 +14,9 @@ def encode(string):
 
 
 def get_gist_info(gist_id):
+    """
+    Get gist info from github api
+    """
     url = 'https://api.github.com/gists/{}'.format(gist_id)
     headers = {
         "Accept": "application/vnd.github+json"
@@ -26,9 +29,15 @@ def get_gist_info(gist_id):
 
 
 def get_first_gist(gist_id):
+    """
+    Get first gist from gist_id
+    Actually the first one in dict, but who cares?
+    """
     gist_info = get_gist_info(gist_id)
     if gist_info:
-        return gist_info['files'].values()[0]['content']
+        files = gist_info['files']
+        for i in files:  # Who cares?
+            return i['content']
     else:
         return "# Error"
 
