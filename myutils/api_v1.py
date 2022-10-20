@@ -893,3 +893,35 @@ def api_v1_base16384():
     else:
         # Unknown type
         flask.abort(400, "Unknown type.")
+
+
+# unvcode api
+@urls_blueprint.route('/unvcode')
+def api_v1_unvcode():
+    """
+    Unvcode
+    https://github.com/RimoChan/unvcode
+    ---
+    tags:
+        - unvcode
+        - fun
+    parameters:
+        - name: string
+          in: query
+          type: string
+          required: true
+          description: String to unvcode
+        - name: skip_ascii
+          in: query
+          required: false
+          default: false
+          description: Skip ascii
+        - name: mse
+          in: query
+          required: false
+          default: 0.1
+          description: Threshold of character similarity
+    responses:
+        200:
+            description: Unvcode string JSON"""
+    return myutils.unv.requestHandler()
