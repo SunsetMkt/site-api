@@ -1,3 +1,4 @@
+import base64
 import json
 import os
 import random
@@ -925,3 +926,24 @@ def api_v1_unvcode():
         200:
             description: Unvcode string JSON"""
     return myutils.unv.requestHandler()
+
+
+# sixty-four api
+# with China IP check
+@urls_blueprint.route('/sixty-four')
+def api_v1_sixty_four():
+    """
+    sixty-four
+    sixty-four
+    ---
+    tags:
+        - china
+    responses:
+        200:
+            description: JSON
+        418:
+            description: User in China"""
+    myutils.chinaip.check_and_abort()
+    url = "aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU1JTg1JUFEJUU1JTlCJTlCJUU0JUJBJThCJUU0JUJCJUI2"
+    info = "ODk2NA=="
+    return flask.jsonify({"url": base64.b64decode(url).decode("utf-8"), "info": base64.b64decode(info).decode("utf-8")})
