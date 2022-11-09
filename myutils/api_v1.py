@@ -945,7 +945,7 @@ def api_v1_sixty_four():
 @urls_blueprint.route('/firefox')
 def api_v1_firefox():
     """
-    Get Firefox
+    Get Firefox Installer
     Get Firefox Win x64 zh-CN Installer
     ---
     tags:
@@ -978,8 +978,8 @@ def api_v1_firefox():
 @urls_blueprint.route('/kaspersky')
 def api_v1_kaspersky():
     """
-    Get Kaspersky Internet Security
-    Get Kaspersky Internet Security zh-Hans Installer
+    Get Kaspersky Internet Security Installer
+    Get Kaspersky Internet Security zh-Hans Installer for Windows x64
     Execute with /pPRODUCTTYPE=saas to install Kaspersky Security Cloud
     ---
     tags:
@@ -996,6 +996,40 @@ def api_v1_kaspersky():
         302:
             description: Redirect to URL"""
     url = myutils.getkis.getKis()
+    # Get param redirect
+    redirect = flask.request.args.get("redirect")
+    if redirect == None:
+        redirect = "false"
+    if redirect.lower() == "true":
+        # no-referrer redirect to url
+        response = flask.redirect(url)
+        response.headers['Referrer-Policy'] = 'no-referrer'
+        return response
+    return flask.Response(url, mimetype='text/plain')
+
+
+# Get Chrome Offline Installer
+# https://dl.google.com/chrome/install/ChromeStandaloneSetup64.exe
+@urls_blueprint.route('/chrome')
+def api_v1_chrome():
+    """
+    Get Chrome Offline Installer for Windows x64
+    https://dl.google.com/chrome/install/ChromeStandaloneSetup64.exe
+    ---
+    tags:
+        - chrome
+    parameters:
+        - name: redirect
+          in: query
+          type: string
+          required: false
+          default: false
+    responses:
+        200:
+            description: URL
+        302:
+            description: Redirect to URL"""
+    url = myutils.getchrome.getChrome()
     # Get param redirect
     redirect = flask.request.args.get("redirect")
     if redirect == None:
