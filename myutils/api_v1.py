@@ -947,3 +947,33 @@ def api_v1_sixty_four():
     url = "aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU1JTg1JUFEJUU1JTlCJTlCJUU0JUJBJThCJUU0JUJCJUI2"
     info = "ODk2NA=="
     return flask.jsonify({"url": base64.b64decode(url).decode("utf-8"), "info": base64.b64decode(info).decode("utf-8")})
+
+
+# Get Firefox
+@urls_blueprint.route('/firefox')
+def api_v1_firefox():
+    """
+    Get Firefox
+    Get Firefox Win x64 zh-CN Installer
+    ---
+    tags:
+        - firefox
+    responses:
+        200:
+            description: URL"""
+    return flask.Response(myutils.getfirefox.win64(), mimetype='text/plain')
+
+
+# Get Kaspersky Internet Security zh-Hans Installer
+@urls_blueprint.route('/kaspersky')
+def api_v1_kaspersky():
+    """
+    Get Kaspersky Internet Security
+    Get Kaspersky Internet Security zh-Hans Installer
+    ---
+    tags:
+        - kaspersky
+    responses:
+        200:
+            description: URL"""
+    return flask.Response(myutils.getkis.getKis(), mimetype='text/plain')
