@@ -1009,7 +1009,9 @@ def api_v1_kaspersky():
 
 
 # Get Chrome Offline Installer
-# https://dl.google.com/chrome/install/ChromeStandaloneSetup64.exe
+# Not working, seems that Google needs more args to build a functionable installer
+# Fxxk Google
+'''
 @urls_blueprint.route('/chrome')
 def api_v1_chrome():
     """
@@ -1040,3 +1042,4 @@ def api_v1_chrome():
         response.headers['Referrer-Policy'] = 'no-referrer'
         return response
     return flask.Response(url, mimetype='text/plain')
+'''
