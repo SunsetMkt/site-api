@@ -1029,7 +1029,7 @@ def api_v1_chrome():
             description: URL
         302:
             description: Redirect to URL"""
-    url = myutils.getchrome.getChrome()
+    url = "https://dl.google.com/chrome/install/ChromeStandaloneSetup64.exe"
     # Get param redirect
     redirect = flask.request.args.get("redirect")
     if redirect == None:
