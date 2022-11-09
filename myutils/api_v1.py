@@ -826,27 +826,19 @@ def api_v1_dxx():
           description: Redirect to the latest real dxx share page
     responses:
         200:
-            description: Fake dxx share page or redirect page"""
+            description: Fake dxx share page
+        302:
+            description: Redirect to the latest real dxx page"""
     title, icon, url = myutils.dxx.get()
     # Get param redirect
     redirect = flask.request.args.get("redirect")
     if redirect == None:
         redirect = "false"
     if redirect.lower() == "true":
-        # return flask.redirect(url)
-        # No origin or referer
-        return flask.Response(
-            """
-            <html>
-            <head>
-            <meta http-equiv="refresh" content="0;url=%s">
-            </head>
-            <body>
-            <a href="%s">Redirecting...</a>
-            </body>
-            </html>
-            """ % (url, url),
-            mimetype='text/html')
+        # no-referrer redirect to url
+        response = flask.redirect(url)
+        response.headers['Referrer-Policy'] = 'no-referrer'
+        return response
     return flask.render_template('dxx.html', title=title, image=icon, link=url)
 
 
@@ -958,10 +950,28 @@ def api_v1_firefox():
     ---
     tags:
         - firefox
+    parameters:
+        - name: redirect
+          in: query
+          type: string
+          required: false
+          default: false
     responses:
         200:
-            description: URL"""
-    return flask.Response(myutils.getfirefox.win64(), mimetype='text/plain')
+            description: URL
+        302:
+            description: Redirect to URL"""
+    url = myutils.getfirefox.win64()
+    # Get param redirect
+    redirect = flask.request.args.get("redirect")
+    if redirect == None:
+        redirect = "false"
+    if redirect.lower() == "true":
+        # no-referrer redirect to url
+        response = flask.redirect(url)
+        response.headers['Referrer-Policy'] = 'no-referrer'
+        return response
+    return flask.Response(url, mimetype='text/plain')
 
 
 # Get Kaspersky Internet Security zh-Hans Installer
@@ -973,7 +983,25 @@ def api_v1_kaspersky():
     ---
     tags:
         - kaspersky
+    parameters:
+        - name: redirect
+          in: query
+          type: string
+          required: false
+          default: false
     responses:
         200:
-            description: URL"""
-    return flask.Response(myutils.getkis.getKis(), mimetype='text/plain')
+            description: URL
+        302:
+            description: Redirect to URL"""
+    url = myutils.getkis.getKis()
+    # Get param redirect
+    redirect = flask.request.args.get("redirect")
+    if redirect == None:
+        redirect = "false"
+    if redirect.lower() == "true":
+        # no-referrer redirect to url
+        response = flask.redirect(url)
+        response.headers['Referrer-Policy'] = 'no-referrer'
+        return response
+    return flask.Response(url, mimetype='text/plain')
