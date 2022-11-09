@@ -980,6 +980,7 @@ def api_v1_kaspersky():
     """
     Get Kaspersky Internet Security
     Get Kaspersky Internet Security zh-Hans Installer
+    Execute with /pPRODUCTTYPE=saas to install Kaspersky Security Cloud
     ---
     tags:
         - kaspersky
