@@ -368,6 +368,21 @@ else:
         return flask.abort(503, "This API has security issues and should be used on Serverless Platform only.")
 
 
+# Handle /api/clash
+@app.route("/api/clash")
+def api_clash():
+    """
+    Get Clash Setup & Config Guide
+    Return Clash Setup & Config Guide HTML
+    ---
+    tags:
+        - clash
+    responses:
+        200:
+          description: Clash Setup & Config Guide"""
+    return myutils.clash.render()
+
+
 # Handle Any Exception
 @app.errorhandler(Exception)
 def handle_exception(e):
