@@ -1,5 +1,3 @@
-import base64
-
 import lxml.html
 import requests
 
