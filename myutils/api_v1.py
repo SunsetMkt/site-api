@@ -1010,13 +1010,13 @@ def api_v1_kaspersky():
 
 # Get Chrome Offline Installer
 # Not working, seems that Google needs more args to build a functionable installer
+# https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B00000000-0000-0000-0000-000000000000%7D%26lang%3Dzh-CN%26browser%3D0%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/chrome/install/ChromeStandaloneSetup64.exe
 # Fxxk Google
-'''
 @urls_blueprint.route('/chrome')
 def api_v1_chrome():
     """
     Get Chrome Offline Installer for Windows x64
-    https://dl.google.com/chrome/install/ChromeStandaloneSetup64.exe
+    https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B00000000-0000-0000-0000-000000000000%7D%26lang%3Dzh-CN%26browser%3D0%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/chrome/install/ChromeStandaloneSetup64.exe
     ---
     tags:
         - chrome
@@ -1031,7 +1031,7 @@ def api_v1_chrome():
             description: URL
         302:
             description: Redirect to URL"""
-    url = "https://dl.google.com/chrome/install/ChromeStandaloneSetup64.exe"
+    url = "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B00000000-0000-0000-0000-000000000000%7D%26lang%3Dzh-CN%26browser%3D0%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/chrome/install/ChromeStandaloneSetup64.exe"
     # Get param redirect
     redirect = flask.request.args.get("redirect")
     if redirect == None:
@@ -1042,4 +1042,3 @@ def api_v1_chrome():
         response.headers['Referrer-Policy'] = 'no-referrer'
         return response
     return flask.Response(url, mimetype='text/plain')
-'''
