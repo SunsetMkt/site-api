@@ -111,3 +111,14 @@ def render():
     subscribe_source_name, subscribe_source_url, subscribe_url = subscribe()
 
     return flask.render_template('clash.html', cfw=cfw, cfw_portable=cfw_portable, cfa=cfa, subscribe_source_name=subscribe_source_name, subscribe_source_url=subscribe_source_url, subscribe_url=subscribe_url)
+
+
+def config():
+    # Get yaml and return
+    # https://raw.githubusercontent.com/yu-steven/openit/main/Clash.yaml
+    config = requests.get(
+        "https://raw.githubusercontent.com/yu-steven/openit/main/Clash.yaml")
+    config.raise_for_status()
+    config = config.text
+
+    return config

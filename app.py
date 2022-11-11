@@ -383,6 +383,21 @@ def api_clash():
     return myutils.clash.render()
 
 
+# Handle /api/clash/config
+@app.route("/api/clash/config")
+def api_clash():
+    """
+    Return Clash Config
+    Return Clash Config YAML
+    ---
+    tags:
+        - clash
+    responses:
+        200:
+          description: Clash Config YAML"""
+    return flask.Response(myutils.clash.config(), mimetype="text/plain")
+
+
 # Handle Any Exception
 @app.errorhandler(Exception)
 def handle_exception(e):
