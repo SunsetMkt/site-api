@@ -105,12 +105,9 @@ def subscribe():
 
 
 def render():
-    cfw = cfw()
-    cfw_portable = cfw_portable()
-    cfa = cfa()
     subscribe_source_name, subscribe_source_url, subscribe_url = subscribe()
 
-    return flask.render_template('clash.html', cfw=cfw, cfw_portable=cfw_portable, cfa=cfa, subscribe_source_name=subscribe_source_name, subscribe_source_url=subscribe_source_url, subscribe_url=subscribe_url)
+    return flask.render_template('clash.html', cfw=cfw(), cfw_portable=cfw_portable(), cfa=cfa(), subscribe_source_name=subscribe_source_name, subscribe_source_url=subscribe_source_url, subscribe_url=subscribe_url)
 
 
 def config():
