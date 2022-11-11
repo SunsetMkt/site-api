@@ -1042,3 +1042,36 @@ def api_v1_chrome():
         response.headers['Referrer-Policy'] = 'no-referrer'
         return response
     return flask.Response(url, mimetype='text/plain')
+
+
+# Get ungoogled-chromium
+@urls_blueprint.route('/ungoogled-chromium')
+def api_v1_ungoogled_chromium():
+    """
+    Get ungoogled-chromium
+    Get ungoogled-chromium Installer for Windows x64
+    ---
+    tags:
+        - ungoogled-chromium
+    parameters:
+        - name: redirect
+          in: query
+          type: string
+          required: false
+          default: false
+    responses:
+        200:
+            description: URL
+        302:
+            description: Redirect to URL"""
+    url = myutils.ungoogled_chromium_windows.get_latest_download_url()
+    # Get param redirect
+    redirect = flask.request.args.get("redirect")
+    if redirect == None:
+        redirect = "false"
+    if redirect.lower() == "true":
+        # no-referrer redirect to url
+        response = flask.redirect(url)
+        response.headers['Referrer-Policy'] = 'no-referrer'
+        return response
+    return flask.Response(url, mimetype='text/plain')

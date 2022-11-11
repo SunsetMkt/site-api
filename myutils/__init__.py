@@ -1,6 +1,6 @@
 from . import (bili, bing, cfstyle, chinaip, dir, dxx, exec_with_return,
                freenom, gist, github, hash, keybase, kizunaai, lzma, mc, pi,
-               randerr, strange_url, totp, unv, verceldetect, getfirefox, getkis)
+               randerr, strange_url, totp, unv, verceldetect, getfirefox, getkis, ungoogled_chromium_windows)
 
 __all__ = [
     'bili',
@@ -26,6 +26,7 @@ __all__ = [
     'unv',
     'getfirefox',
     'getkis',
+    'ungoogled_chromium_windows',
 ]
 
 
