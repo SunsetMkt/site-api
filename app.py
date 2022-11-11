@@ -385,7 +385,7 @@ def api_clash():
 
 # Handle /api/clash/config
 @app.route("/api/clash/config")
-def api_clash():
+def api_clash_config():
     """
     Return Clash Config
     Return Clash Config YAML
