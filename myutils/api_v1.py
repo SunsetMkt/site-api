@@ -11,6 +11,7 @@ import flask
 import flask_gzipbomb
 import lorem
 import pybase16384 as pybs
+import requests
 
 import myutils
 
@@ -1072,6 +1073,43 @@ def api_v1_ungoogled_chromium():
     if redirect.lower() == "true":
         # no-referrer redirect to url
         response = flask.redirect(url)
+        response.headers['Referrer-Policy'] = 'no-referrer'
+        return response
+    return flask.Response(url, mimetype='text/plain')
+
+
+# Get VSCode Installer for Windows x64
+# https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user
+@urls_blueprint.route('/vscode')
+def api_v1_vscode():
+    """
+    Get VSCode Installer for Windows x64
+    https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user
+    ---
+    tags:
+        - vscode
+    parameters:
+        - name: redirect
+          in: query
+          type: string
+          required: false
+          default: false
+    responses:
+        200:
+            description: URL
+        302:
+            description: Redirect to URL"""
+    url = "https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user"
+    # Get redirect url
+    req = requests.get(url, allow_redirects=False)
+    url = req.headers['Location']
+    # Get param redirect
+    redirect = flask.request.args.get("redirect")
+    if redirect == None:
+        redirect = "false"
+    if redirect.lower() == "true":
+        # no-referrer redirect to url
+        response = flask.redirect
         response.headers['Referrer-Policy'] = 'no-referrer'
         return response
     return flask.Response(url, mimetype='text/plain')
