@@ -889,6 +889,7 @@ def api_v1_base16384():
         flask.abort(400, "Unknown type.")
 
 
+'''
 # unvcode api
 @urls_blueprint.route('/unvcode')
 def api_v1_unvcode():
@@ -919,6 +920,7 @@ def api_v1_unvcode():
         200:
             description: Unvcode string JSON"""
     return myutils.unv.requestHandler()
+'''
 
 
 # sixty-four api
