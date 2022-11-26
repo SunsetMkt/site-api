@@ -73,6 +73,15 @@ app.config['JSONERROR'] = '0'
 flask_cors.CORS(app, resources={
                 r"/*": {"origins": r"^(https?://)?(\w+\.)?(lwd-temp|ikia|cedaros)\.top(:\d+)?$"}})
 
+
+# Response headers
+@app.after_request
+def add_header(response):
+    # appversion
+    response.headers['App-Version'] = 'v1-' + str(app.config['GIT_HASH'])
+    return response
+
+
 # API v1
 app.register_blueprint(myutils.api_v1.urls_blueprint, url_prefix="/api/v1")
 
