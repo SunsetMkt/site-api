@@ -1113,3 +1113,18 @@ def api_v1_vscode():
         response.headers['Referrer-Policy'] = 'no-referrer'
         return response
     return flask.Response(url, mimetype='text/plain')
+
+
+# Return random Chinese text
+@urls_blueprint.route('/randtext')
+def api_v1_randtext():
+    """
+    Return random Chinese text
+    ---
+    tags:
+        - random
+        - fun
+    responses:
+        200:
+            description: Random Chinese text"""
+    return flask.Response(myutils.fake_strings.fake_article(), mimetype='text/plain')
