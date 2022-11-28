@@ -1,7 +1,9 @@
 import flask
 import requests
 
-ghproxy = "https://ghp.lwd-temp.top/"
+from . import keybase
+
+ghproxy = keybase.ghproxy
 
 
 def cfw():

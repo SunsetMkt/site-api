@@ -1130,3 +1130,44 @@ def api_v1_randtext():
         200:
             description: Random Chinese text"""
     return flask.Response(myutils.fake_strings.fake_article(), mimetype='text/plain')
+
+
+# Get HMCL executable
+@urls_blueprint.route('/hmcl')
+def api_v1_hmcl():
+    """
+    Get HMCL executable
+    ---
+    tags:
+        - hmcl
+    parameters:
+        - name: redirect
+          in: query
+          type: string
+          required: false
+          default: false
+        - name: ext
+          in: query
+          type: string
+          required: false
+          default: exe
+    responses:
+        200:
+            description: URL
+        302:
+            description: Redirect to URL"""
+    # Get param redirect
+    redirect = flask.request.args.get("redirect")
+    if redirect == None:
+        redirect = "false"
+    # Get param ext
+    ext = flask.request.args.get("ext")
+    if ext == None:
+        ext = "exe"
+    url = myutils.hmcl.get_latest_release(ext)
+    if redirect.lower() == "true":
+        # no-referrer redirect to url
+        response = flask.redirect
+        response.headers['Referrer-Policy'] = 'no-referrer'
+        return response
+    return flask.Response(url, mimetype='text/plain')

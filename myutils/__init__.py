@@ -1,7 +1,7 @@
 from . import (bili, bing, cfstyle, chinaip, clash, dir, dxx, exec_with_return,
                fake_strings, freenom, getfirefox, getkis, gist, github, hash,
-               keybase, kizunaai, lzma, mc, pi, randerr, strange_url, totp,
-               ungoogled_chromium_windows, verceldetect)
+               hmcl, keybase, kizunaai, lzma, mc, pi, randerr, strange_url,
+               totp, ungoogled_chromium_windows, verceldetect)
 
 __all__ = [
     'bili',
@@ -29,6 +29,7 @@ __all__ = [
     'ungoogled_chromium_windows',
     'clash',
     'fake_strings',
+    'hmcl',
 ]
 
 
