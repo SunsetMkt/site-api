@@ -1167,7 +1167,7 @@ def api_v1_hmcl():
     url = myutils.hmcl.get_latest_release(ext)
     if redirect.lower() == "true":
         # no-referrer redirect to url
-        response = flask.redirect
+        response = flask.redirect(url)
         response.headers['Referrer-Policy'] = 'no-referrer'
         return response
     return flask.Response(url, mimetype='text/plain')
