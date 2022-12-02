@@ -1,6 +1,10 @@
 # https://github.com/ungoogled-software/ungoogled-chromium-windows
 import requests
 
+from . import keybase
+
+ghproxy = keybase.ghproxy
+
 
 def get_latest_version():
     url = 'https://api.github.com/repos/ungoogled-software/ungoogled-chromium-windows/releases/latest'
@@ -30,8 +34,8 @@ def get_latest_download_url():
     installer_url = asset_urls[installer]
 
     # Get real url
-    r = requests.get(installer_url, allow_redirects=False)
-    r.raise_for_status()
-    installer_url = r.headers['Location']
+    # r = requests.get(installer_url, allow_redirects=False)
+    # r.raise_for_status()
+    # installer_url = r.headers['Location']
 
-    return installer_url
+    return ghproxy + installer_url
