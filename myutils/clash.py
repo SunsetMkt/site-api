@@ -94,10 +94,10 @@ def cfa():
 
 
 def subscribe():
-    # https://github.com/yu-steven/openit
-    # https://raw.githubusercontent.com/yu-steven/openit/main/Clash.yaml
-    subscribe_source_name = "Openit：致力于打造免费无感的翻墙环境 采用 CC BY-SA 4.0 许可协议"
-    subscribe_source_url = "https://github.com/yu-steven/openit"
+    # https://github.com/ermaozi/get_subscribe
+    # https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml
+    subscribe_source_name = "ermaozi/get_subscribe"
+    subscribe_source_url = "https://github.com/ermaozi/get_subscribe"
     subscribe_url = "https://raw.githubusercontent.com/yu-steven/openit/main/Clash.yaml"
 
     # ghproxy
@@ -114,9 +114,9 @@ def render():
 
 def config():
     # Get yaml and return
-    # https://raw.githubusercontent.com/yu-steven/openit/main/Clash.yaml
+    # https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml
     config = requests.get(
-        "https://raw.githubusercontent.com/yu-steven/openit/main/Clash.yaml")
+        "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml")
     config.raise_for_status()
     config = config.text
 
