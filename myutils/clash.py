@@ -98,7 +98,7 @@ def subscribe():
     # https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml
     subscribe_source_name = "ermaozi/get_subscribe"
     subscribe_source_url = "https://github.com/ermaozi/get_subscribe"
-    subscribe_url = "https://raw.githubusercontent.com/yu-steven/openit/main/Clash.yaml"
+    subscribe_url = "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml"
 
     # ghproxy
     subscribe_url = ghproxy + subscribe_url
