@@ -1181,12 +1181,13 @@ def api_v1_chinacovid19():
     ---
     tags:
         - covid19
+        - china
     parameters:
         - name: json
-            in: query
-            type: string
-            required: false
-            default: false
+          in: query
+          type: string
+          required: false
+          default: false
     responses:
         200:
             description: Page"""
