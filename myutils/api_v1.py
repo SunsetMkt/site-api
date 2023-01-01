@@ -1171,3 +1171,17 @@ def api_v1_hmcl():
         response.headers['Referrer-Policy'] = 'no-referrer'
         return response
     return flask.Response(url, mimetype='text/plain')
+
+
+# Get COVID-19 report from China CDC
+@urls_blueprint.route('/chinacovid19')
+def api_v1_chinacovid19():
+    """
+    Get COVID-19 report from China CDC
+    ---
+    tags:
+        - covid19
+    responses:
+        200:
+            description: Page"""
+    return myutils.chinacovid19.render_page()
