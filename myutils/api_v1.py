@@ -1181,7 +1181,15 @@ def api_v1_chinacovid19():
     ---
     tags:
         - covid19
+    parameters:
+        - name: json
+            in: query
+            type: string
+            required: false
+            default: false
     responses:
         200:
             description: Page"""
+    if flask.request.args.get("json") == "true":
+        return flask.jsonify(myutils.chinacovid19.get_report())
     return myutils.chinacovid19.render_page()

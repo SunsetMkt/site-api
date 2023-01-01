@@ -40,7 +40,16 @@ def pharse_detail_page(url):
     return title, content
 
 
-def render_page():
+def get_report():
     page = get_latest_page_url()
     title, content = pharse_detail_page(page)
-    return flask.render_template("gist.html", title=title, gist=content)
+    return {
+        "title": title,
+        "content": content,
+        "url": page
+    }
+
+
+def render_page():
+    report = get_report()
+    return flask.render_template("gist.html", title=report['title'], gist=report['content'])
