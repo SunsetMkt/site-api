@@ -1229,7 +1229,7 @@ def api_v1_rustdesk():
     platform = flask.request.args.get("platform")
     if platform == None:
         platform = "win64"
-    url = myutils.rustdesk.get_latest_release(platform.lower())
+    url = myutils.rustdesk.get_download_link(platform.lower())
     if redirect.lower() == "true":
         # no-referrer redirect to url
         response = flask.redirect
