@@ -1,8 +1,8 @@
 from . import (bili, bing, cfstyle, chinacovid19, chinaip, clash, dir, dxx,
                exec_with_return, fake_strings, freenom, getfirefox, getkis,
                gist, github, hash, hmcl, keybase, kizunaai, lzma, mc, pi,
-               randerr, strange_url, totp, ungoogled_chromium_windows,
-               verceldetect)
+               randerr, rustdesk, strange_url, totp,
+               ungoogled_chromium_windows, verceldetect)
 
 __all__ = [
     'bili',
@@ -32,6 +32,7 @@ __all__ = [
     'fake_strings',
     'hmcl',
     'chinacovid19',
+    'rustdesk',
 ]
 
 

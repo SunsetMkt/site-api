@@ -1194,3 +1194,45 @@ def api_v1_chinacovid19():
     if flask.request.args.get("json") == "true":
         return flask.jsonify(myutils.chinacovid19.get_report())
     return myutils.chinacovid19.render_page()
+
+
+# Get rustdesl executable
+@urls_blueprint.route('/rustdesk')
+def api_v1_rustdesk():
+    """
+    Get rustdesk executable
+    platform can be win32/win64/android
+    ---
+    tags:
+        - rustdesk
+    parameters:
+        - name: redirect
+          in: query
+          type: string
+          required: false
+          default: false
+        - name: platform
+          in: query
+          type: string
+          required: false
+          default: win64
+    responses:
+        200:
+            description: URL
+        302:
+            description: Redirect to URL"""
+    # Get param redirect
+    redirect = flask.request.args.get("redirect")
+    if redirect == None:
+        redirect = "false"
+    # Get param platform
+    platform = flask.request.args.get("platform")
+    if platform == None:
+        platform = "win64"
+    url = myutils.rustdesk.get_latest_release(platform.lower())
+    if redirect.lower() == "true":
+        # no-referrer redirect to url
+        response = flask.redirect
+        response.headers['Referrer-Policy'] = 'no-referrer'
+        return response
+    return flask.Response(url, mimetype='text/plain')
