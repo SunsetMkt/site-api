@@ -407,6 +407,22 @@ def api_clash_config():
     return flask.Response(myutils.clash.config(), mimetype="text/plain")
 
 
+# Handle /api/alive
+@app.route("/api/alive")
+def api_alive():
+    """
+    Get lwd-temp Alive Status Page, Demo Only
+    Return lwd-temp Alive Status Page, Demo Only
+    ---
+    tags:
+        - demo
+        - live
+    responses:
+        200:
+          description: Alive Status"""
+    return myutils.alive.render()
+
+
 # Handle Any Exception
 @app.errorhandler(Exception)
 def handle_exception(e):

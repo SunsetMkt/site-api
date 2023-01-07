@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://unpkg.com/simpledotcss/simple.min.css">
+    <style>
+        .center {
+            text-align: center;
+        }
+
+        .blink {
+            animation: blinker 1s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes shining-red-neon {
+            50% {
+                text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000, 0 0 80px #ff0000;
+            }
+        }
+
+        .green {
+            background-color: #339933;
+            color: #FFFFFF;
+        }
+
+        .yellow {
+            background-color: #FFCC00;
+            color: #333333;
+        }
+
+        .red {
+            background-color: #FF6666;
+            color: #FFFF00;
+            /**shining-red-neon**/
+            animation: shining-red-neon 5s linear infinite;
+        }
+
+        .error {
+            color: #FF0000;
+            animation: shining-red-neon 5s linear infinite;
+        }
+    </style>
+</head>
+
+<body class="{{color}}">
+    <!--center title-->
+    <h1 class="center">{{title}}</h1>
+    <!--center subtitle-->
+    <h2 class="center">{{subtitle}}</h2>
+    <!--center message-->
+    <p class="center">{{message}}</p>
+</body>
+
+</html>

@@ -11,3 +11,5 @@ TOTP_KEY = "base32secret3232"
 EXEC_KEY_SHA256 = "07756c808d25f945a848946ffd5b690ccb144a252ea02d1e018ac90a3338921d"
 
 ghproxy = "https://ghp.lwd-temp.top/"
+
+username = "lwd-temp"
