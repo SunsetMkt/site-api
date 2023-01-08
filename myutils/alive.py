@@ -23,7 +23,7 @@ def get_github_last_activity_time(name):
         # 时间表中只包含过去 90 天内创建的事件。 超过 90 天的活动将不包括在内（即使时间表中的活动总数不到 300 个）。
         latest = '1970-01-01T00:00:00Z'
 
-    return datetime.datetime.strptime(latest, '%Y-%m-%dT%H:%M:%SZ')
+    return datetime.datetime.strptime(latest, '%Y-%m-%dT%H:%M:%SZ'), r.text
 
 
 def get_days_since(time):
@@ -32,18 +32,18 @@ def get_days_since(time):
 
 def get_alive_info(name):
     try:
-        time = get_github_last_activity_time(name)
+        time, code = get_github_last_activity_time(name)
     except:
-        return 'error', 'error', 'error'
+        return 'error', 'error', 'error', 'error'
     days = get_days_since(time)
     if days > 90:
-        return 'timeout', days, time
+        return 'timeout', days, time, code
     if days > red_alert_days:
-        return 'red', days, time
+        return 'red', days, time, code
     elif days > yellow_alert_days:
-        return 'yellow', days, time
+        return 'yellow', days, time, code
     else:
-        return 'green', days, time
+        return 'green', days, time, code
 
 
 def time_to_str(time):
@@ -53,7 +53,7 @@ def time_to_str(time):
 
 def render():
     name = username
-    color, days, time = get_alive_info(name)
+    color, days, time, code = get_alive_info(name)
     if color == 'error':
         title = '无法获取活跃信息'
         subtitle = f'无法获取 {name} 的活跃信息'
@@ -77,4 +77,4 @@ def render():
         message = '这是一个演示目的的页面，警报无实际意义。'
     else:
         raise ValueError('Unknown color')
-    return flask.render_template('alive.html', title=title, subtitle=subtitle, message=message, color=color)
+    return flask.render_template('alive.html', title=title, subtitle=subtitle, message=message, color=color, code=code)

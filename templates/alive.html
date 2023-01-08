@@ -48,6 +48,30 @@
             color: #FF0000;
             animation: shining-red-neon 5s linear infinite;
         }
+
+        details {
+            user-select: none;
+        }
+
+        details>summary span.icon {
+            width: 24px;
+            height: 24px;
+            transition: all 0.3s;
+            margin-left: auto;
+        }
+
+        details[open] summary span.icon {
+            transform: rotate(180deg);
+        }
+
+        summary {
+            display: flex;
+            cursor: pointer;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
     </style>
 </head>
 
@@ -58,6 +82,17 @@
     <h2 class="center">{{subtitle}}</h2>
     <!--center message-->
     <p class="center">{{message}}</p>
+    <p class="center"></p>
+    <!--https://dev.to/jordanfinners/creating-a-collapsible-section-with-nothing-but-html-4ip9-->
+    <details class="{{color}}">
+        <summary>
+            展示 GitHub API 请求结果
+            <span class="icon">⬇️</span>
+        </summary>
+        <p>
+            {{code}}
+        </p>
+    </details>
 </body>
 
 </html>
