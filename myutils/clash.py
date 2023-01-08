@@ -94,11 +94,11 @@ def cfa():
 
 
 def subscribe():
-    # https://github.com/ermaozi/get_subscribe
-    # https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml
-    subscribe_source_name = "ermaozi/get_subscribe"
-    subscribe_source_url = "https://github.com/ermaozi/get_subscribe"
-    subscribe_url = "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml"
+    # https://github.com/paimonhub/Paimonnode
+    # https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml
+    subscribe_source_name = "paimonhub/Paimonnode"
+    subscribe_source_url = "https://github.com/paimonhub/Paimonnode"
+    subscribe_url = "https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml"
 
     # ghproxy
     subscribe_url = ghproxy + subscribe_url
@@ -114,9 +114,9 @@ def render():
 
 def config():
     # Get yaml and return
-    # https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml
+    # https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml
     config = requests.get(
-        "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml")
+        "https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml")
     config.raise_for_status()
     config = config.text
 
