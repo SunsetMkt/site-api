@@ -1,5 +1,6 @@
 import flask
 import requests
+import urllib.parse
 
 from . import keybase
 
@@ -99,17 +100,22 @@ def subscribe():
     subscribe_source_name = "paimonhub/Paimonnode"
     subscribe_source_url = "https://github.com/paimonhub/Paimonnode"
     subscribe_url = "https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml"
+    base64_url = "https://raw.githubusercontent.com/paimonhub/Paimonnode/main/base64"
 
     # ghproxy
     subscribe_url = ghproxy + subscribe_url
+    base64_url = ghproxy + base64_url
 
-    return subscribe_source_name, subscribe_source_url, subscribe_url
+    return subscribe_source_name, subscribe_source_url, subscribe_url, base64_url
 
 
 def render():
-    subscribe_source_name, subscribe_source_url, subscribe_url = subscribe()
+    subscribe_source_name, subscribe_source_url, subscribe_url, base64_url = subscribe()
 
-    return flask.render_template('clash.html', cfw=cfw(), cfw_portable=cfw_portable(), cfa=cfa(), subscribe_source_name=subscribe_source_name, subscribe_source_url=subscribe_source_url, subscribe_url=subscribe_url)
+    # URL Encoded
+    subscribe_encoded_url = urllib.parse.quote(subscribe_url)
+
+    return flask.render_template('clash.html', cfw=cfw(), cfw_portable=cfw_portable(), cfa=cfa(), subscribe_source_name=subscribe_source_name, subscribe_source_url=subscribe_source_url, subscribe_url=subscribe_url, base64_url=base64_url, subscribe_encoded_url=subscribe_encoded_url)
 
 
 def config():
