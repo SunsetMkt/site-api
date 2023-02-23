@@ -121,9 +121,21 @@ def render():
 def config():
     # Get yaml and return
     # https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml
-    config = requests.get(
-        "https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml")
-    config.raise_for_status()
-    config = config.text
+    config_urls = [
+        "https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml",
+        "https://sub.pmsub.me/clash.yaml",
+        "https://sub.xeton.dev/sub?target=clash&new_name=true&url=https%3A%2F%2Fraw.githubusercontent.com%2FPawdroid%2FFree-servers%2Fmain%2Fsub&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%2FACL4SSR%2FACL4SSR%2Fmaster%2FClash%2Fconfig%2FACL4SSR_Online.ini",
+        "https://raw.githubusercontent.com/openrunner/clash-freenode/main/clash.yaml",
+        "https://raw.githubusercontent.com/learnhard-cn/free_proxy_ss/main/config.yaml"
+    ]
+
+    for url in config_urls:
+        config = requests.get(url)
+        if config.status_code != 200:
+            continue
+        else:
+            config.raise_for_status()
+            config = config.text
+            break
 
     return config
