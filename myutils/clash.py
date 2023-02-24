@@ -97,7 +97,7 @@ def cfa():
 def subscribe():
     # https://github.com/paimonhub/Paimonnode
     # https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml
-    subscribe_source_name = "API自动聚合"
+    subscribe_source_name = "API自动聚合（来源见项目源码）"
     subscribe_source_url = "https://api.lwd-temp.top/"
     subscribe_url = "https://api.lwd-temp.top/api/clash/config"
     base64_url = "https://api.lwd-temp.top/"
@@ -131,6 +131,7 @@ def config():
         "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/config.yaml",
         "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/2/config.yaml",
         "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/3/config.yaml",
+        "https://sub.sharecentre.online/sub"
         # "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml" # 长期不更新
         # "https://github.com/yu-steven/openit" # 纪念
     ]
