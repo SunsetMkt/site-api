@@ -406,8 +406,8 @@ def api_clash_config():
         200:
           description: Clash Config YAML"""
     return flask.Response(myutils.clash.config(), mimetype="text/plain", headers=[
-        ("content-disposition", 'attachment; filename="' +
-         urllib.parse.quote('看什么看？没见过通知栏养猫的嘛？.yaml', safe='')+'"'),
+        # ("content-disposition", 'attachment; filename="' +
+        #  urllib.parse.quote('看什么看？没见过通知栏养猫的嘛？.yaml', safe='')+'"'),
         ("profile-update-interval", "12"),
         ("profile-web-page-url", "https://api.lwd-temp.top/api/clash")
     ])
