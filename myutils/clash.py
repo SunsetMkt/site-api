@@ -168,9 +168,9 @@ def config():
         for sub in subs:
             url_cmb = url_cmb + "|"
             url_cmb = url_cmb + sub
-        api_args = "target=clash&new_name=true&url=" + url_cmb + \
+        api_args = "target=clash&new_name=true&url=" + urllib.parse.quote(url_cmb, safe='') + \
             "&insert=false&append_type=true&emoji=true&list=false&tfo=false&scv=false&fdn=true&sort=true"
-        api_call = api_call + urllib.parse.quote(api_args, safe='')
+        api_call = api_call + api_args
         api_req = requests.get(api_call)
         api_req.raise_for_status()
         config = api_req.text
