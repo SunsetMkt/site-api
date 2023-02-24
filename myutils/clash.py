@@ -190,6 +190,12 @@ def config():
         # No API available
         for url in sub_urls:
 
+            # Clash yaml only
+            if url.endswith(".yaml"):
+                pass
+            else:
+                continue
+
             try:
                 config = requests.get(url)
             except:
