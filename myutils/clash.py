@@ -123,6 +123,7 @@ def config():
     # https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml
     sub_urls = [
         "https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml",
+        "https://sub.pmsub.me/clash.yaml",
         "https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub",
         "https://raw.githubusercontent.com/openrunner/clash-freenode/main/clash.yaml",
         "https://raw.githubusercontent.com/learnhard-cn/free_proxy_ss/main/config.yaml",
