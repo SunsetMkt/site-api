@@ -97,14 +97,14 @@ def cfa():
 def subscribe():
     # https://github.com/paimonhub/Paimonnode
     # https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml
-    subscribe_source_name = "paimonhub/Paimonnode"
-    subscribe_source_url = "https://github.com/paimonhub/Paimonnode"
-    subscribe_url = "https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml"
-    base64_url = "https://raw.githubusercontent.com/paimonhub/Paimonnode/main/base64"
+    subscribe_source_name = "API自动聚合"
+    subscribe_source_url = "https://api.lwd-temp.top/"
+    subscribe_url = "https://api.lwd-temp.top/api/clash/config"
+    base64_url = "https://api.lwd-temp.top/"
 
     # ghproxy
-    subscribe_url = ghproxy + subscribe_url
-    base64_url = ghproxy + base64_url
+    # subscribe_url = ghproxy + subscribe_url
+    # base64_url = ghproxy + base64_url
 
     return subscribe_source_name, subscribe_source_url, subscribe_url, base64_url
 
