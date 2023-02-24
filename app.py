@@ -404,7 +404,11 @@ def api_clash_config():
     responses:
         200:
           description: Clash Config YAML"""
-    return flask.Response(myutils.clash.config(), mimetype="text/plain")
+    return flask.Response(myutils.clash.config(), mimetype="text/plain",headers=[
+        ("content-disposition",'filename="看什么看？没见过通知栏养猫的嘛？"'),
+        ("profile-update-interval","12"),
+        ("profile-web-page-url","https://api.lwd-temp.top/api/clash")
+    ])
 
 
 # Handle /api/alive
