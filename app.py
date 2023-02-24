@@ -8,6 +8,7 @@ import http
 import os
 import pathlib
 import traceback
+import urllib.parse
 
 import flasgger
 import flask
@@ -404,10 +405,11 @@ def api_clash_config():
     responses:
         200:
           description: Clash Config YAML"""
-    return flask.Response(myutils.clash.config(), mimetype="text/plain",headers=[
-        ("content-disposition",'filename="看什么看？没见过通知栏养猫的嘛？"'),
-        ("profile-update-interval","12"),
-        ("profile-web-page-url","https://api.lwd-temp.top/api/clash")
+    return flask.Response(myutils.clash.config(), mimetype="text/plain", headers=[
+        ("content-disposition", 'filename="' +
+         urllib.parse.quote('看什么看？没见过通知栏养猫的嘛？', safe='')+'"'),
+        ("profile-update-interval", "12"),
+        ("profile-web-page-url", "https://api.lwd-temp.top/api/clash")
     ])
 
 
