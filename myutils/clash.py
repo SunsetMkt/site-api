@@ -125,13 +125,22 @@ def config():
         "https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml",
         "https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub",
         "https://raw.githubusercontent.com/openrunner/clash-freenode/main/clash.yaml",
-        "https://raw.githubusercontent.com/learnhard-cn/free_proxy_ss/main/config.yaml"
+        "https://raw.githubusercontent.com/learnhard-cn/free_proxy_ss/main/config.yaml",
+        "https://raw.githubusercontent.com/learnhard-cn/free_proxy_ss/main/clash/config.yaml",
+        "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/config.yaml",
+        "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/2/config.yaml",
+        "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/3/config.yaml",
+        # "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml" # 长期不更新
+        # "https://github.com/yu-steven/openit" # 纪念
     ]
 
     api_urls = [
         "https://sub.xeton.dev/sub",
         "https://api.wcc.best/sub",
-        "https://api.dler.io/sub"
+        "https://api.dler.io/sub",
+        "https://api.sublink.dev/sub",
+        "https://sub.id9.cc/sub",
+        "https://sub.maoxiongnet.com/sub"
     ]
 
     # Get an available API url
