@@ -97,7 +97,7 @@ def cfa():
 def subscribe():
     # https://github.com/paimonhub/Paimonnode
     # https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml
-    subscribe_source_name = "API自动聚合（来源见项目源码）"
+    subscribe_source_name = "所有分享节点和订阅的组织和个人，由API自动聚合（来源见项目源码）"
     subscribe_source_url = "https://api.lwd-temp.top/"
     subscribe_url = "https://api.lwd-temp.top/api/clash/config"
     base64_url = "https://api.lwd-temp.top/"
