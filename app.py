@@ -390,7 +390,8 @@ def api_clash():
     responses:
         200:
           description: Clash Setup & Config Guide"""
-    return myutils.clash.render()
+    china = myutils.chinaip.check()
+    return myutils.clash.render(china=china)
 
 
 # Handle /api/clash/config
