@@ -137,7 +137,7 @@ def config():
     # Get yaml and return
     # https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml
     sub_urls = [
-        "https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml",
+        # "https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml",
         "https://sub.pmsub.me/clash.yaml",
         "https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub",
         "https://raw.githubusercontent.com/openrunner/clash-freenode/main/clash.yaml",
@@ -146,7 +146,8 @@ def config():
         "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/config.yaml",
         "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/2/config.yaml",
         "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/3/config.yaml",
-        "https://sub.sharecentre.online/sub"
+        "https://sub.sharecentre.online/sub",
+        "https://sub.cloudflare.quest/"
         # "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml" # 长期不更新
         # "https://github.com/yu-steven/openit" # 纪念
     ]
