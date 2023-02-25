@@ -19,11 +19,14 @@ def generate_key():
     # 将日期部分和数字部分组合在一起
     key = f"{date_part}{key_digits}"
 
+    # 无意义，但检验
+    if not validate_key(key):
+        return generate_key()
+
     return key
 
+
 # 验证激活码
-
-
 def validate_key(key):
     # 检查激活码的格式
     if not key or len(key) != 12:
@@ -48,3 +51,7 @@ def validate_key(key):
         return False
 
     return True
+
+
+if __name__ == "__main__":
+    print(generate_key())
