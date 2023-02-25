@@ -1,8 +1,9 @@
-import flask
-import requests
 import urllib.parse
 
-from . import keybase
+import flask
+import requests
+
+from . import keybase, license
 
 ghproxy = keybase.ghproxy
 
@@ -108,7 +109,8 @@ def subscribe():
     # https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml
     subscribe_source_name = "所有分享节点和订阅的组织和个人，由API自动聚合（来源见项目源码）"
     subscribe_source_url = "https://api.lwd-temp.top/"
-    subscribe_url = "https://api.lwd-temp.top/api/clash/config"
+    subscribe_url = "https://api.lwd-temp.top/api/clash/config" + \
+        "?key=" + license.generate_key()
     base64_url = "https://api.lwd-temp.top/"
 
     # ghproxy

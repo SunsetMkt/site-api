@@ -403,9 +403,19 @@ def api_clash_config():
     ---
     tags:
         - clash
+    parameters:
+        - name: key
+          in: query
+          type: string
+          required: true
+          description: Key to anti spider. Access /api/clash to generate.
     responses:
         200:
           description: Clash Config YAML"""
+    # Get param key
+    key = flask.request.args.get("key")
+    if key == None or myutils.license.validate_key(key) == False:
+        return flask.abort(403, "Invalid key.")
     return flask.Response(myutils.clash.config(), mimetype="text/plain", headers=[
         # ("content-disposition", 'attachment; filename="' +
         #  urllib.parse.quote('看什么看？没见过通知栏养猫的嘛？.yaml', safe='')+'"'),
