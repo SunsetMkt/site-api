@@ -1,7 +1,7 @@
 from . import (alive, bili, bing, cfstyle, chinacovid19, chinaip, clash, dir,
                dxx, exec_with_return, fake_strings, freenom, getfirefox,
-               getkis, gist, github, hash, hmcl, keybase, kizunaai, lzma, mc,
-               pi, randerr, rustdesk, strange_url, totp,
+               getkis, gist, github, hash, hmcl, keybase, kizunaai, license,
+               lzma, mc, pi, randerr, rustdesk, strange_url, totp,
                ungoogled_chromium_windows, verceldetect)
 
 __all__ = [
@@ -34,6 +34,7 @@ __all__ = [
     'chinacovid19',
     'rustdesk',
     'alive',
+    'license',
 ]
 
 
