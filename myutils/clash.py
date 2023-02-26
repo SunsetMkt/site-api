@@ -213,6 +213,8 @@ def config():
             # Same
             # No API available
             for url in sub_urls:
+                import traceback
+                trace = traceback.format_exc()
 
                 # Clash yaml only
                 if url.endswith(".yaml"):
@@ -230,7 +232,10 @@ def config():
                 else:
                     # config.raise_for_status()
                     config = config.text
-                    config = "# " + url + " #" + "\n" + config
+                    debug_info = {"sub": url, "trace": trace,
+                                  "error": "Error while calling API."}
+                    config = "# " + \
+                        json.dumps(debug_info) + " #" + "\n" + config
                     break
 
     else:
@@ -253,7 +258,8 @@ def config():
             else:
                 # config.raise_for_status()
                 config = config.text
-                config = "# " + url + " #" + "\n" + config
+                debug_info = {"sub": url, "error": "No API available."}
+                config = "# " + json.dumps(debug_info) + " #" + "\n" + config
                 break
 
     return config
