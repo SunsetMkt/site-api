@@ -1236,3 +1236,18 @@ def api_v1_rustdesk():
         response.headers['Referrer-Policy'] = 'no-referrer'
         return response
     return flask.Response(url, mimetype='text/plain')
+
+
+# Get license key
+@urls_blueprint.route('/license')
+def api_v1_license():
+    """
+    Get API license key
+    Just for fun.
+    ---
+    tags:
+        - fun
+    responses:
+        200:
+            description: license key"""
+    return flask.Response(myutils.license.generate_key(), mimetype='text/plain')
