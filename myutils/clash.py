@@ -1,3 +1,4 @@
+import json
 import urllib.parse
 
 import flask
@@ -205,6 +206,9 @@ def config():
             api_req = requests.get(api_call, timeout=5)
             api_req.raise_for_status()
             config = api_req.text
+            debug_info = {"api_url": api_url,
+                          "subs": subs, "api_call": api_call}
+            config = "# " + json.dumps(debug_info) + " #" + "\n" + config
         except:
             # Same
             # No API available
@@ -226,6 +230,7 @@ def config():
                 else:
                     # config.raise_for_status()
                     config = config.text
+                    config = "# " + url + " #" + "\n" + config
                     break
 
     else:
@@ -248,6 +253,7 @@ def config():
             else:
                 # config.raise_for_status()
                 config = config.text
+                config = "# " + url + " #" + "\n" + config
                 break
 
     return config
