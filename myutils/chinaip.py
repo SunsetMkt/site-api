@@ -10,12 +10,21 @@ from . import cfstyle
 
 
 def is_china_ip(ip):
+    # IPv4
     with open('china_ip_list.txt') as f:
         for line in f:
             line = line.strip()
             if ipaddress.ip_address(ip) in ipaddress.ip_network(line):
                 return True
-        return False
+    # IPv6
+    # https://github.com/ChanthMiao/China-IPv6-List
+    with open('cn6.txt') as f:
+        for line in f:
+            line = line.strip()
+            if ipaddress.ip_address(ip) in ipaddress.ip_network(line):
+                return True
+
+    return False
 
 
 # Check request Accept-Language header
