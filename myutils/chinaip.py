@@ -9,6 +9,33 @@ import flask
 from . import cfstyle
 
 
+def get_ip():
+    # Get IP
+    # From headers first
+    # cf-connecting-ip x-real-ip
+    # x-forwarded-for
+    # Then from request
+    ip = flask.request.headers.get('cf-connecting-ip')
+    if ip is None:
+        ip = flask.request.headers.get('x-real-ip')
+    if ip is None:
+        ip = flask.request.headers.get('x-forwarded-for')
+    if ip is None:
+        ip = flask.request.remote_addr
+    return ip
+
+
+def chk_cdn_region_header():
+    Cf_Ipcountry = flask.request.headers.get('cf-ipcountry')
+    if Cf_Ipcountry == "CN":
+        return True
+    X_Vercel_Ip_Country = flask.request.headers.get('x-vercel-ip-country')
+    if X_Vercel_Ip_Country == "CN":
+        return True
+
+    return False
+
+
 def is_china_ip(ip):
     # IPv4
     with open('china_ip_list.txt') as f:
@@ -38,6 +65,8 @@ def check_zhcn():
 def check(lang=False):
     ip = cfstyle.get_ip()
     if is_china_ip(ip):
+        return True
+    if chk_cdn_region_header():
         return True
     if lang and check_zhcn():
         return True
