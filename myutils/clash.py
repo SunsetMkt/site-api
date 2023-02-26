@@ -139,7 +139,10 @@ def render(china=False):
 
 def config():
     # Get yaml and return
-    # https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml
+
+    # Start time
+    start = time.time()
+
     sub_urls = [
         # "https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml",
         "https://sub.pmsub.me/clash.yaml",
@@ -207,8 +210,13 @@ def config():
             api_req = requests.get(api_call, timeout=5)
             api_req.raise_for_status()
             config = api_req.text
+
+            # End time
+            end = time.time()
+            delta = end - start
+
             debug_info = {"api_url": api_url,
-                          "subs": subs, "api_call": api_call, "timestamp": time.time()}
+                          "subs": subs, "api_call": api_call, "timestamp": time.time(), "duration": delta}
             config = "# " + json.dumps(debug_info) + " #" + "\n" + config
         except:
             # Same
