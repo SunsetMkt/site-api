@@ -1,4 +1,5 @@
 import json
+import time
 import urllib.parse
 
 import flask
@@ -207,7 +208,7 @@ def config():
             api_req.raise_for_status()
             config = api_req.text
             debug_info = {"api_url": api_url,
-                          "subs": subs, "api_call": api_call}
+                          "subs": subs, "api_call": api_call, "timestamp": time.time()}
             config = "# " + json.dumps(debug_info) + " #" + "\n" + config
         except:
             # Same
@@ -233,7 +234,7 @@ def config():
                     # config.raise_for_status()
                     config = config.text
                     debug_info = {"sub": url, "trace": trace,
-                                  "error": "Error while calling API."}
+                                  "error": "Error while calling API.", "timestamp": time.time()}
                     config = "# " + \
                         json.dumps(debug_info) + " #" + "\n" + config
                     break
@@ -258,7 +259,8 @@ def config():
             else:
                 # config.raise_for_status()
                 config = config.text
-                debug_info = {"sub": url, "error": "No API available."}
+                debug_info = {
+                    "sub": url, "error": "No API available.", "timestamp": time.time()}
                 config = "# " + json.dumps(debug_info) + " #" + "\n" + config
                 break
 
