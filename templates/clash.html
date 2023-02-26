@@ -29,11 +29,36 @@
             max-height: 1000px;
             transition: max-height 0.5s ease-in;
         }
+
+        .success {
+            display: flex;
+            align-items: center;
+            background-color: #d9f5d9;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #a3d9a3;
+            font-size: 18px;
+            color: #4d834d;
+        }
+
+        .icon {
+            font-size: 28px;
+            margin-right: 10px;
+            color: #4d834d;
+        }
+
+        .message {
+            font-weight: bold;
+        }
     </style>
 </head>
 
 <body>
     <h1>Clash客户端和免费节点</h1>
+    <div class="success {{china}}">
+        <span class="icon">&#10003;</span>
+        <span class="message">您没有直接从中国连接服务器。</span>
+    </div>
     <h2>0. 校准设备时间</h2>
     <p>访问时，服务器时间（UTC+8）为：{{date}}</p>
     <h2>1. 下载客户端</h2>
@@ -69,7 +94,6 @@
     </div>
     <div class="{{china}}">
         <h2>后记</h2>
-        <p>如果您能看见这行字，这说明服务器不认为您正在从中国连接。</p>
         <blockquote>
             我们希望有一天，那些设置障碍使自己的人民与世界隔离、使人民互相隔离的政府，将认识到他们这么做不但伤害自己的利益，也伤害自己公民和全人类的权利。
             <br>
