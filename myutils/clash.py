@@ -176,7 +176,7 @@ def render(china=False):
     dateStr = datetime.datetime.now(tz=pytz.timezone(
         'Asia/Shanghai')).strftime("%Y-%m-%d %H:%M:%S")
 
-    return flask.render_template('clash.html', cfw=cfw(), cfw_portable=cfw_portable(), cfa=cfa(), subscribe_source_name=subscribe_source_name, subscribe_source_url=subscribe_source_url, subscribe_url=subscribe_url, base64_url=base64_url, subscribe_encoded_url=subscribe_encoded_url, china=chinaclass, date=dateStr, mac=cfx(), ios=ios())
+    return flask.render_template('clash.html', cfw=cfw(), cfw_portable=cfw_portable(), cfa=cfa(), subscribe_source_name=subscribe_source_name, subscribe_source_url=subscribe_source_url, subscribe_url=subscribe_url, base64_url=base64_url, subscribe_encoded_url=subscribe_encoded_url, china=chinaclass, date=dateStr, mac=cfx())
 
 
 def config():
