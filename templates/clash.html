@@ -15,19 +15,23 @@
 
 <body>
     <h1>Clash客户端和免费节点</h1>
+    <h2>0. 校准设备时间</h2>
+    <p>访问时，服务器时间（UTC+8）为：{{date}}</p>
     <h2>1. 下载客户端</h2>
     <a href="{{cfw}}">Windows</a>
     <a href="{{cfw_portable}}">Windows（免安装）</a>
     <a href="{{cfa}}">Android</a>
+    <a href="{{mac}}">Mac</a>
+    <a href="{{ios}}">其他Apple设备</a>
     <h2>2. 获取节点列表URL</h2>
     <p>复制下方URL</p>
     <code>{{subscribe_url}}</code>
     <p><em>感谢<a href="{{subscribe_source_url}}">{{subscribe_source_name}}</a></em></p>
     <h2>3. 在客户端应用节点列表</h2>
     <a href="clash://install-config?url={{subscribe_encoded_url}}">点击此处快速应用Windows配置</a>
-    <h2>专业人员参考</h2>
-    <!--<a href="{{base64_url}}">Base64通用配置</a>-->
-    <a href="https://apps.apple.com/us/app/fair-vpn/id1533873488">Fair VPN（Apple设备，非中国Apple账号）</a>
+    <!--<h2>专业人员参考</h2>
+    <a href="{{base64_url}}">Base64通用配置</a>
+    <a href="https://apps.apple.com/us/app/fair-vpn/id1533873488">Fair VPN（Apple设备，非中国Apple账号）</a>-->
     <!-- https://github.com/Alvin9999/new-pac/wiki/%E8%8B%B9%E6%9E%9C%E6%89%8B%E6%9C%BA%E7%BF%BB%E5%A2%99%E8%BD%AF%E4%BB%B6 -->
     <div class="{{china}}">
         <h2>后记</h2>
@@ -37,6 +41,7 @@
             <a href="https://blog.zoom.us/zh/improving-our-policies-as-we-continue-to-enable-global-collaboration/">——Zoom
                 Video Communications, Inc.</a>
         </blockquote>
+        <p>如果您能看见这行字，这说明服务器不认为您正在从中国连接。</p>
     </div>
 </body>
 

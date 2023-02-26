@@ -1,8 +1,10 @@
+import datetime
 import json
 import time
 import urllib.parse
 
 import flask
+import pytz
 import requests
 
 from . import keybase, license
@@ -106,6 +108,43 @@ def cfa():
         return ""
 
 
+def cfx():
+    # Mac
+    try:
+        # Get latest release
+        r = requests.get(
+            'https://api.github.com/repos/yichengchen/clashX/releases/latest', timeout=1)
+        r.raise_for_status()
+        release = r.json()
+
+        # Get assets
+        assets = release['assets']
+
+        # Get name: url
+        asset_urls = {asset['name']: asset['browser_download_url']
+                      for asset in assets}
+
+        # Return name Clash.for.Windows.Setup.x.xx.x.exe
+        # Check all names contains Setup
+        for name in asset_urls:
+            if '.dmg' in name:
+                installer = name
+
+        # Return url
+        installer_url = asset_urls[installer]
+
+        # ghproxy
+        installer_url = ghproxy + installer_url
+
+        return installer_url
+    except:
+        return ""
+
+
+def ios():
+    return "https://apps.apple.com/us/app/shadowrocket/id932747118"
+
+
 def subscribe():
     # https://github.com/paimonhub/Paimonnode
     # https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml
@@ -134,7 +173,10 @@ def render(china=False):
     else:
         chinaclass = "notchina"
 
-    return flask.render_template('clash.html', cfw=cfw(), cfw_portable=cfw_portable(), cfa=cfa(), subscribe_source_name=subscribe_source_name, subscribe_source_url=subscribe_source_url, subscribe_url=subscribe_url, base64_url=base64_url, subscribe_encoded_url=subscribe_encoded_url, china=chinaclass)
+    dateStr = datetime.datetime.now(tz=pytz.timezone(
+        'Asia/Shanghai')).strftime("%Y-%m-%d %H:%M:%S")
+
+    return flask.render_template('clash.html', cfw=cfw(), cfw_portable=cfw_portable(), cfa=cfa(), subscribe_source_name=subscribe_source_name, subscribe_source_url=subscribe_source_url, subscribe_url=subscribe_url, base64_url=base64_url, subscribe_encoded_url=subscribe_encoded_url, china=chinaclass, date=dateStr, mac=cfx(), ios=ios())
 
 
 def config():
