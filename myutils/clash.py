@@ -152,7 +152,8 @@ def subscribe():
     subscribe_source_url = "https://api.lwd-temp.top/api/dir/var/task/myutils/clash.py/"
     subscribe_url = "https://api.lwd-temp.top/api/clash/config" + \
         "?key=" + license.generate_key()
-    base64_url = "https://api.lwd-temp.top/"
+    base64_url = "https://api.lwd-temp.top/api/clash/base64" + \
+        "?key=" + license.generate_key()
 
     # ghproxy
     # subscribe_url = ghproxy + subscribe_url
@@ -179,7 +180,7 @@ def render(china=False):
     return flask.render_template('clash.html', cfw=cfw(), cfw_portable=cfw_portable(), cfa=cfa(), subscribe_source_name=subscribe_source_name, subscribe_source_url=subscribe_source_url, subscribe_url=subscribe_url, base64_url=base64_url, subscribe_encoded_url=subscribe_encoded_url, china=chinaclass, date=dateStr, mac=cfx())
 
 
-def config():
+def config(base64=False):
     # Get yaml and return
 
     # Start time
@@ -241,13 +242,23 @@ def config():
             # API args
             # target=clash&new_name=true&url=
             # &insert=false&append_type=true&emoji=true&list=false&tfo=false&scv=false&fdn=true&sort=true
+
+            # Pre-API-Args
+            pre_api_args = "target=clash&new_name=true&url="
+
+            if base64:
+                pre_api_args = "target=v2ray&new_name=true&url="
+
+            # Post-API-Args
+            post_api_args = "&insert=false&append_type=true&emoji=true&list=false&tfo=false&scv=false&fdn=true&sort=true"
+
             api_call = api_url + "?"
             url_cmb = ""
             for sub in subs:
                 url_cmb = url_cmb + "|"
                 url_cmb = url_cmb + sub
-            api_args = "target=clash&new_name=true&url=" + urllib.parse.quote(url_cmb, safe='') + \
-                "&insert=false&append_type=true&emoji=true&list=false&tfo=false&scv=false&fdn=true&sort=true"
+            api_args = pre_api_args + \
+                urllib.parse.quote(url_cmb, safe='') + post_api_args
             api_call = api_call + api_args
             api_req = requests.get(api_call, timeout=5)
             api_req.raise_for_status()
@@ -267,8 +278,13 @@ def config():
                 import traceback
                 trace = traceback.format_exc()
 
+                allowed = ".yaml"
+
+                if base64:
+                    allowed = "sub"
+
                 # Clash yaml only
-                if url.endswith(".yaml"):
+                if url.endswith(allowed):
                     pass
                 else:
                     continue
@@ -293,8 +309,13 @@ def config():
         # No API available
         for url in sub_urls:
 
+            allowed = ".yaml"
+
+            if base64:
+                allowed = "sub"
+
             # Clash yaml only
-            if url.endswith(".yaml"):
+            if url.endswith(allowed):
                 pass
             else:
                 continue
@@ -313,5 +334,10 @@ def config():
                     "sub": url, "error": "No API available.", "timestamp": time.time()}
                 config = "# " + json.dumps(debug_info) + " #" + "\n" + config
                 break
+
+    if base64:
+        # Deleting the first 1 lines of a string(debug_info)
+        # string.find('\n')会返回第一个换行符的位置，加1表示从第二行开始切片，最后将切片后的字符串保存到new_string变量中
+        config = config[config.find('\n')+1:]
 
     return config

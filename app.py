@@ -411,7 +411,9 @@ def api_clash_config():
           description: Key to anti spider. Access /api/clash to generate.
     responses:
         200:
-          description: Clash Config YAML"""
+          description: Clash Config YAML
+        403:
+          description: Invalid key"""
     # Get param key
     key = flask.request.args.get("key")
     if key == None or myutils.license.validate_key(key) == False:
@@ -422,6 +424,32 @@ def api_clash_config():
         ("profile-update-interval", "12"),
         ("profile-web-page-url", "https://api.lwd-temp.top/api/clash")
     ])
+
+
+# Handle /api/clash/base64
+@app.route("/api/clash/base64")
+def api_clash_base64():
+    """
+    Return Base64 Config
+    ---
+    tags:
+        - clash
+    parameters:
+        - name: key
+          in: query
+          type: string
+          required: true
+          description: Key to anti spider. Access /api/clash to generate.
+    responses:
+        200:
+          description: Base64 Config
+        403:
+          description: Invalid key"""
+    # Get param key
+    key = flask.request.args.get("key")
+    if key == None or myutils.license.validate_key(key) == False:
+        return flask.abort(403, "Invalid key.")
+    return flask.Response(myutils.clash.config(base64=True), mimetype="text/plain")
 
 
 # Handle /api/alive
