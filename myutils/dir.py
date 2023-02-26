@@ -29,7 +29,7 @@ def api_dir(path):
         # Get file
         file = open(path, "rb")
         # Return file
-        return flask.send_file(file, mimetype="octet-stream", as_attachment=True, download_name=os.path.basename(path))
+        return flask.send_file(file, download_name=os.path.basename(path))
     # If ends with /
     elif path.endswith("/"):
         # Remove the last / and check if it's a file
@@ -39,7 +39,7 @@ def api_dir(path):
             # Get file
             file = open(path, "rb")
             # Return file
-            return flask.send_file(file, mimetype="octet-stream", as_attachment=True, download_name=os.path.basename(path))
+            return flask.send_file(file, download_name=os.path.basename(path))
         # If path is a directory, return a list of files
         elif os.path.isdir(path):
             # Get files
