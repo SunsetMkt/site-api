@@ -188,16 +188,16 @@ def config(base64=False):
 
     sub_urls = [
         # "https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml",
-        "https://sub.pmsub.me/clash.yaml",
-        "https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub",
-        "https://raw.githubusercontent.com/openrunner/clash-freenode/main/clash.yaml",
-        "https://raw.githubusercontent.com/learnhard-cn/free_proxy_ss/main/config.yaml",
-        "https://raw.githubusercontent.com/learnhard-cn/free_proxy_ss/main/clash/config.yaml",
-        "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/config.yaml",
-        "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/2/config.yaml",
-        "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/3/config.yaml",
-        "https://sub.sharecentre.online/sub",
-        "https://sub.cloudflare.quest/"
+        "https://sub.pmsub.me/clash.yaml",  # 信任
+        "https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub",  # 能用
+        # "https://raw.githubusercontent.com/openrunner/clash-freenode/main/clash.yaml", # 效果不佳。这年代还用shadowsocks？
+        # "https://raw.githubusercontent.com/learnhard-cn/free_proxy_ss/main/config.yaml", # 效果不佳。
+        # "https://raw.githubusercontent.com/learnhard-cn/free_proxy_ss/main/clash/config.yaml", # 效果不佳。
+        # "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/config.yaml", # 效果不佳。
+        # "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/2/config.yaml", # 效果不佳。
+        # "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/3/config.yaml", # 效果不佳。
+        "https://sub.sharecentre.online/sub",  # 信任
+        "https://sub.cloudflare.quest/"  # 能用
         # "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml" # 长期不更新
         # "https://github.com/yu-steven/openit" # 纪念
     ]
