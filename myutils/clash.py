@@ -7,7 +7,7 @@ import flask
 import pytz
 import requests
 
-from . import keybase, license, cfstyle
+from . import cfstyle, keybase, license
 
 ghproxy = keybase.ghproxy
 
@@ -262,7 +262,7 @@ def config(base64=False):
             api_call = api_call + api_args
             api_req = requests.get(api_call, timeout=5)
             api_req.raise_for_status()
-            config = api_req.text
+            config = api_req.text.replace("🇨🇳", "🇹🇼")  # 替换引人迷惑的flag
 
             # End time
             end = time.time()
