@@ -409,6 +409,11 @@ def api_clash_config():
           type: string
           required: true
           description: Key to anti spider. Access /api/clash to generate.
+        - name: append
+          in: query
+          type: string
+          required: false
+          description: Append your URL.
     responses:
         200:
           description: Clash Config YAML
@@ -418,7 +423,10 @@ def api_clash_config():
     key = flask.request.args.get("key")
     if key == None or myutils.license.validate_key(key) == False:
         return flask.abort(403, "Invalid key.")
-    return flask.Response(myutils.clash.config(), mimetype="text/plain", headers=[
+    appendURL = flask.request.args.get("append")
+    if appendURL == None:
+        appendURL = False
+    return flask.Response(myutils.clash.config(append_url=appendURL), mimetype="text/plain", headers=[
         # ("content-disposition", 'attachment; filename="' +
         #  urllib.parse.quote('看什么看？没见过通知栏养猫的嘛？.yaml', safe='')+'"'),
         ("profile-update-interval", "12"),

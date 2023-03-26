@@ -180,7 +180,7 @@ def render(china=False):
     return flask.render_template('clash.html', cfw=cfw(), cfw_portable=cfw_portable(), cfa=cfa(), subscribe_source_name=subscribe_source_name, subscribe_source_url=subscribe_source_url, subscribe_url=subscribe_url, base64_url=base64_url, subscribe_encoded_url=subscribe_encoded_url, china=chinaclass, date=dateStr, mac=cfx(), ip=cfstyle.get_ip())
 
 
-def config(base64=False):
+def config(base64=False, append_url=None):
     # Get yaml and return
 
     # Start time
@@ -238,6 +238,9 @@ def config(base64=False):
 
                 if config.status_code == 200:
                     subs.append(url)
+
+            if append_url:
+                subs.append(append_url)
 
             # API args
             # target=clash&new_name=true&url=
