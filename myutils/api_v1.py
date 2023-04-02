@@ -213,7 +213,7 @@ def api_v1_env():
     responses:
         200:
             description: Env"""
-    #json_str = json.dumps({**os.environ, **app.config}, default=str)
+    # json_str = json.dumps({**os.environ, **app.config}, default=str)
 
     # get all flask config information
     flask_config = {}
@@ -1251,3 +1251,18 @@ def api_v1_license():
         200:
             description: license key"""
     return flask.Response(myutils.license.generate_key(), mimetype='text/plain')
+
+
+# hitokoto
+@urls_blueprint.route('/hitokoto')
+def api_v1_hitokoto():
+    """
+    Hitokoto API
+    hitokoto.cn
+    ---
+    tags:
+        - fun
+    responses:
+        200:
+            description: Random Hitokoto"""
+    return flask.jsonify(myutils.hitokoto.main())
