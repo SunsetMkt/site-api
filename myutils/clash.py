@@ -243,17 +243,31 @@ def config(base64=False, append_url=None):
                 subs.append(append_url)
 
             # API args
-            # target=clash&new_name=true&url=
-            # &insert=false&append_type=true&emoji=true&list=false&tfo=false&scv=false&fdn=true&sort=true
+            # target=clash&url=
+            # &insert=false&config=
 
             # Pre-API-Args
-            pre_api_args = "target=clash&new_name=true&url="
+            pre_api_args = "target=clash&url="
 
             if base64:
-                pre_api_args = "target=v2ray&new_name=true&url="
+                pre_api_args = "target=v2ray&url="
 
             # Post-API-Args
-            post_api_args = "&insert=false&append_type=true&emoji=true&list=false&tfo=false&scv=false&fdn=true&sort=true"
+            post_api_args = "&insert=false"
+
+            # &config=https%3A%2F%2Fraw.githubusercontent.com%2FLM-Firefly%2FRules%2Fmaster%2FSubconverter-base%2FAllSub-NoReject.toml
+            # Check config alive
+            try:
+                config_url = "https://raw.githubusercontent.com/lwd-temp/Rules/master/Subconverter-base/AIO-NoReject.ini"
+                config = requests.get(config_url, timeout=1)
+                if config.status_code == 200:
+                    post_api_args = post_api_args + \
+                        "&config=" + urllib.parse.quote(config_url, safe='')
+                else:
+                    config_url = "default"
+            except:
+                config_url = "default"
+                pass
 
             api_call = api_url + "?"
             url_cmb = ""
@@ -272,7 +286,7 @@ def config(base64=False, append_url=None):
             delta = end - start
 
             debug_info = {"api_url": api_url,
-                          "subs": subs, "api_call": api_call, "timestamp": time.time(), "duration": delta}
+                          "subs": subs, "config": config_url, "api_call": api_call, "timestamp": time.time(), "duration": delta}
             config = "# " + json.dumps(debug_info) + " #" + "\n" + config
         except:
             # Same
