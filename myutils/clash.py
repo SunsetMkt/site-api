@@ -215,9 +215,7 @@ def config(base64=False, append_url=None):
     api_url = False
     for url in api_urls:
         try:
-            # api = requests.get(url, timeout=1)
-            # Get head for test only
-            api = requests.head(url, timeout=1)
+            api = requests.get(url, timeout=1)
         except:
             continue
 
@@ -234,9 +232,7 @@ def config(base64=False, append_url=None):
             subs = []
             for url in sub_urls:
                 try:
-                    # config = requests.get(url, timeout=1)
-                    # Get head for test only
-                    config = requests.head(url, timeout=1)
+                    config = requests.get(url, timeout=1)
                 except:
                     continue
 
@@ -263,9 +259,7 @@ def config(base64=False, append_url=None):
             # Check config alive
             try:
                 config_url = "https://raw.githubusercontent.com/lwd-temp/Rules/master/Subconverter-base/AIO-NoReject.ini"
-                # config = requests.get(config_url, timeout=1)
-                # Get head for test only
-                config = requests.head(config_url, timeout=1)
+                config = requests.get(config_url, timeout=1)
                 if config.status_code == 200:
                     post_api_args = post_api_args + \
                         "&config=" + urllib.parse.quote(config_url, safe='')
