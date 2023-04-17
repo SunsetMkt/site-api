@@ -277,7 +277,7 @@ def config(base64=False, append_url=None):
             api_args = pre_api_args + \
                 urllib.parse.quote(url_cmb, safe='') + post_api_args
             api_call = api_call + api_args
-            api_req = requests.get(api_call, timeout=5)
+            api_req = requests.get(api_call, timeout=8)
             api_req.raise_for_status()
             config = api_req.text  # .replace("🇨🇳", "🇹🇼")  # 替换引人迷惑的flag
 
