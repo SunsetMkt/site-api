@@ -426,12 +426,20 @@ def api_clash_config():
     appendURL = flask.request.args.get("append")
     if appendURL == None:
         appendURL = False
-    return flask.Response(myutils.clash.config(append_url=appendURL), mimetype="text/plain", headers=[
-        # ("content-disposition", 'attachment; filename="' +
-        #  urllib.parse.quote('看什么看？没见过通知栏养猫的嘛？.yaml', safe='')+'"'),
-        ("profile-update-interval", "12"),
-        ("profile-web-page-url", "https://api.lwd-temp.top/api/clash")
-    ])
+    isPreview = flask.request.args.get("preview")
+    if isPreview == None:
+        isPreview = False
+    if isPreview == False:
+        return flask.Response(myutils.clash.config(append_url=appendURL), mimetype="text/plain", headers=[
+            # ("content-disposition", 'attachment; filename="' +
+            #  urllib.parse.quote('看什么看？没见过通知栏养猫的嘛？.yaml', safe='')+'"'),
+            ("profile-update-interval", "12"),
+            ("profile-web-page-url", "https://api.lwd-temp.top/api/clash")
+        ])
+    else:
+        preview_content = "```yaml" + '\n' + \
+            myutils.clash.config(append_url=appendURL) + '\n' + "```"
+        return flask.render_template("gist.html", title="YAML预览", gist=preview_content)
 
 
 # Handle /api/clash/base64
