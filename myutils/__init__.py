@@ -2,7 +2,7 @@ from . import (alive, bili, bing, cfstyle, chinacovid19, chinaip, clash, dir,
                dxx, exec_with_return, fake_strings, freenom, getfirefox,
                getkis, gist, github, hash, hitokoto, hmcl, keybase, kizunaai,
                license, lzma, mc, pi, randerr, rustdesk, strange_url, totp,
-               ungoogled_chromium_windows, verceldetect)
+               ungoogled_chromium_windows, verceldetect, thispersondoesnotexist)
 
 __all__ = [
     'bili',
@@ -36,6 +36,7 @@ __all__ = [
     'alive',
     'license',
     'hitokoto',
+    'thispersondoesnotexist',
 ]
 
 

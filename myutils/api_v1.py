@@ -1266,3 +1266,65 @@ def api_v1_hitokoto():
         200:
             description: Random Hitokoto"""
     return flask.jsonify(myutils.hitokoto.main())
+
+
+# thispersondoesnotexist
+@urls_blueprint.route('/thispersondoesnotexist')
+def api_v1_thispersondoesnotexist():
+    """
+    this-person-does-not-exist.com API
+    genders = ['all', 'male', 'female']
+    ages = ['all', '12-18', '19-25', '26-35', '35-50', '50']
+    etnics = ['all', 'asian', 'black', 'white', 'indian', 'middle_eastern', 'latino_hispanic']
+    ---
+    tags:
+        - fun
+    parameters:
+        - name: redirect
+          in: query
+          type: string
+          required: false
+          default: false
+        - name: gender
+          in: query
+          type: string
+          required: false
+          default: all
+        - name: age
+          in: query
+          type: string
+          required: false
+          default: all
+        - name: etnic
+          in: query
+          type: string
+          required: false
+          default: all
+    responses:
+        200:
+            description: URL
+        302:
+            description: Redirect to URL"""
+    # Get param redirect
+    redirect = flask.request.args.get("redirect")
+    if redirect == None:
+        redirect = "false"
+    # Get param gender
+    gender = flask.request.args.get("gender")
+    if gender == None:
+        gender = "all"
+    # Get param age
+    age = flask.request.args.get("age")
+    if age == None:
+        age = "all"
+    # Get param etnic
+    etnic = flask.request.args.get("etnic")
+    if etnic == None:
+        etnic = "all"
+    url = myutils.thispersondoesnotexist.new(gender, age, etnic)
+    if redirect.lower() == "true":
+        # no-referrer redirect to url
+        response = flask.redirect(url)
+        response.headers['Referrer-Policy'] = 'no-referrer'
+        return response
+    return flask.Response(url, mimetype='text/plain')
