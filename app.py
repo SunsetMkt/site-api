@@ -37,10 +37,10 @@ except Exception:
     app.config['GIT_HASH'] = 'unknown'
 
 swagger_config = flasgger.Swagger.DEFAULT_CONFIG
-swagger_config['swagger_ui_bundle_js'] = '//unpkg.com/swagger-ui-dist@3/swagger-ui-bundle.js'
-swagger_config['swagger_ui_standalone_preset_js'] = '//unpkg.com/swagger-ui-dist@3/swagger-ui-standalone-preset.js'
-swagger_config['jquery_js'] = '//unpkg.com/jquery@2.2.4/dist/jquery.min.js'
-swagger_config['swagger_ui_css'] = '//unpkg.com/swagger-ui-dist@3/swagger-ui.css'
+swagger_config['swagger_ui_bundle_js'] = '//unpkg.com/swagger-ui-dist@4/swagger-ui-bundle.js'
+swagger_config['swagger_ui_standalone_preset_js'] = '//unpkg.com/swagger-ui-dist@4/swagger-ui-standalone-preset.js'
+swagger_config['jquery_js'] = '//unpkg.com/jquery@3.6.4/dist/jquery.min.js'
+swagger_config['swagger_ui_css'] = '//unpkg.com/swagger-ui-dist@4/swagger-ui.css'
 swagger_template = {
     "info": {
         "title": "site-api",
