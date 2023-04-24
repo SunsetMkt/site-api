@@ -823,6 +823,7 @@ def api_v1_dxx():
           in: query
           type: string
           required: false
+          enum: [true, false]
           default: false
           description: Redirect to the latest real dxx share page
     responses:
@@ -959,6 +960,7 @@ def api_v1_firefox():
           type: string
           required: false
           default: false
+          enum: [true, false]
     responses:
         200:
             description: URL
@@ -993,6 +995,7 @@ def api_v1_kaspersky():
           type: string
           required: false
           default: false
+          enum: [true, false]
     responses:
         200:
             description: URL
@@ -1029,6 +1032,7 @@ def api_v1_chrome():
           type: string
           required: false
           default: false
+          enum: [true, false]
     responses:
         200:
             description: URL
@@ -1062,6 +1066,7 @@ def api_v1_ungoogled_chromium():
           type: string
           required: false
           default: false
+          enum: [true, false]
     responses:
         200:
             description: URL
@@ -1096,6 +1101,7 @@ def api_v1_vscode():
           type: string
           required: false
           default: false
+          enum: [true, false]
     responses:
         200:
             description: URL
@@ -1146,11 +1152,13 @@ def api_v1_hmcl():
           type: string
           required: false
           default: false
+          enum: [true, false]
         - name: ext
           in: query
           type: string
           required: false
           default: exe
+          enum: [exe, jar, sh]
     responses:
         200:
             description: URL
@@ -1188,6 +1196,7 @@ def api_v1_chinacovid19():
           type: string
           required: false
           default: false
+          enum: [true, false]
     responses:
         200:
             description: Page"""
@@ -1211,11 +1220,13 @@ def api_v1_rustdesk():
           type: string
           required: false
           default: false
+          enum: [true, false]
         - name: platform
           in: query
           type: string
           required: false
           default: win64
+          enum: [win32, win64, android]
     responses:
         200:
             description: URL
@@ -1285,21 +1296,25 @@ def api_v1_thispersondoesnotexist():
           type: string
           required: false
           default: false
+          enum: [true, false]
         - name: gender
           in: query
           type: string
           required: false
           default: all
+          enum: [all, male, female]
         - name: age
           in: query
           type: string
           required: false
           default: all
+          enum: [all, 12-18, 19-25, 26-35, 35-50, 50]
         - name: etnic
           in: query
           type: string
           required: false
           default: all
+          enum: [all, asian, black, white, indian, middle_eastern, latino_hispanic]
     responses:
         200:
             description: URL
