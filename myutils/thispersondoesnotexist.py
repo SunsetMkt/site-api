@@ -39,5 +39,12 @@ def new(gender='all', age='all', etnic='all'):
         raise Exception("Remote server returned error.")
 
 
+def get(gender, age, etnic):
+    url = new(gender, age, etnic)
+    response = requests.get(url)
+    response.raise_for_status()
+    return response.content
+
+
 if __name__ == '__main__':
     print(new())

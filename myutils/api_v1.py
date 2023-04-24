@@ -1297,6 +1297,13 @@ def api_v1_thispersondoesnotexist():
           required: false
           default: false
           enum: [true, false]
+        - name: format
+          in: query
+          type: string
+          required: false
+          enum: [url, image]
+          default: url
+          description: Response type
         - name: gender
           in: query
           type: string
@@ -1324,6 +1331,10 @@ def api_v1_thispersondoesnotexist():
     redirect = flask.request.args.get("redirect")
     if redirect == None:
         redirect = "false"
+    # Get param format
+    format = flask.request.args.get("format")
+    if format == None:
+        format = "url"
     # Get param gender
     gender = flask.request.args.get("gender")
     if gender == None:
@@ -1336,10 +1347,15 @@ def api_v1_thispersondoesnotexist():
     etnic = flask.request.args.get("etnic")
     if etnic == None:
         etnic = "all"
-    url = myutils.thispersondoesnotexist.new(gender, age, etnic)
+
     if redirect.lower() == "true":
         # no-referrer redirect to url
+        url = myutils.thispersondoesnotexist.new(gender, age, etnic)
         response = flask.redirect(url)
         response.headers['Referrer-Policy'] = 'no-referrer'
         return response
-    return flask.Response(url, mimetype='text/plain')
+    if format.lower() == "url":
+        url = myutils.thispersondoesnotexist.new(gender, age, etnic)
+        return flask.Response(url, mimetype='text/plain')
+    image = myutils.thispersondoesnotexist.get(gender, age, etnic)
+    return flask.Response(image, mimetype='image/png')
