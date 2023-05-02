@@ -258,6 +258,7 @@ def config(base64=False, append_url=None):
             # &config=https%3A%2F%2Fraw.githubusercontent.com%2FLM-Firefly%2FRules%2Fmaster%2FSubconverter-base%2FAllSub-NoReject.toml
             # Check config alive
             try:
+                raise Exception("Disable Config.")
                 config_url = "https://raw.githubusercontent.com/lwd-temp/Rules/master/Subconverter-base/AIO-NoReject.ini"
                 config = requests.get(config_url, timeout=1)
                 if config.status_code == 200:
