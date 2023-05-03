@@ -197,9 +197,10 @@ def config(base64=False, append_url=None):
         # "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/2/config.yaml", # 效果不佳。
         # "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/3/config.yaml", # 效果不佳。
         "https://sub.sharecentre.online/sub",  # 信任
-        "https://get.ooop.ink"  # 能用
+        "https://get.ooop.ink",  # 能用
         # "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml" # 长期不更新
         # "https://github.com/yu-steven/openit" # 纪念
+        "https://sub.yxjnode.com/sub",  # 来自sharecentre
     ]
 
     api_urls = [
