@@ -1359,3 +1359,18 @@ def api_v1_thispersondoesnotexist():
         return flask.Response(url, mimetype='text/plain')
     image = myutils.thispersondoesnotexist.get(gender, age, etnic)
     return flask.Response(image, mimetype='image/png')
+
+
+# awesome_free_chatgpt
+@urls_blueprint.route('/awesome_free_chatgpt')
+def api_v1_awesome_free_chatgpt():
+    """
+    awesome_free_chatgpt API
+    https://raw.githubusercontent.com/LiLittleCat/awesome-free-chatgpt/main/README.md
+    ---
+    tags:
+        - fun
+    responses:
+        200:
+            description: Page"""
+    return myutils.awesome_free_chatgpt.main()
