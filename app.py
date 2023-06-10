@@ -70,9 +70,9 @@ app.config['JSONERROR'] = '0'
 
 # CORS
 # flask_cors.CORS(app, resources={r"/*": {"origins": "*"}})
-# Allow *.lwd-temp.top and *.lwd-temp.top:port, also ikia.top and cedaros.top
+# Allow *.lwd-temp.* and *.lwd-temp.*:port, also ikia.* and cedaros.*
 flask_cors.CORS(app, resources={
-                r"/*": {"origins": r"^(https?://)?(\w+\.)?(lwd-temp|ikia|cedaros)\.top(:\d+)?$"}})
+                r"/*": {"origins": r"^(https?://)?(\w+\.)?(lwd-temp|ikia|cedaros)\.?(\w+)?(:\d+)?$"}})
 
 
 # Response headers
