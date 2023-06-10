@@ -7,8 +7,8 @@
 import http
 import os
 import pathlib
-import re
 import traceback
+import urllib.parse
 
 import flasgger
 import flask
@@ -70,18 +70,9 @@ app.config['JSONERROR'] = '0'
 
 # CORS
 # flask_cors.CORS(app, resources={r"/*": {"origins": "*"}})
-# Allow *.lwd-temp.* and *.lwd-temp.*:port, also ikia.top and cedaros.top
-pattern = r"^(https?://)?(\*\.)?lwd-temp\..*(:\d+)?$"
-allowed_origins = ["cedaros.top", "ikia.top"]
-
-
-def check_origin(origin):
-    if re.match(pattern, origin) or origin in allowed_origins:
-        return True
-    return False
-
-
-flask_cors.CORS(app, resources={r"/*": {"origins": check_origin}})
+# Allow *.lwd-temp.top and *.lwd-temp.top:port, also ikia.top and cedaros.top
+flask_cors.CORS(app, resources={
+                r"/*": {"origins": r"^(https?://)?(\w+\.)?(lwd-temp|ikia|cedaros)\.top(:\d+)?$"}})
 
 
 # Response headers
