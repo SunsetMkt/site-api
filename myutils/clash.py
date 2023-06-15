@@ -197,7 +197,7 @@ def config(base64=False, append_url=None):
         # "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/3/config.yaml", # 效果不佳。
         "https://sub.sharecentre.online/sub",  # 信任 # https://t.me/ShareCentrePro
         # "https://get.ooop.ink",  # 能用
-        # "https://woc.ooop.ink",  # https://t.me/aries_init
+        "https://woc.ooop.ink",  # https://t.me/aries_init
         # "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml" # 长期不更新
         # "https://github.com/yu-steven/openit" # 纪念
         "https://sub.yxjnode.com/sub",  # 来自sharecentre # https://t.me/ShareCentrePro
@@ -249,7 +249,7 @@ def config(base64=False, append_url=None):
             # &insert=false&config=
 
             # Pre-API-Args
-            pre_api_args = "target=clash&url="
+            pre_api_args = "target=clash&exclude=gRPC&url="
 
             if base64:
                 pre_api_args = "target=v2ray&url="
