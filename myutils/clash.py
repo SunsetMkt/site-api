@@ -234,7 +234,7 @@ def config(base64=False, append_url=None):
             subs = []
             for url in sub_urls:
                 try:
-                    config = requests.get(url, timeout=1)
+                    config = requests.get(url, timeout=2)
                 except:
                     continue
 
