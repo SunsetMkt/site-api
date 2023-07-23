@@ -22,6 +22,7 @@ def readmeParser(text):
 
 
 def main():
-    available = readmeParser(getREADME())
-    markdown = "\n".join(available)
-    return flask.render_template("gist.html", title="ChatGPT镜像网站列表", gist=markdown)
+    # available = readmeParser(getREADME())
+    # markdown = "\n".join(available)
+    markdown_content = getREADME()
+    return flask.render_template("gist.html", title="awesome-free-chatgpt", gist=markdown_content)
