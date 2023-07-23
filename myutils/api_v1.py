@@ -1374,3 +1374,21 @@ def api_v1_awesome_free_chatgpt():
         200:
             description: Page"""
     return myutils.awesome_free_chatgpt.main()
+
+
+# agefans
+@urls_blueprint.route('/agefans')
+def api_v1_agefans():
+    """
+    agefans API
+    https://raw.githubusercontent.com/agefanscom/website/main/README.md
+    ---
+    tags:
+        - fun
+    responses:
+        200:
+            description: Page"""
+    markdown_content = requests.get(
+        "https://raw.githubusercontent.com/agefanscom/website/main/README.md")
+    markdown_content.raise_for_status()
+    return flask.render_template("gist.html", gist=markdown_content.text, title="AGE动漫")
