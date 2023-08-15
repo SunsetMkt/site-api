@@ -1,4 +1,5 @@
 import time
+import json
 
 import requests
 
@@ -27,7 +28,19 @@ def test_now(url):
 
     response.raise_for_status()
 
-    return response.text
+    text = response.text
+
+    # Try to load as json
+    try:
+        return json.loads(text)
+    except:
+        # Remove the last line of text and try again
+        lines = text.splitlines()
+        text = '\n'.join(lines[:-1])
+        try:
+            return json.loads(text)
+        except:
+            return text
 
 
 if __name__ == '__main__':
