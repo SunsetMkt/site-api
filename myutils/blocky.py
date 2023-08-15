@@ -30,7 +30,6 @@ headers = {
 
 
 def test_now(url):
-
     params = {
         'url': str(url),
         'timestamp': str(int(time.time())),

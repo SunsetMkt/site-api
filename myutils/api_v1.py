@@ -1413,7 +1413,7 @@ def api_v1_blocky_check():
         200:
             description: API response"""
     url = flask.request.args.get("url")
-    return flask.Response(myutils.blocky.test_now(url), mimetype='text/plain')
+    return flask.jsonify(myutils.blocky.test_now(url))
 
 
 # /blocky/report
@@ -1435,4 +1435,4 @@ def api_v1_blocky_report():
         200:
             description: API response"""
     url = flask.request.args.get("url")
-    return flask.Response(myutils.blocky.get_latest_report_of_url(url), mimetype='text/plain')
+    return flask.jsonify(myutils.blocky.get_latest_report_of_url(url))
