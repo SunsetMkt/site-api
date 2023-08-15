@@ -1392,3 +1392,24 @@ def api_v1_agefans():
         "https://raw.githubusercontent.com/agefanscom/website/main/README.md")
     markdown_content.raise_for_status()
     return flask.render_template("gist.html", gist=markdown_content.text, title="AGE动漫")
+
+
+# blocky
+@urls_blueprint.route('/blocky')
+def api_v1_blocky():
+    """
+    Blocky Test Now API
+    https://blocky.greatfire.org/
+    ---
+    tags:
+        - china
+    parameters:
+        - name: url
+          in: query
+          type: string
+          required: true
+    responses:
+        200:
+            description: API response"""
+    url = flask.request.args.get("url")
+    return flask.Response(myutils.blocky.test_now(url), mimetype='text/plain')
