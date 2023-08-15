@@ -1394,9 +1394,9 @@ def api_v1_agefans():
     return flask.render_template("gist.html", gist=markdown_content.text, title="AGE动漫")
 
 
-# blocky
-@urls_blueprint.route('/blocky')
-def api_v1_blocky():
+# /blocky/check
+@urls_blueprint.route('/blocky/check')
+def api_v1_blocky_check():
     """
     Blocky Test Now API
     https://blocky.greatfire.org/
@@ -1408,8 +1408,31 @@ def api_v1_blocky():
           in: query
           type: string
           required: true
+          default: https://www.google.com/
     responses:
         200:
             description: API response"""
     url = flask.request.args.get("url")
     return flask.Response(myutils.blocky.test_now(url), mimetype='text/plain')
+
+
+# /blocky/report
+@urls_blueprint.route('/blocky/report')
+def api_v1_blocky_report():
+    """
+    Blocky Report API
+    https://blocky.greatfire.org/
+    ---
+    tags:
+        - china
+    parameters:
+        - name: url
+          in: query
+          type: string
+          required: true
+          default: https://www.google.com
+    responses:
+        200:
+            description: API response"""
+    url = flask.request.args.get("url")
+    return flask.Response(myutils.blocky.get_latest_report_of_url(url), mimetype='text/plain')
