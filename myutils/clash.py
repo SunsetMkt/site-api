@@ -242,9 +242,7 @@ def config(base64=False, append_url=None):
                     subs.append(url)
 
             if append_url:
-                # subs.append(append_url)
-                # Put append_url at first
-                subs.insert(0, append_url)
+                subs.append(append_url)
 
             # API args
             # target=clash&url=
