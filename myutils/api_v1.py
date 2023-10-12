@@ -630,8 +630,8 @@ if myutils.verceldetect.isVercel():
         responses:
             200:
                 description: Result"""
-        # flask.abort(
-        #     503, "Sorry, but this API has potential security issues and has been temporarily disabled on this deployment.")
+        flask.abort(
+            503, "Sorry, but this API has potential security issues and has been temporarily disabled on this deployment.")
         # Get arg pass
         passcode = flask.request.args.get("pass")
         # Check passcode
