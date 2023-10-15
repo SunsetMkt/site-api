@@ -22,7 +22,7 @@ urls_blueprint = flask.Blueprint("v1", __name__)
 
 
 # if path is empty, redirect to /api/v1
-@urls_blueprint.route('/')
+@urls_blueprint.route("/")
 def api_v1_root():
     """
     Handle /api/v1
@@ -35,12 +35,13 @@ def api_v1_root():
           description: Redirect to /api/v1"""
     return flask.redirect("/api/v1")
 
+
 # if path is not empty, use different api
 # for example, /api/v1/echo?text=hello
 # will return {"text": "hello"}
 
 
-@urls_blueprint.route('/echo')
+@urls_blueprint.route("/echo")
 def api_v1_echo():
     """
     Echo text
@@ -58,10 +59,11 @@ def api_v1_echo():
             description: Echo text"""
     return flask.jsonify({"text": flask.request.args.get("text")})
 
+
 # postecho will return the post data
 
 
-@urls_blueprint.route('/postecho', methods=["POST"])
+@urls_blueprint.route("/postecho", methods=["POST"])
 def api_v1_postecho():
     """
     Echo post data
@@ -84,10 +86,11 @@ def api_v1_postecho():
             description: Echo jsonified request body"""
     return flask.jsonify(flask.request.json)
 
+
 # statuscode will return the given status code
 
 
-@urls_blueprint.route('/statuscode')
+@urls_blueprint.route("/statuscode")
 def api_v1_statuscode():
     """
     Return status code
@@ -106,10 +109,11 @@ def api_v1_statuscode():
             description: Return status code"""
     return flask.Response(status=int(flask.request.args.get("code")))
 
+
 # random will return a random number
 
 
-@urls_blueprint.route('/random')
+@urls_blueprint.route("/random")
 def api_v1_random():
     """
     Return random number
@@ -123,10 +127,11 @@ def api_v1_random():
             description: Random number"""
     return flask.jsonify({"random": random.random()})
 
+
 # time return timestamp
 
 
-@urls_blueprint.route('/time')
+@urls_blueprint.route("/time")
 def api_v1_time():
     """
     Return timestamp
@@ -139,10 +144,11 @@ def api_v1_time():
             description: Timestamp"""
     return flask.jsonify({"time": time.time()})
 
+
 # pi will calculate pi at the given digit
 
 
-@urls_blueprint.route('/pi')
+@urls_blueprint.route("/pi")
 def api_v1_pi():
     """
     Calculate pi
@@ -163,11 +169,12 @@ def api_v1_pi():
     n = flask.request.args.get("n")
     return flask.jsonify(myutils.pi.cal(str(n)))
 
+
 # hello api
 # return {"hello": "world"}
 
 
-@urls_blueprint.route('/hello')
+@urls_blueprint.route("/hello")
 def api_v1_hello():
     """
     Return hello world
@@ -180,11 +187,12 @@ def api_v1_hello():
             description: Hello world"""
     return flask.jsonify({"hello": "world"})
 
+
 # status api
 # return {"status": "ok"}
 
 
-@urls_blueprint.route('/status')
+@urls_blueprint.route("/status")
 def api_v1_status():
     """
     Return status
@@ -197,11 +205,12 @@ def api_v1_status():
             description: Status"""
     return flask.jsonify({"status": "ok"})
 
+
 # env api
 # return all flask config information, environment variables, Python config & sys info in json
 
 
-@urls_blueprint.route('/env')
+@urls_blueprint.route("/env")
 def api_v1_env():
     """
     Return environment information
@@ -231,15 +240,18 @@ def api_v1_env():
         python_config[key] = getattr(sys, key)
 
     outputJson = json.dumps(
-        {"flask_config": flask_config, "env": env, "python_config": python_config}, default=str)
+        {"flask_config": flask_config, "env": env, "python_config": python_config},
+        default=str,
+    )
 
-    return flask.Response(outputJson, mimetype='application/json')
+    return flask.Response(outputJson, mimetype="application/json")
+
 
 # 33reply api
 # Bilibili Reply Fetcher for 662016827293958168
 
 
-@urls_blueprint.route('/33reply')
+@urls_blueprint.route("/33reply")
 def api_v1_33reply():
     """
     Bilibili Reply Fetcher
@@ -274,11 +286,12 @@ def api_v1_33reply():
         oid = 662016827293958168
     return flask.jsonify(myutils.bili.threethreeReply(next, oid))
 
+
 # getBiliUserInfo api
 # Bilibili User Info Fetcher
 
 
-@urls_blueprint.route('/getBiliUserInfo')
+@urls_blueprint.route("/getBiliUserInfo")
 def api_v1_getBiliUserInfo():
     """
     Bilibili User Info Fetcher
@@ -303,11 +316,12 @@ def api_v1_getBiliUserInfo():
         mid = 22259558
     return flask.jsonify(myutils.bili.getBiliUserInfo(mid))
 
+
 # getGitHubAvatar api
 # GitHub Avatar Fetcher
 
 
-@urls_blueprint.route('/getGitHubAvatar')
+@urls_blueprint.route("/getGitHubAvatar")
 def api_v1_getGitHubAvatar():
     """
     GitHub Avatar Fetcher
@@ -343,11 +357,12 @@ def api_v1_getGitHubAvatar():
         type = "raw"
     return myutils.github.getGitHubAvatar(username, type)
 
+
 # ikialive api
 # Bilibili user live status fetcher
 
 
-@urls_blueprint.route('/ikialive')
+@urls_blueprint.route("/ikialive")
 def api_v1_ikialive():
     """
     Bilibili user live status fetcher
@@ -370,13 +385,14 @@ def api_v1_ikialive():
     # If mid is not set, set it to 22259558
     if mid == None:
         mid = 22259558
-    return flask.Response(myutils.bili.ikialive(mid), mimetype='text/plain')
+    return flask.Response(myutils.bili.ikialive(mid), mimetype="text/plain")
+
 
 # kizunaai api
 # KizunaAI Directories List
 
 
-@urls_blueprint.route('/kizunaai')
+@urls_blueprint.route("/kizunaai")
 def api_v1_kizunaai():
     """
     KizunaAI Resource Path List
@@ -402,13 +418,14 @@ def api_v1_kizunaai():
     # Get args: id, date
     id = flask.request.args.get("id")
     date = flask.request.args.get("date")
-    return flask.Response(myutils.kizunaai.kizunaai(id, date), mimetype='text/plain')
+    return flask.Response(myutils.kizunaai.kizunaai(id, date), mimetype="text/plain")
+
 
 # mcskin api
 # Get Minecraft skin from a Minecraft username
 
 
-@urls_blueprint.route('/mcskin')
+@urls_blueprint.route("/mcskin")
 def api_v1_mcskin():
     """
     Get Minecraft skin from a Minecraft username
@@ -437,11 +454,12 @@ def api_v1_mcskin():
     format = flask.request.args.get("format")
     return myutils.mc.mcskin(id, format)
 
+
 # bomb api
 # return a gzip bomb
 
 
-@urls_blueprint.route('/bomb')
+@urls_blueprint.route("/bomb")
 def api_v1_bomb():
     """
     Return Gzip Bomb
@@ -453,13 +471,14 @@ def api_v1_bomb():
     responses:
         200:
             description: Bomb"""
-    return flask_gzipbomb.GzipBombResponse(size='10G')
+    return flask_gzipbomb.GzipBombResponse(size="10G")
+
 
 # ZeroDivisionError api
 # Trigger a ZeroDivisionError on purpose
 
 
-@urls_blueprint.route('/ZeroDivisionError')
+@urls_blueprint.route("/ZeroDivisionError")
 def api_v1_ZeroDivisionError():
     """
     Return ZeroDivisionError
@@ -470,13 +489,14 @@ def api_v1_ZeroDivisionError():
     responses:
         500:
             description: ZeroDivisionError"""
-    return 1/0
+    return 1 / 0
+
 
 # raiseException api
 # Trigger a Exception on purpose
 
 
-@urls_blueprint.route('/raiseException')
+@urls_blueprint.route("/raiseException")
 def api_v1_raiseException():
     """
     Trigger a Exception on purpose
@@ -489,11 +509,12 @@ def api_v1_raiseException():
             description: Exception"""
     raise Exception("This is a test exception.")
 
+
 # raiseHTTPError api
 # Trigger a HTTPError on purpose
 
 
-@urls_blueprint.route('/raiseHTTPError')
+@urls_blueprint.route("/raiseHTTPError")
 def api_v1_raiseHTTPError():
     """
     Trigger a HTTP Error on purpose
@@ -515,12 +536,13 @@ def api_v1_raiseHTTPError():
     # raise
     flask.abort(int(status))
 
+
 # freenom api
 # Call freenom.fnRenew(username, password)
 # Check Freenom Domain Expiration Info
 
 
-@urls_blueprint.route('/freenom', methods=['GET'])
+@urls_blueprint.route("/freenom", methods=["GET"])
 def api_v1_freenom():
     """
     Check Freenom Domain Expiration Info
@@ -547,11 +569,17 @@ def api_v1_freenom():
     password = flask.request.args.get("password")
     # If username or password is empty, return help message
     if username == None or password == None:
-        return flask.Response("Usage: \nGET ?username=[username]&password=[password]\nPOST {\"username\": \"[username]\", \"password\": \"[password]\"}", mimetype='text/plain', status=400)
-    return flask.Response(myutils.freenom.fnRenew(username, password), mimetype='text/plain')
+        return flask.Response(
+            'Usage: \nGET ?username=[username]&password=[password]\nPOST {"username": "[username]", "password": "[password]"}',
+            mimetype="text/plain",
+            status=400,
+        )
+    return flask.Response(
+        myutils.freenom.fnRenew(username, password), mimetype="text/plain"
+    )
 
 
-@urls_blueprint.route('/freenompost', methods=['POST'])
+@urls_blueprint.route("/freenompost", methods=["POST"])
 def api_v1_freenompost():
     """
     Check Freenom Domain Expiration Info
@@ -585,8 +613,14 @@ def api_v1_freenompost():
     password = json_data["password"]
     # If username or password is empty, return help message
     if username == None or password == None:
-        return flask.Response("Usage: \nGET ?username=[username]&password=[password]\nPOST {\"username\": \"[username]\", \"password\": \"[password]\"}", mimetype='text/plain', status=400)
-    return flask.Response(myutils.freenom.fnRenew(username, password), mimetype='text/plain')
+        return flask.Response(
+            'Usage: \nGET ?username=[username]&password=[password]\nPOST {"username": "[username]", "password": "[password]"}',
+            mimetype="text/plain",
+            status=400,
+        )
+    return flask.Response(
+        myutils.freenom.fnRenew(username, password), mimetype="text/plain"
+    )
 
 
 if myutils.verceldetect.isVercel():
@@ -594,7 +628,7 @@ if myutils.verceldetect.isVercel():
     # exec api
     # Get posted Python code and execute it.
     # Return the result.
-    @urls_blueprint.route('/exec', methods=['POST'])
+    @urls_blueprint.route("/exec", methods=["POST"])
     def api_v1_exec():
         """
         Get posted Python code and execute it.
@@ -631,16 +665,21 @@ if myutils.verceldetect.isVercel():
             200:
                 description: Result"""
         flask.abort(
-            503, "Sorry, but this API has potential security issues and has been temporarily disabled on this deployment.")
+            503,
+            "Sorry, but this API has potential security issues and has been temporarily disabled on this deployment.",
+        )
         # Get arg pass
         passcode = flask.request.args.get("pass")
         # Check passcode
-        if passcode == None or myutils.hash.sha256(passcode) != app.config["EXEC_KEY_SHA256"]:
+        if (
+            passcode == None
+            or myutils.hash.sha256(passcode) != app.config["EXEC_KEY_SHA256"]
+        ):
             flask.abort(401, "Unauthorized")
         # Get arg totp
         totp = flask.request.args.get("totp")
         # Check TOTP
-        if totp == None or not myutils.totp.verify_totp(app.config['TOTP_KEY'], totp):
+        if totp == None or not myutils.totp.verify_totp(app.config["TOTP_KEY"], totp):
             flask.abort(401, "Invalid TOTP.")
         # Get arg type
         # eval or exec, default exec
@@ -659,28 +698,33 @@ if myutils.verceldetect.isVercel():
                 return myutils.exec_with_return.exec_with_return(code)
             elif type == "eval":
                 # Execute code with eval()
-                return flask.Response(str(eval(code)), mimetype='text/plain')
+                return flask.Response(str(eval(code)), mimetype="text/plain")
             else:
                 # Unknown type
                 flask.abort(400, "Unknown type.")
         except:
             # Return traceback
-            return flask.Response(traceback.format_exc(), mimetype='text/plain')
+            return flask.Response(traceback.format_exc(), mimetype="text/plain")
         # Return Done if code didn't return anything
         # return flask.Response("Done", mimetype='text/plain')
+
 else:
-    @urls_blueprint.route('/exec')
+
+    @urls_blueprint.route("/exec")
     def api_v1_exec():
         # Raise 503, reason Non-Vercel
         flask.abort(
-            503, "This API has security issues and should be used on Serverless Platform only.")
+            503,
+            "This API has security issues and should be used on Serverless Platform only.",
+        )
+
 
 # word api
 # Call coolname.generate_slug()
 # Generate a random word
 
 
-@urls_blueprint.route('/word')
+@urls_blueprint.route("/word")
 def api_v1_word():
     """
     Generate a random word
@@ -692,14 +736,15 @@ def api_v1_word():
     responses:
         200:
             description: Random word"""
-    return flask.Response(coolname.generate_slug(), mimetype='text/plain')
+    return flask.Response(coolname.generate_slug(), mimetype="text/plain")
+
 
 # bing api
 # Call myutils.bing.bing()
 # Get Bing Image of the Day
 
 
-@urls_blueprint.route('/bing')
+@urls_blueprint.route("/bing")
 def api_v1_bing():
     """
     Get Bing Image of the Day
@@ -719,12 +764,13 @@ def api_v1_bing():
             description: Redirect to Bing Image of the Day"""
     return myutils.bing.get()
 
+
 # randerr api
 # Call myutils.randerr.randerr()
 # Get a random error
 
 
-@urls_blueprint.route('/randerr')
+@urls_blueprint.route("/randerr")
 def api_v1_randerr():
     """
     Get a random error
@@ -738,11 +784,12 @@ def api_v1_randerr():
             description: Random error"""
     return myutils.randerr.randerr()
 
+
 # lorem api
 # Get a random lorem ipsum text
 
 
-@urls_blueprint.route('/lorem')
+@urls_blueprint.route("/lorem")
 def api_v1_lorem():
     """
     Get a random lorem ipsum text
@@ -754,14 +801,15 @@ def api_v1_lorem():
     responses:
         200:
             description: Random lorem ipsum text"""
-    return flask.Response(lorem.get_paragraph(), mimetype='text/plain')
+    return flask.Response(lorem.get_paragraph(), mimetype="text/plain")
+
 
 # china api
 # Check if user in china
 # If true, raise 451
 
 
-@urls_blueprint.route('/china')
+@urls_blueprint.route("/china")
 def api_v1_china():
     """
     Check if user in china
@@ -781,13 +829,14 @@ def api_v1_china():
     else:
         flask.abort(418, "You are not in China.")
 
+
 # china strict api
 # Check if user in china
 # If true, raise 451
 # If false, raise 418
 
 
-@urls_blueprint.route('/china/strict')
+@urls_blueprint.route("/china/strict")
 def api_v1_china_strict():
     """
     Check if user in china, strict mode
@@ -808,7 +857,7 @@ def api_v1_china_strict():
 
 # dxx api
 # Return the latest fake dxx share page
-@urls_blueprint.route('/dxx')
+@urls_blueprint.route("/dxx")
 def api_v1_dxx():
     """
     Return the latest fake dxx share page
@@ -839,15 +888,15 @@ def api_v1_dxx():
     if redirect.lower() == "true":
         # no-referrer redirect to url
         response = flask.redirect(url)
-        response.headers['Referrer-Policy'] = 'no-referrer'
+        response.headers["Referrer-Policy"] = "no-referrer"
         return response
-    return flask.render_template('dxx.html', title=title, image=icon, link=url)
+    return flask.render_template("dxx.html", title=title, image=icon, link=url)
 
 
 # base16384 api
 # encode or decode posted string
 # default encode
-@urls_blueprint.route('/base16384', methods=['POST'])
+@urls_blueprint.route("/base16384", methods=["POST"])
 def api_v1_base16384():
     """
     Encode or decode posted string
@@ -881,10 +930,10 @@ def api_v1_base16384():
     string = flask.request.data.decode("utf-8")
     if type.lower() == "encode":
         # Encode
-        return flask.Response(pybs.encode_string(string), mimetype='text/plain')
+        return flask.Response(pybs.encode_string(string), mimetype="text/plain")
     elif type.lower() == "decode":
         # Decode
-        return flask.Response(pybs.decode_string(string), mimetype='text/plain')
+        return flask.Response(pybs.decode_string(string), mimetype="text/plain")
     else:
         # Unknown type
         flask.abort(400, "Unknown type.")
@@ -926,7 +975,7 @@ def api_v1_unvcode():
 
 # sixty-four api
 # with China IP check
-@urls_blueprint.route('/sixty-four')
+@urls_blueprint.route("/sixty-four")
 def api_v1_sixty_four():
     """
     sixty-four
@@ -942,11 +991,16 @@ def api_v1_sixty_four():
     myutils.chinaip.check_and_abort()
     url = "aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kvJUU1JTg1JUFEJUU1JTlCJTlCJUU0JUJBJThCJUU0JUJCJUI2"
     info = "ODk2NA=="
-    return flask.jsonify({"url": base64.b64decode(url).decode("utf-8"), "info": base64.b64decode(info).decode("utf-8")})
+    return flask.jsonify(
+        {
+            "url": base64.b64decode(url).decode("utf-8"),
+            "info": base64.b64decode(info).decode("utf-8"),
+        }
+    )
 
 
 # Get Firefox
-@urls_blueprint.route('/firefox')
+@urls_blueprint.route("/firefox")
 def api_v1_firefox():
     """
     Get Firefox Installer
@@ -974,13 +1028,13 @@ def api_v1_firefox():
     if redirect.lower() == "true":
         # no-referrer redirect to url
         response = flask.redirect(url)
-        response.headers['Referrer-Policy'] = 'no-referrer'
+        response.headers["Referrer-Policy"] = "no-referrer"
         return response
-    return flask.Response(url, mimetype='text/plain')
+    return flask.Response(url, mimetype="text/plain")
 
 
 # Get Kaspersky Internet Security zh-Hans Installer
-@urls_blueprint.route('/kaspersky')
+@urls_blueprint.route("/kaspersky")
 def api_v1_kaspersky():
     """
     Get Kaspersky Internet Security Installer
@@ -1009,16 +1063,16 @@ def api_v1_kaspersky():
     if redirect.lower() == "true":
         # no-referrer redirect to url
         response = flask.redirect(url)
-        response.headers['Referrer-Policy'] = 'no-referrer'
+        response.headers["Referrer-Policy"] = "no-referrer"
         return response
-    return flask.Response(url, mimetype='text/plain')
+    return flask.Response(url, mimetype="text/plain")
 
 
 # Get Chrome Offline Installer
 # Not working, seems that Google needs more args to build a functionable installer
 # https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B00000000-0000-0000-0000-000000000000%7D%26lang%3Dzh-CN%26browser%3D0%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/chrome/install/ChromeStandaloneSetup64.exe
 # Fxxk Google
-@urls_blueprint.route('/chrome')
+@urls_blueprint.route("/chrome")
 def api_v1_chrome():
     """
     Get Chrome Offline Installer for Windows x64
@@ -1046,13 +1100,13 @@ def api_v1_chrome():
     if redirect.lower() == "true":
         # no-referrer redirect to url
         response = flask.redirect(url)
-        response.headers['Referrer-Policy'] = 'no-referrer'
+        response.headers["Referrer-Policy"] = "no-referrer"
         return response
-    return flask.Response(url, mimetype='text/plain')
+    return flask.Response(url, mimetype="text/plain")
 
 
 # Get ungoogled-chromium
-@urls_blueprint.route('/ungoogled-chromium')
+@urls_blueprint.route("/ungoogled-chromium")
 def api_v1_ungoogled_chromium():
     """
     Get ungoogled-chromium
@@ -1080,14 +1134,14 @@ def api_v1_ungoogled_chromium():
     if redirect.lower() == "true":
         # no-referrer redirect to url
         response = flask.redirect(url)
-        response.headers['Referrer-Policy'] = 'no-referrer'
+        response.headers["Referrer-Policy"] = "no-referrer"
         return response
-    return flask.Response(url, mimetype='text/plain')
+    return flask.Response(url, mimetype="text/plain")
 
 
 # Get VSCode Installer for Windows x64
 # https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user
-@urls_blueprint.route('/vscode')
+@urls_blueprint.route("/vscode")
 def api_v1_vscode():
     """
     Get VSCode Installer for Windows x64
@@ -1110,7 +1164,7 @@ def api_v1_vscode():
     url = "https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user"
     # Get redirect url
     req = requests.get(url, allow_redirects=False)
-    url = req.headers['Location']
+    url = req.headers["Location"]
     # Get param redirect
     redirect = flask.request.args.get("redirect")
     if redirect == None:
@@ -1118,13 +1172,13 @@ def api_v1_vscode():
     if redirect.lower() == "true":
         # no-referrer redirect to url
         response = flask.redirect(url)
-        response.headers['Referrer-Policy'] = 'no-referrer'
+        response.headers["Referrer-Policy"] = "no-referrer"
         return response
-    return flask.Response(url, mimetype='text/plain')
+    return flask.Response(url, mimetype="text/plain")
 
 
 # Return random Chinese text
-@urls_blueprint.route('/randtext')
+@urls_blueprint.route("/randtext")
 def api_v1_randtext():
     """
     Return random Chinese text
@@ -1135,11 +1189,11 @@ def api_v1_randtext():
     responses:
         200:
             description: Random Chinese text"""
-    return flask.Response(myutils.fake_strings.fake_article(), mimetype='text/plain')
+    return flask.Response(myutils.fake_strings.fake_article(), mimetype="text/plain")
 
 
 # Get HMCL executable
-@urls_blueprint.route('/hmcl')
+@urls_blueprint.route("/hmcl")
 def api_v1_hmcl():
     """
     Get HMCL executable
@@ -1176,13 +1230,13 @@ def api_v1_hmcl():
     if redirect.lower() == "true":
         # no-referrer redirect to url
         response = flask.redirect(url)
-        response.headers['Referrer-Policy'] = 'no-referrer'
+        response.headers["Referrer-Policy"] = "no-referrer"
         return response
-    return flask.Response(url, mimetype='text/plain')
+    return flask.Response(url, mimetype="text/plain")
 
 
 # Get COVID-19 report from China CDC
-@urls_blueprint.route('/chinacovid19')
+@urls_blueprint.route("/chinacovid19")
 def api_v1_chinacovid19():
     """
     Get COVID-19 report from China CDC
@@ -1206,7 +1260,7 @@ def api_v1_chinacovid19():
 
 
 # Get rustdesl executable
-@urls_blueprint.route('/rustdesk')
+@urls_blueprint.route("/rustdesk")
 def api_v1_rustdesk():
     """
     Get rustdesk executable
@@ -1244,13 +1298,13 @@ def api_v1_rustdesk():
     if redirect.lower() == "true":
         # no-referrer redirect to url
         response = flask.redirect
-        response.headers['Referrer-Policy'] = 'no-referrer'
+        response.headers["Referrer-Policy"] = "no-referrer"
         return response
-    return flask.Response(url, mimetype='text/plain')
+    return flask.Response(url, mimetype="text/plain")
 
 
 # Get license key
-@urls_blueprint.route('/license')
+@urls_blueprint.route("/license")
 def api_v1_license():
     """
     Get API license key
@@ -1261,11 +1315,11 @@ def api_v1_license():
     responses:
         200:
             description: license key"""
-    return flask.Response(myutils.license.generate_key(), mimetype='text/plain')
+    return flask.Response(myutils.license.generate_key(), mimetype="text/plain")
 
 
 # hitokoto
-@urls_blueprint.route('/hitokoto')
+@urls_blueprint.route("/hitokoto")
 def api_v1_hitokoto():
     """
     Hitokoto API
@@ -1280,7 +1334,7 @@ def api_v1_hitokoto():
 
 
 # thispersondoesnotexist
-@urls_blueprint.route('/thispersondoesnotexist')
+@urls_blueprint.route("/thispersondoesnotexist")
 def api_v1_thispersondoesnotexist():
     """
     this-person-does-not-exist.com API
@@ -1352,17 +1406,17 @@ def api_v1_thispersondoesnotexist():
         # no-referrer redirect to url
         url = myutils.thispersondoesnotexist.new(gender, age, etnic)
         response = flask.redirect(url)
-        response.headers['Referrer-Policy'] = 'no-referrer'
+        response.headers["Referrer-Policy"] = "no-referrer"
         return response
     if format.lower() == "url":
         url = myutils.thispersondoesnotexist.new(gender, age, etnic)
-        return flask.Response(url, mimetype='text/plain')
+        return flask.Response(url, mimetype="text/plain")
     image = myutils.thispersondoesnotexist.get(gender, age, etnic)
-    return flask.Response(image, mimetype='image/png')
+    return flask.Response(image, mimetype="image/png")
 
 
 # awesome_free_chatgpt
-@urls_blueprint.route('/awesome_free_chatgpt')
+@urls_blueprint.route("/awesome_free_chatgpt")
 def api_v1_awesome_free_chatgpt():
     """
     awesome_free_chatgpt API
@@ -1377,7 +1431,7 @@ def api_v1_awesome_free_chatgpt():
 
 
 # agefans
-@urls_blueprint.route('/agefans')
+@urls_blueprint.route("/agefans")
 def api_v1_agefans():
     """
     agefans API
@@ -1389,13 +1443,14 @@ def api_v1_agefans():
         200:
             description: Page"""
     markdown_content = requests.get(
-        "https://raw.githubusercontent.com/agefanscom/website/main/README.md")
+        "https://raw.githubusercontent.com/agefanscom/website/main/README.md"
+    )
     markdown_content.raise_for_status()
     return flask.render_template("gist.html", gist=markdown_content.text, title="AGE动漫")
 
 
 # /blocky/check
-@urls_blueprint.route('/blocky/check')
+@urls_blueprint.route("/blocky/check")
 def api_v1_blocky_check():
     """
     Blocky Test Now API
@@ -1417,7 +1472,7 @@ def api_v1_blocky_check():
 
 
 # /blocky/report
-@urls_blueprint.route('/blocky/report')
+@urls_blueprint.route("/blocky/report")
 def api_v1_blocky_report():
     """
     Blocky Report API
@@ -1436,3 +1491,51 @@ def api_v1_blocky_report():
             description: API response"""
     url = flask.request.args.get("url")
     return flask.jsonify(myutils.blocky.get_latest_report_of_url(url))
+
+
+# /b23tv/get
+@urls_blueprint.route("/b23tv/get")
+def api_v1_b23tv_get():
+    """
+    Get b23.tv link for a given Bilibili URL
+    https://github.com/Cesium01/b23tvGenerator
+    ---
+    tags:
+        - fun
+        - bilibili
+    parameters:
+        - name: url
+          in: query
+          type: string
+          required: true
+          default: https://www.bilibili.com/
+    responses:
+        200:
+            description: URL"""
+    url = flask.request.args.get("url")
+    return flask.Response(myutils.b23tv.get_b23of(url), mimetype="text/plain")
+
+
+# /b23tv/parse
+@urls_blueprint.route("/b23tv/parse")
+def api_v1_b23tv_parse():
+    """
+    Get Bilibili URL link for a given b23.tv
+    https://github.com/willbe03/b23-remover-telegram-bot
+    ---
+    tags:
+        - fun
+        - bilibili
+    parameters:
+        - name: url
+          in: query
+          type: string
+          required: true
+          default: https://b23.tv/
+    responses:
+        200:
+            description: URL"""
+    url = flask.request.args.get("url")
+    return flask.Response(
+        myutils.b23tv.access_b23_url_and_return_real_url(url), mimetype="text/plain"
+    )
