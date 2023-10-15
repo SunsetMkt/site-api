@@ -1501,8 +1501,7 @@ def api_v1_b23tv_get():
     https://github.com/Cesium01/b23tvGenerator
     ---
     tags:
-        - fun
-        - bilibili
+        - bili
     parameters:
         - name: url
           in: query
@@ -1524,8 +1523,7 @@ def api_v1_b23tv_parse():
     https://github.com/willbe03/b23-remover-telegram-bot
     ---
     tags:
-        - fun
-        - bilibili
+        - bili
     parameters:
         - name: url
           in: query
