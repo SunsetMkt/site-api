@@ -22,7 +22,10 @@ def exec_with_return(code):
 
     exec(compile(init_ast, "<ast>", "exec"), globals())
     if type(last_ast.body[0]) == ast.Expr:
-        return eval(compile(convertExpr2Expression(last_ast.body[0]), "<ast>", "eval"), globals())
+        return eval(
+            compile(convertExpr2Expression(last_ast.body[0]), "<ast>", "eval"),
+            globals(),
+        )
     else:
         exec(compile(last_ast, "<ast>", "exec"), globals())
 

@@ -5,7 +5,7 @@ import os
 
 def isVercel():
     # Check if linux
-    if os.name == 'posix':
+    if os.name == "posix":
         # Get all environment variables
         env = os.environ
         # Check if keyword "VERCEL" is in the environment variables

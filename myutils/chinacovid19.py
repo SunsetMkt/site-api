@@ -16,9 +16,9 @@ def get_latest_page_url():
     root = lxml.html.fromstring(r.text)
     # Get the first <a> tag
     a = root.xpath('//ul[@class="jal-item-list"]/li[1]/a')[0]
-    href = a.get('href')
+    href = a.get("href")
     # Combine href and list_page
-    href = href.replace('./', list_page)
+    href = href.replace("./", list_page)
     return href
 
 
@@ -32,24 +32,22 @@ def pharse_detail_page(url):
     # Get content, div cn-main-detail
     div = root.xpath('//div[@class="cn-main-detail"]')[0]
     # Remove style and script
-    for e in div.xpath('//style | //script'):
+    for e in div.xpath("//style | //script"):
         e.getparent().remove(e)
     # Get any text in it
-    ps = div.xpath('.//text()')
-    content = '\n'.join(ps).strip()
+    ps = div.xpath(".//text()")
+    content = "\n".join(ps).strip()
     return title, content
 
 
 def get_report():
     page = get_latest_page_url()
     title, content = pharse_detail_page(page)
-    return {
-        "title": title,
-        "content": content,
-        "url": page
-    }
+    return {"title": title, "content": content, "url": page}
 
 
 def render_page():
     report = get_report()
-    return flask.render_template("gist.html", title=report['title'], gist=report['content'])
+    return flask.render_template(
+        "gist.html", title=report["title"], gist=report["content"]
+    )

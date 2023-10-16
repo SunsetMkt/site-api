@@ -31,20 +31,27 @@ def get_b23of(long_url):
         "share_id": "public.webview.0.0.pv",
         "share_mode": str(random.randint(1, 10)),
     }
-    res = requests.post(api, data=data)
-    res.raise_for_status()
-    data = json.loads(res.content)
-    if data["data"].__contains__("content"):
-        return data["data"]["content"]
-    else:
+
+    try:
+        res = requests.post(api, data=data)
+        res.raise_for_status()
+        data = json.loads(res.content)
+        if data["data"].__contains__("content"):
+            return data["data"]["content"]
+        else:
+            return "Not available"
+    except:
         return "Not available"
 
 
 def access_b23_url_and_return_real_url(url):
-    res = requests.head(url, allow_redirects=True)
-    real_url = res.url
-    r = urlparse(real_url)
-    return r.scheme + "://" + r.netloc + r.path
+    try:
+        res = requests.head(url, allow_redirects=True)
+        real_url = res.url
+        r = urlparse(real_url)
+        return r.scheme + "://" + r.netloc + r.path
+    except:
+        return "Not available"
 
 
 def generate_short_url_from_short_url(short_url):

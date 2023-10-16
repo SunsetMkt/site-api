@@ -13,6 +13,7 @@ import urllib.parse
 import flasgger
 import flask
 import flask_cors
+import requests
 
 import myutils
 import myutils.api_v1
@@ -23,29 +24,33 @@ app = flask.Flask(__name__)
 # Get git commit hash without git executable or GitPython
 # https://stackoverflow.com/a/56245722
 def get_git_revision(base_path):
-    git_dir = pathlib.Path(base_path) / '.git'
-    with (git_dir / 'HEAD').open('r') as head:
-        ref = head.readline().split(' ')[-1].strip()
+    git_dir = pathlib.Path(base_path) / ".git"
+    with (git_dir / "HEAD").open("r") as head:
+        ref = head.readline().split(" ")[-1].strip()
 
-    with (git_dir / ref).open('r') as git_hash:
+    with (git_dir / ref).open("r") as git_hash:
         return git_hash.readline().strip()
 
 
 try:
-    app.config['GIT_HASH'] = get_git_revision(os.path.dirname(__file__))
+    app.config["GIT_HASH"] = get_git_revision(os.path.dirname(__file__))
 except Exception:
-    app.config['GIT_HASH'] = 'unknown'
+    app.config["GIT_HASH"] = "unknown"
 
 swagger_config = flasgger.Swagger.DEFAULT_CONFIG
-swagger_config['swagger_ui_bundle_js'] = '//unpkg.com/swagger-ui-dist@4/swagger-ui-bundle.js'
-swagger_config['swagger_ui_standalone_preset_js'] = '//unpkg.com/swagger-ui-dist@4/swagger-ui-standalone-preset.js'
-swagger_config['jquery_js'] = '//unpkg.com/jquery@3.6.4/dist/jquery.min.js'
-swagger_config['swagger_ui_css'] = '//unpkg.com/swagger-ui-dist@4/swagger-ui.css'
+swagger_config[
+    "swagger_ui_bundle_js"
+] = "//unpkg.com/swagger-ui-dist@4/swagger-ui-bundle.js"
+swagger_config[
+    "swagger_ui_standalone_preset_js"
+] = "//unpkg.com/swagger-ui-dist@4/swagger-ui-standalone-preset.js"
+swagger_config["jquery_js"] = "//unpkg.com/jquery@3.6.4/dist/jquery.min.js"
+swagger_config["swagger_ui_css"] = "//unpkg.com/swagger-ui-dist@4/swagger-ui.css"
 swagger_template = {
     "info": {
         "title": "site-api",
         "description": "Open source API to handle some tasks.",
-        "version": "v1-" + str(app.config['GIT_HASH']),
+        "version": "v1-" + str(app.config["GIT_HASH"]),
     }
 }
 swagger = flasgger.Swagger(app, template=swagger_template)
@@ -57,29 +62,35 @@ swagger = flasgger.Swagger(app, template=swagger_template)
 # app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 # set a 'SECRET_KEY' to enable the Flask session cookies
-app.config['SECRET_KEY'] = myutils.keybase.SECRET_KEY
+app.config["SECRET_KEY"] = myutils.keybase.SECRET_KEY
 
 # toolbar = flask_debugtoolbar.DebugToolbarExtension(app)
 
 # Example TOTP secret
-app.config['TOTP_KEY'] = myutils.keybase.TOTP_KEY
+app.config["TOTP_KEY"] = myutils.keybase.TOTP_KEY
 
-app.config['EXEC_KEY_SHA256'] = myutils.keybase.EXEC_KEY_SHA256
+app.config["EXEC_KEY_SHA256"] = myutils.keybase.EXEC_KEY_SHA256
 
-app.config['JSONERROR'] = '0'
+app.config["JSONERROR"] = "0"
 
 # CORS
 # flask_cors.CORS(app, resources={r"/*": {"origins": "*"}})
 # Allow *.lwd-temp.* and *.lwd-temp.*:port, also ikia.* and cedaros.*
-flask_cors.CORS(app, resources={
-                r"/*": {"origins": r"^(https?://)?(\w+\.)?(lwd-temp|ikia|cedaros)\.?(\w+)?(:\d+)?$"}})
+flask_cors.CORS(
+    app,
+    resources={
+        r"/*": {
+            "origins": r"^(https?://)?(\w+\.)?(lwd-temp|ikia|cedaros)\.?(\w+)?(:\d+)?$"
+        }
+    },
+)
 
 
 # Response headers
 @app.after_request
 def add_header(response):
     # appversion
-    response.headers['App-Version'] = 'v1-' + str(app.config['GIT_HASH'])
+    response.headers["App-Version"] = "v1-" + str(app.config["GIT_HASH"])
     return response
 
 
@@ -88,7 +99,7 @@ app.register_blueprint(myutils.api_v1.urls_blueprint, url_prefix="/api/v1")
 
 
 # Handle /favicon.ico
-@app.route('/favicon.ico')
+@app.route("/favicon.ico")
 def favicon():
     """
     Handle /favicon.ico
@@ -99,13 +110,15 @@ def favicon():
     responses:
         200:
           description: favicon.ico"""
-    return flask.send_from_directory(os.path.join(app.root_path, 'static'),
-                                     'favicon.ico',
-                                     mimetype='image/vnd.microsoft.icon')
+    return flask.send_from_directory(
+        os.path.join(app.root_path, "static"),
+        "favicon.ico",
+        mimetype="image/vnd.microsoft.icon",
+    )
 
 
 # Handle /robots.txt
-@app.route('/robots.txt')
+@app.route("/robots.txt")
 def robots():
     """
     Handle /robots.txt
@@ -116,13 +129,13 @@ def robots():
     responses:
         200:
           description: robots.txt"""
-    return flask.send_from_directory(os.path.join(app.root_path, 'static'),
-                                     'robots.txt',
-                                     mimetype='text/plain')
+    return flask.send_from_directory(
+        os.path.join(app.root_path, "static"), "robots.txt", mimetype="text/plain"
+    )
 
 
 # Handle / (index)
-@app.route('/', methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])
 def index():
     """
     Handle /
@@ -133,13 +146,16 @@ def index():
     responses:
         200:
           description: index.html"""
-    html = '<textarea>' + myutils.cfstyle.get_request_info() + '</textarea>'
-    return myutils.cfstyle.cfstyle(title="你好，世界！",
-                                   msg="你好，世界！",
-                                   status="OK",
-                                   statuscode="200",
-                                   whathappened="你已经访问了这个应用程序的索引页。<br><a href=\"/apidocs\">API Documentation</a><br><br>"+html,
-                                   whatcanido=myutils.cfstyle.whatcanido["200"])
+    html = "<textarea>" + myutils.cfstyle.get_request_info() + "</textarea>"
+    return myutils.cfstyle.cfstyle(
+        title="你好，世界！",
+        msg="你好，世界！",
+        status="OK",
+        statuscode="200",
+        whathappened='你已经访问了这个应用程序的索引页。<br><a href="/apidocs">API Documentation</a><br><br>'
+        + html,
+        whatcanido=myutils.cfstyle.whatcanido["200"],
+    )
 
 
 # Handle /api/* requests
@@ -161,7 +177,9 @@ def redirect_php(path):
         301:
           description: Redirect to /api/v1/*"""
     # Redirect with all args
-    return flask.redirect("/api/v1/" + path + "?" + flask.request.query_string.decode("utf-8"))
+    return flask.redirect(
+        "/api/v1/" + path + "?" + flask.request.query_string.decode("utf-8")
+    )
 
 
 # Redirect all /api/* to /api/v1/*
@@ -358,24 +376,34 @@ if myutils.verceldetect.isVercel():
             302:
               description: Redirect to /api/dir/"""
         return flask.redirect("/api/dir/", code=302)
+
 else:
     # 403
     @app.route("/api/dir")
     def api_dir_root():
         # Raise 503, reason is "Non-Vercel"
-        return flask.abort(503, "This API has security issues and should be used on Serverless Platform only.")
+        return flask.abort(
+            503,
+            "This API has security issues and should be used on Serverless Platform only.",
+        )
 
     # Also /api/dir/*
     @app.route("/api/dir/<path:path>")
     def api_dir(path):
         # Raise 503, reason is "Non-Vercel"
-        return flask.abort(503, "This API has security issues and should be used on Serverless Platform only.")
+        return flask.abort(
+            503,
+            "This API has security issues and should be used on Serverless Platform only.",
+        )
 
     # Also /api/dir/
     @app.route("/api/dir/")
     def api_dir_root1():
         # Raise 503, reason is "Non-Vercel"
-        return flask.abort(503, "This API has security issues and should be used on Serverless Platform only.")
+        return flask.abort(
+            503,
+            "This API has security issues and should be used on Serverless Platform only.",
+        )
 
 
 # Handle /api/clash
@@ -430,15 +458,20 @@ def api_clash_config():
     if isPreview == None:
         isPreview = False
     if isPreview == False:
-        return flask.Response(myutils.clash.config(append_url=appendURL), mimetype="text/plain", headers=[
-            # ("content-disposition", 'attachment; filename="' +
-            #  urllib.parse.quote('看什么看？没见过通知栏养猫的嘛？.yaml', safe='')+'"'),
-            ("profile-update-interval", "12"),
-            ("profile-web-page-url", "https://api.lwd-temp.top/api/clash")
-        ])
+        return flask.Response(
+            myutils.clash.config(append_url=appendURL),
+            mimetype="text/plain",
+            headers=[
+                # ("content-disposition", 'attachment; filename="' +
+                #  urllib.parse.quote('看什么看？没见过通知栏养猫的嘛？.yaml', safe='')+'"'),
+                ("profile-update-interval", "12"),
+                ("profile-web-page-url", "https://api.lwd-temp.top/api/clash"),
+            ],
+        )
     else:
-        preview_content = "```yaml" + '\n' + \
-            myutils.clash.config(append_url=appendURL) + '\n' + "```"
+        preview_content = (
+            "```yaml" + "\n" + myutils.clash.config(append_url=appendURL) + "\n" + "```"
+        )
         return flask.render_template("gist.html", title="YAML预览", gist=preview_content)
 
 
@@ -484,6 +517,28 @@ def api_alive():
     return myutils.alive.render()
 
 
+# /api/mas
+@app.route("/api/mas")
+def api_mas():
+    """
+    Return MAS Script
+    https://raw.githubusercontent.com/massgravel/mas-docs/main/get.ps1
+    ---
+    tags:
+        - windows
+    responses:
+        200:
+          description: MAS Script"""
+    originalScript = requests.get(
+        "https://raw.githubusercontent.com/massgravel/mas-docs/main/get.ps1"
+    ).text
+    newScript = originalScript.replace(
+        "https://raw.githubusercontent.com/",
+        myutils.keybase.ghproxy + "https://raw.githubusercontent.com/",
+    )
+    return flask.Response(newScript, mimetype="text/plain")
+
+
 # Handle Any Exception
 @app.errorhandler(Exception)
 def handle_exception(e):
@@ -491,29 +546,41 @@ def handle_exception(e):
     whatcanido = myutils.cfstyle.whatcanido
     # Get Exception code, description and traceback
     code = e.code if hasattr(e, "code") else 500
-    description = e.description if hasattr(
-        e, "description") else str(e)
+    description = e.description if hasattr(e, "description") else str(e)
     # Get name of the status code
     status = http.HTTPStatus(code).phrase
     trace = traceback.format_exc()
     # Get whatcanido
-    whatcanido = whatcanido[str(code)] if str(
-        code) in whatcanido else whatcanido['other']
+    whatcanido = (
+        whatcanido[str(code)] if str(code) in whatcanido else whatcanido["other"]
+    )
     # If client is expecting JSON, return JSON
     # Or if jsonerror in url, return JSON
-    if flask.request.headers.get("Accept") == "application/json" or "jsonerror" in flask.request.url or app.config['JSONERROR'] == '1':
+    if (
+        flask.request.headers.get("Accept") == "application/json"
+        or "jsonerror" in flask.request.url
+        or app.config["JSONERROR"] == "1"
+    ):
         return flask.jsonify({"error": description, "trace": trace}), code
     else:
-        trace = "<textarea>" + trace + '\n' + myutils.cfstyle.get_request_info() + \
-            "</textarea>"
-        return myutils.cfstyle.cfstyle(
-            title=str(code) + " " + status,
-            msg=description,
-            status=status,
-            statuscode=code,
-            whathappened=trace,
-            whatcanido=whatcanido
-        ), code
+        trace = (
+            "<textarea>"
+            + trace
+            + "\n"
+            + myutils.cfstyle.get_request_info()
+            + "</textarea>"
+        )
+        return (
+            myutils.cfstyle.cfstyle(
+                title=str(code) + " " + status,
+                msg=description,
+                status=status,
+                statuscode=code,
+                whathappened=trace,
+                whatcanido=whatcanido,
+            ),
+            code,
+        )
 
 
 if __name__ == "__main__":

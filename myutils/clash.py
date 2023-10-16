@@ -16,21 +16,22 @@ def cfw():
     try:
         # Get latest release
         r = requests.get(
-            'https://api.github.com/repos/Fndroid/clash_for_windows_pkg/releases/latest', timeout=1)
+            "https://api.github.com/repos/Fndroid/clash_for_windows_pkg/releases/latest",
+            timeout=1,
+        )
         r.raise_for_status()
         release = r.json()
 
         # Get assets
-        assets = release['assets']
+        assets = release["assets"]
 
         # Get name: url
-        asset_urls = {asset['name']: asset['browser_download_url']
-                      for asset in assets}
+        asset_urls = {asset["name"]: asset["browser_download_url"] for asset in assets}
 
         # Return name Clash.for.Windows.Setup.x.xx.x.exe
         # Check all names contains Setup
         for name in asset_urls:
-            if 'Setup' in name and 'ia32' not in name and 'arm64' not in name:
+            if "Setup" in name and "ia32" not in name and "arm64" not in name:
                 installer = name
 
         # Return url
@@ -48,21 +49,22 @@ def cfw_portable():
     try:
         # Get latest release
         r = requests.get(
-            'https://api.github.com/repos/Fndroid/clash_for_windows_pkg/releases/latest', timeout=1)
+            "https://api.github.com/repos/Fndroid/clash_for_windows_pkg/releases/latest",
+            timeout=1,
+        )
         r.raise_for_status()
         release = r.json()
 
         # Get assets
-        assets = release['assets']
+        assets = release["assets"]
 
         # Get name: url
-        asset_urls = {asset['name']: asset['browser_download_url']
-                      for asset in assets}
+        asset_urls = {asset["name"]: asset["browser_download_url"] for asset in assets}
 
         # Return name Clash.for.Windows.Setup.x.xx.x.exe
         # Check all names contains Setup
         for name in asset_urls:
-            if 'win.7z' in name and 'ia32' not in name and 'arm64' not in name:
+            if "win.7z" in name and "ia32" not in name and "arm64" not in name:
                 installer = name
 
         # Return url
@@ -80,21 +82,22 @@ def cfa():
     try:
         # Get latest release
         r = requests.get(
-            'https://api.github.com/repos/Kr328/ClashForAndroid/releases/latest', timeout=1)
+            "https://api.github.com/repos/Kr328/ClashForAndroid/releases/latest",
+            timeout=1,
+        )
         r.raise_for_status()
         release = r.json()
 
         # Get assets
-        assets = release['assets']
+        assets = release["assets"]
 
         # Get name: url
-        asset_urls = {asset['name']: asset['browser_download_url']
-                      for asset in assets}
+        asset_urls = {asset["name"]: asset["browser_download_url"] for asset in assets}
 
         # Return name Clash.for.Windows.Setup.x.xx.x.exe
         # Check all names contains Setup
         for name in asset_urls:
-            if 'premium-universal-release' in name:
+            if "premium-universal-release" in name:
                 installer = name
 
         # Return url
@@ -113,21 +116,21 @@ def cfx():
     try:
         # Get latest release
         r = requests.get(
-            'https://api.github.com/repos/yichengchen/clashX/releases/latest', timeout=1)
+            "https://api.github.com/repos/yichengchen/clashX/releases/latest", timeout=1
+        )
         r.raise_for_status()
         release = r.json()
 
         # Get assets
-        assets = release['assets']
+        assets = release["assets"]
 
         # Get name: url
-        asset_urls = {asset['name']: asset['browser_download_url']
-                      for asset in assets}
+        asset_urls = {asset["name"]: asset["browser_download_url"] for asset in assets}
 
         # Return name Clash.for.Windows.Setup.x.xx.x.exe
         # Check all names contains Setup
         for name in asset_urls:
-            if '.dmg' in name:
+            if ".dmg" in name:
                 installer = name
 
         # Return url
@@ -150,10 +153,12 @@ def subscribe():
     # https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml
     subscribe_source_name = "所有分享节点和订阅的组织和个人，由API自动聚合（来源见项目源码）"
     subscribe_source_url = "https://api.lwd-temp.top/api/dir/var/task/myutils/clash.py/"
-    subscribe_url = "https://api.lwd-temp.top/api/clash/config" + \
-        "?key=" + license.generate_key()
-    base64_url = "https://api.lwd-temp.top/api/clash/base64" + \
-        "?key=" + license.generate_key()
+    subscribe_url = (
+        "https://api.lwd-temp.top/api/clash/config" + "?key=" + license.generate_key()
+    )
+    base64_url = (
+        "https://api.lwd-temp.top/api/clash/base64" + "?key=" + license.generate_key()
+    )
 
     # ghproxy
     # subscribe_url = ghproxy + subscribe_url
@@ -167,17 +172,32 @@ def render(china=False):
 
     chinaclass = "notchina"
     # URL Encoded
-    subscribe_encoded_url = urllib.parse.quote(subscribe_url, safe='')
+    subscribe_encoded_url = urllib.parse.quote(subscribe_url, safe="")
 
     if china:
         chinaclass = "china"
     else:
         chinaclass = "notchina"
 
-    dateStr = datetime.datetime.now(tz=pytz.timezone(
-        'Asia/Shanghai')).strftime("%Y-%m-%d %H:%M:%S")
+    dateStr = datetime.datetime.now(tz=pytz.timezone("Asia/Shanghai")).strftime(
+        "%Y-%m-%d %H:%M:%S"
+    )
 
-    return flask.render_template('clash.html', cfw=cfw(), cfw_portable=cfw_portable(), cfa=cfa(), subscribe_source_name=subscribe_source_name, subscribe_source_url=subscribe_source_url, subscribe_url=subscribe_url, base64_url=base64_url, subscribe_encoded_url=subscribe_encoded_url, china=chinaclass, date=dateStr, mac=cfx(), ip=cfstyle.get_ip())
+    return flask.render_template(
+        "clash.html",
+        cfw=cfw(),
+        cfw_portable=cfw_portable(),
+        cfa=cfa(),
+        subscribe_source_name=subscribe_source_name,
+        subscribe_source_url=subscribe_source_url,
+        subscribe_url=subscribe_url,
+        base64_url=base64_url,
+        subscribe_encoded_url=subscribe_encoded_url,
+        china=chinaclass,
+        date=dateStr,
+        mac=cfx(),
+        ip=cfstyle.get_ip(),
+    )
 
 
 def config(base64=False, append_url=None):
@@ -210,7 +230,7 @@ def config(base64=False, append_url=None):
         "https://api.dler.io/sub",
         "https://api.sublink.dev/sub",
         "https://sub.id9.cc/sub",
-        "https://sub.maoxiongnet.com/sub"
+        "https://sub.maoxiongnet.com/sub",
     ]
 
     # Get an available API url
@@ -264,8 +284,11 @@ def config(base64=False, append_url=None):
                 config_url = "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online.ini"
                 config = requests.get(config_url, timeout=1)
                 if config.status_code == 200:
-                    post_api_args = post_api_args + \
-                        "&config=" + urllib.parse.quote(config_url, safe='')
+                    post_api_args = (
+                        post_api_args
+                        + "&config="
+                        + urllib.parse.quote(config_url, safe="")
+                    )
                 else:
                     config_url = "default"
             except:
@@ -277,8 +300,9 @@ def config(base64=False, append_url=None):
             for sub in subs:
                 url_cmb = url_cmb + "|"
                 url_cmb = url_cmb + sub
-            api_args = pre_api_args + \
-                urllib.parse.quote(url_cmb, safe='') + post_api_args
+            api_args = (
+                pre_api_args + urllib.parse.quote(url_cmb, safe="") + post_api_args
+            )
             api_call = api_call + api_args
             api_req = requests.get(api_call, timeout=8)
             api_req.raise_for_status()
@@ -288,14 +312,21 @@ def config(base64=False, append_url=None):
             end = time.time()
             delta = end - start
 
-            debug_info = {"api_url": api_url,
-                          "subs": subs, "config": config_url, "api_call": api_call, "timestamp": time.time(), "duration": delta}
+            debug_info = {
+                "api_url": api_url,
+                "subs": subs,
+                "config": config_url,
+                "api_call": api_call,
+                "timestamp": time.time(),
+                "duration": delta,
+            }
             config = "# " + json.dumps(debug_info) + " #" + "\n" + config
         except:
             # Same
             # No API available
             for url in sub_urls:
                 import traceback
+
                 trace = traceback.format_exc()
 
                 allowed = ".yaml"
@@ -319,16 +350,18 @@ def config(base64=False, append_url=None):
                 else:
                     # config.raise_for_status()
                     config = config.text
-                    debug_info = {"sub": url, "trace": trace,
-                                  "error": "Error while calling API.", "timestamp": time.time()}
-                    config = "# " + \
-                        json.dumps(debug_info) + " #" + "\n" + config
+                    debug_info = {
+                        "sub": url,
+                        "trace": trace,
+                        "error": "Error while calling API.",
+                        "timestamp": time.time(),
+                    }
+                    config = "# " + json.dumps(debug_info) + " #" + "\n" + config
                     break
 
     else:
         # No API available
         for url in sub_urls:
-
             allowed = ".yaml"
 
             if base64:
@@ -351,13 +384,16 @@ def config(base64=False, append_url=None):
                 # config.raise_for_status()
                 config = config.text
                 debug_info = {
-                    "sub": url, "error": "No API available.", "timestamp": time.time()}
+                    "sub": url,
+                    "error": "No API available.",
+                    "timestamp": time.time(),
+                }
                 config = "# " + json.dumps(debug_info) + " #" + "\n" + config
                 break
 
     if base64:
         # Deleting the first 1 lines of a string(debug_info)
         # string.find('\n')会返回第一个换行符的位置，加1表示从第二行开始切片，最后将切片后的字符串保存到new_string变量中
-        config = config[config.find('\n')+1:]
+        config = config[config.find("\n") + 1 :]
 
     return config

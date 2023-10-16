@@ -1,79 +1,84 @@
 <!DOCTYPE html>
 <html>
-
-<textarea id="raw" style="display: none;">
+  <textarea id="raw" style="display: none">
 {% autoescape false %}
 {{gist}}
 {% endautoescape %}
-</textarea>
+</textarea
+  >
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{title}}</title>
-    <link rel="stylesheet" href="https://unpkg.com/simpledotcss/simple.min.css">
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/simpledotcss/simple.min.css"
+    />
     <script src="https://unpkg.com/markdown-it@13.0.1/dist/markdown-it.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/default.min.css">
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/styles/default.min.css"
+    />
     <script src="https://unpkg.com/@highlightjs/cdn-assets@11.6.0/highlight.min.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1 id="title">{{title}}</h1>
     <div id="output" class="output"></div>
     <script>
-        var md = window.markdownit({
-            html: false,        // Enable HTML tags in source
-            xhtmlOut: false,        // Use '/' to close single tags (<br />).
-            // This is only for full CommonMark compatibility.
-            breaks: false,        // Convert '\n' in paragraphs into <br>
-            langPrefix: 'language-',  // CSS language prefix for fenced blocks. Can be
-            // useful for external highlighters.
-            linkify: true,        // Autoconvert URL-like text to links
+      var md = window.markdownit({
+        html: false, // Enable HTML tags in source
+        xhtmlOut: false, // Use '/' to close single tags (<br />).
+        // This is only for full CommonMark compatibility.
+        breaks: false, // Convert '\n' in paragraphs into <br>
+        langPrefix: "language-", // CSS language prefix for fenced blocks. Can be
+        // useful for external highlighters.
+        linkify: true, // Autoconvert URL-like text to links
 
-            // Enable some language-neutral replacement + quotes beautification
-            // For the full list of replacements, see https://github.com/markdown-it/markdown-it/blob/master/lib/rules_core/replacements.js
-            typographer: true,
+        // Enable some language-neutral replacement + quotes beautification
+        // For the full list of replacements, see https://github.com/markdown-it/markdown-it/blob/master/lib/rules_core/replacements.js
+        typographer: true,
 
-            // Double + single quotes replacement pairs, when typographer enabled,
-            // and smartquotes on. Could be either a String or an Array.
-            //
-            // For example, you can use '«»„“' for Russian, '„“‚‘' for German,
-            // and ['«\xA0', '\xA0»', '‹\xA0', '\xA0›'] for French (including nbsp).
-            quotes: '“”‘’',
+        // Double + single quotes replacement pairs, when typographer enabled,
+        // and smartquotes on. Could be either a String or an Array.
+        //
+        // For example, you can use '«»„“' for Russian, '„“‚‘' for German,
+        // and ['«\xA0', '\xA0»', '‹\xA0', '\xA0›'] for French (including nbsp).
+        quotes: "“”‘’",
 
-            // Highlighter function. Should return escaped HTML,
-            // or '' if the source string is not changed and should be escaped externally.
-            // If result starts with <pre... internal wrapper is skipped.
-            highlight: function (str, lang) {
-                if (lang && hljs.getLanguage(lang)) {
-                    try {
-                        return hljs.highlight(str, { language: lang }).value;
-                    } catch (__) { }
-                }
+        // Highlighter function. Should return escaped HTML,
+        // or '' if the source string is not changed and should be escaped externally.
+        // If result starts with <pre... internal wrapper is skipped.
+        highlight: function (str, lang) {
+          if (lang && hljs.getLanguage(lang)) {
+            try {
+              return hljs.highlight(str, { language: lang }).value;
+            } catch (__) {}
+          }
 
-                return ''; // use external default escaping
-            }
-        });
-        var raw = document.getElementById('raw').innerHTML;
-        var output = document.getElementById('output');
-        output.innerHTML = md.render(raw);
+          return ""; // use external default escaping
+        },
+      });
+      var raw = document.getElementById("raw").innerHTML;
+      var output = document.getElementById("output");
+      output.innerHTML = md.render(raw);
     </script>
     <script>
-        // Onclick title, show raw data in textarea
-        var title = document.getElementById('title');
-        title.onclick = function () {
-            var raw = document.getElementById('raw').innerHTML;
-            var textarea = document.createElement('textarea');
-            textarea.value = raw;
-            textarea.style.width = '100%';
-            textarea.style.height = '100%';
-            textarea.style.position = 'fixed';
-            textarea.style.top = '0';
-            textarea.style.left = '0';
-            textarea.style.zIndex = '9999';
-            document.body.appendChild(textarea);
-        }
+      // Onclick title, show raw data in textarea
+      var title = document.getElementById("title");
+      title.onclick = function () {
+        var raw = document.getElementById("raw").innerHTML;
+        var textarea = document.createElement("textarea");
+        textarea.value = raw;
+        textarea.style.width = "100%";
+        textarea.style.height = "100%";
+        textarea.style.position = "fixed";
+        textarea.style.top = "0";
+        textarea.style.left = "0";
+        textarea.style.zIndex = "9999";
+        document.body.appendChild(textarea);
+      };
     </script>
-</body>
-
+  </body>
 </html>

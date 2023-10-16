@@ -12,10 +12,10 @@ def sqrt(n, one):
     """
     # Use floating point arithmetic to make an initial guess
     floating_point_precision = 10**16
-    n_float = float((n * floating_point_precision) //
-                    one) / floating_point_precision
-    x = (int(floating_point_precision * math.sqrt(n_float))
-         * one) // floating_point_precision
+    n_float = float((n * floating_point_precision) // one) / floating_point_precision
+    x = (
+        int(floating_point_precision * math.sqrt(n_float)) * one
+    ) // floating_point_precision
     n_one = n * one
     while 1:
         x_old = x
@@ -50,9 +50,9 @@ def pi_chudnovsky_bs(digits):
             if a == 0:
                 Pab = Qab = 1
             else:
-                Pab = (6*a-5)*(2*a-1)*(6*a-1)
-                Qab = a*a*a*C3_OVER_24
-            Tab = Pab * (13591409 + 545140134*a)  # a(a) * p(a)
+                Pab = (6 * a - 5) * (2 * a - 1) * (6 * a - 1)
+                Qab = a * a * a * C3_OVER_24
+            Tab = Pab * (13591409 + 545140134 * a)  # a(a) * p(a)
             if a & 1:
                 Tab = -Tab
         else:
@@ -68,14 +68,15 @@ def pi_chudnovsky_bs(digits):
             Qab = Qam * Qmb
             Tab = Qmb * Tam + Pam * Tmb
         return Pab, Qab, Tab
+
     # how many terms to compute
-    DIGITS_PER_TERM = math.log10(C3_OVER_24/6/2/6)
-    N = int(digits/DIGITS_PER_TERM + 1)
+    DIGITS_PER_TERM = math.log10(C3_OVER_24 / 6 / 2 / 6)
+    N = int(digits / DIGITS_PER_TERM + 1)
     # Calclate P(0,N) and Q(0,N)
     P, Q, T = bs(0, N)
     one = 10**digits
-    sqrtC = sqrt(10005*one, one)
-    return (Q*426880*sqrtC) // T
+    sqrtC = sqrt(10005 * one, one)
+    return (Q * 426880 * sqrtC) // T
 
 
 def cal(n):

@@ -5,7 +5,7 @@ import flask
 import requests
 
 
-def mcskin(id='notch', format='image'):
+def mcskin(id="notch", format="image"):
     # If id is empty, return help message
     if id == None:
         return "Usage: ?id=[Player ID]&format=[url/json/image]"
@@ -28,11 +28,11 @@ def mcskin(id='notch', format='image'):
     if format == "url":
         return skinUrl
     elif format == "json":
-        dict = {"url": skinUrl, 'profile': profile, 'session': session}
-        return flask.Response(json.dumps(dict), mimetype='application/json')
+        dict = {"url": skinUrl, "profile": profile, "session": session}
+        return flask.Response(json.dumps(dict), mimetype="application/json")
     elif format == "image":
         # Get image
         image = requests.get(skinUrl).content
         return flask.Response(image, mimetype="image/png")
     else:
-        return flask.Response(skinUrl, mimetype='text/plain')
+        return flask.Response(skinUrl, mimetype="text/plain")

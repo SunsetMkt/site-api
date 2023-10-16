@@ -12,11 +12,13 @@ def getREADME():
 
 def readmeParser(text):
     available = []
-    whiteWords = ['🆓']
-    blackWords = ['🔐', '🌎']
+    whiteWords = ["🆓"]
+    blackWords = ["🔐", "🌎"]
     for line in text.split("\n"):
         # Must have whiteWords & should not have blackWords
-        if any(word in line for word in whiteWords) and not any(word in line for word in blackWords):
+        if any(word in line for word in whiteWords) and not any(
+            word in line for word in blackWords
+        ):
             available.append(line)
     return available
 
@@ -25,4 +27,6 @@ def main():
     # available = readmeParser(getREADME())
     # markdown = "\n".join(available)
     markdown_content = getREADME()
-    return flask.render_template("gist.html", title="awesome-free-chatgpt", gist=markdown_content)
+    return flask.render_template(
+        "gist.html", title="awesome-free-chatgpt", gist=markdown_content
+    )

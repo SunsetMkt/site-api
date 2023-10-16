@@ -19,11 +19,7 @@ def send_request(code):
     totp_token = totp.now()
 
     # Args
-    args = {
-        "pass": api_key,
-        "totp": totp_token,
-        'jsonerror': 1
-    }
+    args = {"pass": api_key, "totp": totp_token, "jsonerror": 1}
 
     # Req args: args
     # Req body: code
@@ -37,12 +33,14 @@ def get_code():
     import subprocess
     import tempfile
     from pathlib import Path
+
     if os.name == "nt":
         # Create a tmp file, open with notepad, wait user save and close, get code, delete file
 
         # Create tmp file with random name
-        tmp_file = Path(tempfile.gettempdir(
-        )) / Path(tempfile.gettempprefix() + next(tempfile._get_candidate_names()))
+        tmp_file = Path(tempfile.gettempdir()) / Path(
+            tempfile.gettempprefix() + next(tempfile._get_candidate_names())
+        )
 
         print(tmp_file)
         with open(tmp_file, "w") as f:
@@ -62,8 +60,9 @@ def get_code():
         # Create a tmp file, open with deafult cli editor, wait user save and close, get code, delete file
 
         # Create tmp file with random name
-        tmp_file = Path(tempfile.gettempdir(
-        )) / Path(tempfile.gettempprefix() + next(tempfile._get_candidate_names()))
+        tmp_file = Path(tempfile.gettempdir()) / Path(
+            tempfile.gettempprefix() + next(tempfile._get_candidate_names())
+        )
 
         print(tmp_file)
         with open(tmp_file, "w") as f:

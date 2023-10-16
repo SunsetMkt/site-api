@@ -1,122 +1,143 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clash 客户端和免费节点</title>
-    <link rel="stylesheet" href="/static/simple.min.css">
+    <link rel="stylesheet" href="/static/simple.min.css" />
     <style>
-        .china {
-            display: none;
-        }
+      .china {
+        display: none;
+      }
 
-        .collapse input[type="checkbox"] {
-            display: none;
-        }
+      .collapse input[type="checkbox"] {
+        display: none;
+      }
 
-        .collapse label {
-            cursor: pointer;
-        }
+      .collapse label {
+        cursor: pointer;
+      }
 
-        .collapse .content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
+      .collapse .content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+      }
 
-        .collapse input[type="checkbox"]:checked~.content {
-            max-height: 1000px;
-            transition: max-height 0.5s ease-in;
-        }
+      .collapse input[type="checkbox"]:checked ~ .content {
+        max-height: 1000px;
+        transition: max-height 0.5s ease-in;
+      }
 
-        .success {
-            display: flex;
-            align-items: center;
-            background-color: #d9f5d9;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #a3d9a3;
-            font-size: 18px;
-            color: #4d834d;
-        }
+      .success {
+        display: flex;
+        align-items: center;
+        background-color: #d9f5d9;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #a3d9a3;
+        font-size: 18px;
+        color: #4d834d;
+      }
 
-        .icon {
-            font-size: 28px;
-            margin-right: 10px;
-            color: #4d834d;
-        }
+      .icon {
+        font-size: 28px;
+        margin-right: 10px;
+        color: #4d834d;
+      }
 
-        .message {
-            font-weight: bold;
-        }
+      .message {
+        font-weight: bold;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <h1>Clash 客户端和配置文件</h1>
-        <p>为确保信息安全，请勿将页面链接分享给其他人。</p>
+      <h1>Clash 客户端和配置文件</h1>
+      <p>为确保信息安全，请勿将页面链接分享给其他人。</p>
     </header>
 
     <main>
-        <div class="{{china}}">
-            <div class="success">
-                <span class="icon">&#10003;</span>
-                <span class="message">您没有直接从中国连接服务器。</span>
-            </div>
+      <div class="{{china}}">
+        <div class="success">
+          <span class="icon">&#10003;</span>
+          <span class="message">您没有直接从中国连接服务器。</span>
         </div>
-        <h2>0. 校准设备时间</h2>
-        <p>访问时，服务器时间（UTC+8）为：{{date}}</p>
-        <h2>1. 下载客户端</h2>
-        <a href="{{cfw}}">Windows</a>
-        <a href="{{cfw_portable}}">Windows（免安装）</a>
-        <a href="{{cfa}}">Android</a>
-        <a href="{{mac}}">Mac</a>
-        <h2>2. 获取配置文件URL</h2>
-        <p>复制下方URL</p>
-        <code>{{subscribe_url}}</code>
-        <p><em>感谢<a href="{{subscribe_source_url}}">{{subscribe_source_name}}</a></em></p>
-        <h2>3. 在客户端应用配置文件</h2>
-        <a href="clash://install-config?url={{subscribe_encoded_url}}">点击此处尝试快速应用配置（可能无效）</a>
-        <h2>专业人员参考</h2>
-        <div class="collapse">
-            <input type="checkbox" id="toggle">
-            <label for="toggle">展开/折叠</label>
-            <div class="content">
-                <h3>请求IP地址</h3>
-                <p>{{ip}}</p>
-                <h3>在线预览配置文件</h3>
-                <a href="{{subscribe_url}}&preview=true">点击</a>
-                <h3>（不一定可靠的）共享Apple账号</h3>
-                <a href="https://idshare.top/">果书分享</a>
-                <p>在Store登录后下载Shadowrocket</p>
-                <h3>适用于其他Apple设备的客户端</h3>
-                <p>需要非中国Apple账号</p>
-                <a href="https://apps.apple.com/us/app/shadowrocket/id932747118">Shadowrocket（付费）</a>
-                <a href="https://apps.apple.com/us/app/stash-rule-based-proxy/id1596063349">Stash（付费）</a>
-                <h3>Base64配置和客户端</h3>
-                <code>{{base64_url}}</code>
-                <p>需要非中国Apple账号</p>
-                <a href="https://testflight.apple.com/join/sdBZzV82">Fair Plus 2</a>
-                <a href="https://apps.apple.com/us/app/fair-vpn/id1533873488">Fair VPN</a>
-                <a href="https://apps.apple.com/us/app/oneclick-safe-easy-fast/id1545555197">OneClick</a>
-                <!-- https://github.com/Alvin9999/new-pac/wiki/%E8%8B%B9%E6%9E%9C%E6%89%8B%E6%9C%BA%E7%BF%BB%E5%A2%99%E8%BD%AF%E4%BB%B6 -->
-            </div>
+      </div>
+      <h2>0. 校准设备时间</h2>
+      <p>访问时，服务器时间（UTC+8）为：{{date}}</p>
+      <h2>1. 下载客户端</h2>
+      <a href="{{cfw}}">Windows</a>
+      <a href="{{cfw_portable}}">Windows（免安装）</a>
+      <a href="{{cfa}}">Android</a>
+      <a href="{{mac}}">Mac</a>
+      <h2>2. 获取配置文件URL</h2>
+      <p>复制下方URL</p>
+      <code>{{subscribe_url}}</code>
+      <p>
+        <em
+          >感谢<a href="{{subscribe_source_url}}"
+            >{{subscribe_source_name}}</a
+          ></em
+        >
+      </p>
+      <h2>3. 在客户端应用配置文件</h2>
+      <a href="clash://install-config?url={{subscribe_encoded_url}}"
+        >点击此处尝试快速应用配置（可能无效）</a
+      >
+      <h2>专业人员参考</h2>
+      <div class="collapse">
+        <input type="checkbox" id="toggle" />
+        <label for="toggle">展开/折叠</label>
+        <div class="content">
+          <h3>请求IP地址</h3>
+          <p>{{ip}}</p>
+          <h3>在线预览配置文件</h3>
+          <a href="{{subscribe_url}}&preview=true">点击</a>
+          <h3>（不一定可靠的）共享Apple账号</h3>
+          <a href="https://idshare.top/">果书分享</a>
+          <p>在Store登录后下载Shadowrocket</p>
+          <h3>适用于其他Apple设备的客户端</h3>
+          <p>需要非中国Apple账号</p>
+          <a href="https://apps.apple.com/us/app/shadowrocket/id932747118"
+            >Shadowrocket（付费）</a
+          >
+          <a
+            href="https://apps.apple.com/us/app/stash-rule-based-proxy/id1596063349"
+            >Stash（付费）</a
+          >
+          <h3>Base64配置和客户端</h3>
+          <code>{{base64_url}}</code>
+          <p>需要非中国Apple账号</p>
+          <a href="https://testflight.apple.com/join/sdBZzV82">Fair Plus 2</a>
+          <a href="https://apps.apple.com/us/app/fair-vpn/id1533873488"
+            >Fair VPN</a
+          >
+          <a
+            href="https://apps.apple.com/us/app/oneclick-safe-easy-fast/id1545555197"
+            >OneClick</a
+          >
+          <!-- https://github.com/Alvin9999/new-pac/wiki/%E8%8B%B9%E6%9E%9C%E6%89%8B%E6%9C%BA%E7%BF%BB%E5%A2%99%E8%BD%AF%E4%BB%B6 -->
         </div>
-        <div class="{{china}}">
-            <h2>后记</h2>
-            <blockquote>
-                <p>我们希望有一天，那些设置障碍使自己的人民与世界隔离、使人民互相隔离的政府，将认识到他们这么做不但伤害自己的利益，也伤害自己公民和全人类的权利。</p>
-                <p alt="https://blog.zoom.us/zh/improving-our-policies-as-we-continue-to-enable-global-collaboration/">
-                    ——Zoom Video Communications, Inc.</p>
-            </blockquote>
-        </div>
+      </div>
+      <div class="{{china}}">
+        <h2>后记</h2>
+        <blockquote>
+          <p>
+            我们希望有一天，那些设置障碍使自己的人民与世界隔离、使人民互相隔离的政府，将认识到他们这么做不但伤害自己的利益，也伤害自己公民和全人类的权利。
+          </p>
+          <p
+            alt="https://blog.zoom.us/zh/improving-our-policies-as-we-continue-to-enable-global-collaboration/"
+          >
+            ——Zoom Video Communications, Inc.
+          </p>
+        </blockquote>
+      </div>
     </main>
 
     <footer>
-        <p>为确保信息安全，请勿将页面链接分享给其他人。</p>
+      <p>为确保信息安全，请勿将页面链接分享给其他人。</p>
     </footer>
-</body>
-
+  </body>
 </html>

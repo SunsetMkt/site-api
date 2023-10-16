@@ -2,7 +2,6 @@ import os
 
 import flask
 
-
 # Get current flask app
 app = flask.current_app
 

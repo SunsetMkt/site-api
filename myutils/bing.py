@@ -7,25 +7,25 @@ import requests
 useUrl = True
 
 # 设置时间（几天前），将 0 修改为你需要的时间，1 为昨天，2 为前天，-1 为明天，以此类推
-daysAgo = '-1'
+daysAgo = "-1"
 
 
 def bg():
     if useUrl:
         # Get arg: daysago
-        daysAgoQuery = flask.request.args.get('daysago')
+        daysAgoQuery = flask.request.args.get("daysago")
         # If daysago is empty, set daysago to -1
         if daysAgoQuery == None:
-            daysAgoQuery = '-1'
+            daysAgoQuery = "-1"
         data = req(daysAgoQuery)
     else:
         data = req(daysAgo)
 
-    return "https://cn.bing.com"+data['images'][0]['url']
+    return "https://cn.bing.com" + data["images"][0]["url"]
 
 
 def req(daysAgo):
-    url = "https://cn.bing.com/HPImageArchive.aspx?format=js&idx="+daysAgo+"&n=1"
+    url = "https://cn.bing.com/HPImageArchive.aspx?format=js&idx=" + daysAgo + "&n=1"
     r = requests.get(url)
     return r.json()
 
@@ -33,4 +33,4 @@ def req(daysAgo):
 def get():
     url = bg()
     # 302
-    return flask.Response(url, status=302, headers={'Location': url})
+    return flask.Response(url, status=302, headers={"Location": url})

@@ -17,10 +17,8 @@ def get_gist_info(gist_id):
     """
     Get gist info from github api
     """
-    url = 'https://api.github.com/gists/{}'.format(gist_id)
-    headers = {
-        "Accept": "application/vnd.github+json"
-    }
+    url = "https://api.github.com/gists/{}".format(gist_id)
+    headers = {"Accept": "application/vnd.github+json"}
     r = requests.get(url, headers=headers)
     if r.status_code == 200:
         return r.json()
@@ -35,9 +33,9 @@ def get_first_gist(gist_id):
     """
     gist_info = get_gist_info(gist_id)
     if gist_info:
-        files = gist_info['files']
+        files = gist_info["files"]
         for i in files:  # Who cares?
-            return files[i]['content']
+            return files[i]["content"]
     else:
         return "# Error"
 

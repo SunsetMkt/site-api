@@ -4,9 +4,9 @@
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en-US"> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html class="no-js" lang="en-US">
-<!--<![endif]-->
+  <!--<![endif]-->
 
-<head>
+  <head>
     <title>{{title}}</title>
     <meta charset="UTF-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -14,387 +14,418 @@
     <meta name="robots" content="noindex, nofollow" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <style id="cf_styles-css">
-        .border-gray-300 {
-            --border-opacity: 1;
-            border-color: #ebebeb;
-            border-color: rgba(235, 235, 235, var(--border-opacity))
+      .border-gray-300 {
+        --border-opacity: 1;
+        border-color: #ebebeb;
+        border-color: rgba(235, 235, 235, var(--border-opacity));
+      }
+
+      .border-solid {
+        border-style: solid;
+      }
+
+      .border-0 {
+        border-width: 0;
+      }
+
+      .border-t {
+        border-top-width: 1px;
+      }
+
+      .inline-block {
+        display: inline-block;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .font-mono {
+        font-family: monaco, courier, monospace;
+      }
+
+      .font-light {
+        font-weight: 300;
+      }
+
+      .font-normal {
+        font-weight: 400;
+      }
+
+      .text-13 {
+        font-size: 13px;
+      }
+
+      .text-15 {
+        font-size: 15px;
+      }
+
+      .text-60 {
+        font-size: 60px;
+      }
+
+      .text-3xl {
+        font-size: 1.875rem;
+      }
+
+      .leading-tight {
+        line-height: 1.25;
+      }
+
+      .leading-normal {
+        line-height: 1.5;
+      }
+
+      .leading-1\.3 {
+        line-height: 1.3;
+      }
+
+      .mx-auto {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .mr-2 {
+        margin-right: 0.5rem;
+      }
+
+      .mb-4 {
+        margin-bottom: 1rem;
+      }
+
+      .mt-6 {
+        margin-top: 1.5rem;
+      }
+
+      .mb-8 {
+        margin-bottom: 2rem;
+      }
+
+      .mb-15 {
+        margin-bottom: 3.75rem;
+      }
+
+      .p-0 {
+        padding: 0;
+      }
+
+      .py-10 {
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+      }
+
+      .pt-10 {
+        padding-top: 2.5rem;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .text-black-dark {
+        --text-opacity: 1;
+        color: #404040;
+        color: rgba(64, 64, 64, var(--text-opacity));
+      }
+
+      .text-gray-600 {
+        --text-opacity: 1;
+        color: #999;
+        color: rgba(153, 153, 153, var(--text-opacity));
+      }
+
+      .antialiased {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .w-240 {
+        width: 60rem;
+      }
+
+      .w-1\/2 {
+        width: 50%;
+      }
+
+      body,
+      html {
+        --text-opacity: 1;
+        color: #404040;
+        color: rgba(64, 64, 64, var(--text-opacity));
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI,
+          Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+          Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+        font-size: 16px;
+      }
+
+      *,
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      #what-happened-section p {
+        font-size: 15px;
+        line-height: 1.5;
+      }
+
+      .cf-error-footer .hidden {
+        display: none;
+      }
+
+      .cf-error-footer .cf-footer-ip-reveal-btn {
+        -webkit-appearance: button;
+        -moz-appearance: button;
+        appearance: button;
+        text-decoration: none;
+        background: none;
+        color: inherit;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        color: #0051c3;
+        -webkit-transition: color 0.15s ease;
+        transition: color 0.15s ease;
+      }
+
+      .cf-error-footer .cf-footer-ip-reveal-btn:hover {
+        color: #ee730a;
+      }
+
+      @media (max-width: 639px) {
+        .sm\:block {
+          display: block;
         }
 
-        .border-solid {
-            border-style: solid
+        .sm\:mb-1 {
+          margin-bottom: 0.25rem;
         }
 
-        .border-0 {
-            border-width: 0
+        .sm\:py-4 {
+          padding-top: 1rem;
+          padding-bottom: 1rem;
         }
 
-        .border-t {
-            border-top-width: 1px
+        .sm\:px-8 {
+          padding-left: 2rem;
+          padding-right: 2rem;
         }
 
-        .inline-block {
-            display: inline-block
+        .sm\:text-left {
+          text-align: left;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .md\:block {
+          display: block;
         }
 
-        .hidden {
-            display: none
+        .md\:text-3xl {
+          font-size: 1.875rem;
         }
 
-        .font-mono {
-            font-family: monaco, courier, monospace
+        .md\:mb-2 {
+          margin-bottom: 0.5rem;
         }
 
-        .font-light {
-            font-weight: 300
+        .md\:w-full {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 1023px) {
+        .lg\:text-sm {
+          font-size: 0.875rem;
         }
 
-        .font-normal {
-            font-weight: 400
+        .lg\:text-2xl {
+          font-size: 1.5rem;
         }
 
-        .text-13 {
-            font-size: 13px
+        .lg\:leading-relaxed {
+          line-height: 1.625;
         }
 
-        .text-15 {
-            font-size: 15px
+        .lg\:px-8 {
+          padding-left: 2rem;
+          padding-right: 2rem;
         }
 
-        .text-60 {
-            font-size: 60px
+        .lg\:pt-6 {
+          padding-top: 1.5rem;
         }
 
-        .text-3xl {
-            font-size: 1.875rem
+        .lg\:w-full {
+          width: 100%;
         }
+      }
 
-        .leading-tight {
-            line-height: 1.25
-        }
+      textarea {
+        width: 100%;
+        height: 150px;
+        padding: 4px 6px;
+        box-sizing: border-box;
+        border: 2px solid #999;
+        border-radius: 4px;
+        background-color: #ffffff;
+        font-size: 15px;
+      }
 
-        .leading-normal {
-            line-height: 1.5
-        }
+      textarea::-webkit-resizer {
+        border-width: 8px;
+        border-style: solid;
+        border-color: transparent #999 #999 transparent;
+      }
 
-        .leading-1\.3 {
-            line-height: 1.3
-        }
+      textarea::-moz-resizer {
+        border-width: 8px;
+        border-style: solid;
+        border-color: transparent #999 #999 transparent;
+      }
 
-        .mx-auto {
-            margin-left: auto;
-            margin-right: auto
-        }
+      textarea::-ms-resizer {
+        border-width: 8px;
+        border-style: solid;
+        border-color: transparent #999 #999 transparent;
+      }
 
-        .mr-2 {
-            margin-right: .5rem
-        }
+      textarea::-o-resizer {
+        border-width: 8px;
+        border-style: solid;
+        border-color: transparent #999 #999 transparent;
+      }
 
-        .mb-4 {
-            margin-bottom: 1rem
-        }
+      textarea::resizer {
+        border-width: 8px;
+        border-style: solid;
+        border-color: transparent #999 #999 transparent;
+      }
 
-        .mt-6 {
-            margin-top: 1.5rem
-        }
+      a {
+        color: #999;
+        text-decoration: none;
+      }
 
-        .mb-8 {
-            margin-bottom: 2rem
-        }
-
-        .mb-15 {
-            margin-bottom: 3.75rem
-        }
-
-        .p-0 {
-            padding: 0
-        }
-
-        .py-10 {
-            padding-top: 2.5rem;
-            padding-bottom: 2.5rem
-        }
-
-        .pt-10 {
-            padding-top: 2.5rem
-        }
-
-        .text-center {
-            text-align: center
-        }
-
-        .text-black-dark {
-            --text-opacity: 1;
-            color: #404040;
-            color: rgba(64, 64, 64, var(--text-opacity))
-        }
-
-        .text-gray-600 {
-            --text-opacity: 1;
-            color: #999;
-            color: rgba(153, 153, 153, var(--text-opacity))
-        }
-
-        .antialiased {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale
-        }
-
-        .w-240 {
-            width: 60rem
-        }
-
-        .w-1\/2 {
-            width: 50%
-        }
-
-        body,
-        html {
-            --text-opacity: 1;
-            color: #404040;
-            color: rgba(64, 64, 64, var(--text-opacity));
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-            font-size: 16px
-        }
-
-        *,
-        body,
-        html {
-            margin: 0;
-            padding: 0
-        }
-
-        * {
-            box-sizing: border-box
-        }
-
-        #what-happened-section p {
-            font-size: 15px;
-            line-height: 1.5
-        }
-
-        .cf-error-footer .hidden {
-            display: none
-        }
-
-        .cf-error-footer .cf-footer-ip-reveal-btn {
-            -webkit-appearance: button;
-            -moz-appearance: button;
-            appearance: button;
-            text-decoration: none;
-            background: none;
-            color: inherit;
-            border: none;
-            padding: 0;
-            font: inherit;
-            cursor: pointer;
-            color: #0051c3;
-            -webkit-transition: color .15s ease;
-            transition: color .15s ease
-        }
-
-        .cf-error-footer .cf-footer-ip-reveal-btn:hover {
-            color: #ee730a
-        }
-
-        @media (max-width:639px) {
-            .sm\:block {
-                display: block
-            }
-
-            .sm\:mb-1 {
-                margin-bottom: .25rem
-            }
-
-            .sm\:py-4 {
-                padding-top: 1rem;
-                padding-bottom: 1rem
-            }
-
-            .sm\:px-8 {
-                padding-left: 2rem;
-                padding-right: 2rem
-            }
-
-            .sm\:text-left {
-                text-align: left
-            }
-        }
-
-        @media (max-width:720px) {
-
-            .md\:block {
-                display: block
-            }
-
-            .md\:text-3xl {
-                font-size: 1.875rem
-            }
-
-            .md\:mb-2 {
-                margin-bottom: .5rem
-            }
-
-            .md\:w-full {
-                width: 100%
-            }
-        }
-
-        @media (max-width:1023px) {
-            .lg\:text-sm {
-                font-size: .875rem
-            }
-
-            .lg\:text-2xl {
-                font-size: 1.5rem
-            }
-
-            .lg\:leading-relaxed {
-                line-height: 1.625
-            }
-
-            .lg\:px-8 {
-                padding-left: 2rem;
-                padding-right: 2rem
-            }
-
-            .lg\:pt-6 {
-                padding-top: 1.5rem
-            }
-
-            .lg\:w-full {
-                width: 100%
-            }
-        }
-
-        textarea {
-            width: 100%;
-            height: 150px;
-            padding: 4px 6px;
-            box-sizing: border-box;
-            border: 2px solid #999;
-            border-radius: 4px;
-            background-color: #ffffff;
-            font-size: 15px;
-        }
-
-        textarea::-webkit-resizer {
-            border-width: 8px;
-            border-style: solid;
-            border-color: transparent #999 #999 transparent;
-        }
-
-        textarea::-moz-resizer {
-            border-width: 8px;
-            border-style: solid;
-            border-color: transparent #999 #999 transparent;
-        }
-
-        textarea::-ms-resizer {
-            border-width: 8px;
-            border-style: solid;
-            border-color: transparent #999 #999 transparent;
-        }
-
-        textarea::-o-resizer {
-            border-width: 8px;
-            border-style: solid;
-            border-color: transparent #999 #999 transparent;
-        }
-
-        textarea::resizer {
-            border-width: 8px;
-            border-style: solid;
-            border-color: transparent #999 #999 transparent;
-        }
-
-        a {
-            color: #999;
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: #404040;
-        }
+      a:hover {
+        color: #404040;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="cf-wrapper">
-        <div id="cf-error-details" class="p-0">
-            <header class="mx-auto pt-10 lg:pt-6 lg:px-8 w-240 lg:w-full mb-15 antialiased">
-                <h1
-                    class="inline-block md:block mr-2 md:mb-2 font-light text-60 md:text-3xl text-black-dark leading-tight">
-                    <span data-translate="error">{{status}}</span>
-                    <span>{{statuscode}}</span>
-                </h1>
-                <span
-                    class="inline-block md:block heading-ray-id font-mono text-15 lg:text-sm lg:leading-relaxed">{{time}}</span>
-                <h2 class="text-gray-600 leading-1.3 text-3xl lg:text-2xl font-light">{{msg}}</h2>
-            </header>
+      <div id="cf-error-details" class="p-0">
+        <header
+          class="mx-auto pt-10 lg:pt-6 lg:px-8 w-240 lg:w-full mb-15 antialiased"
+        >
+          <h1
+            class="inline-block md:block mr-2 md:mb-2 font-light text-60 md:text-3xl text-black-dark leading-tight"
+          >
+            <span data-translate="error">{{status}}</span>
+            <span>{{statuscode}}</span>
+          </h1>
+          <span
+            class="inline-block md:block heading-ray-id font-mono text-15 lg:text-sm lg:leading-relaxed"
+            >{{time}}</span
+          >
+          <h2 class="text-gray-600 leading-1.3 text-3xl lg:text-2xl font-light">
+            {{msg}}
+          </h2>
+        </header>
 
-            <section class="w-240 lg:w-full mx-auto mb-8 lg:px-8">
-                <div id="what-happened-section" class="w-1/2 md:w-full">
-                    <h2 class="text-3xl leading-tight font-normal mb-4 text-black-dark antialiased"
-                        data-translate="what_happened">发生了什么？</h2>
-                    {% autoescape false %}
-                    <p>{{whathappened}}</p>
-                    {% endautoescape %}
-                </div>
+        <section class="w-240 lg:w-full mx-auto mb-8 lg:px-8">
+          <div id="what-happened-section" class="w-1/2 md:w-full">
+            <h2
+              class="text-3xl leading-tight font-normal mb-4 text-black-dark antialiased"
+              data-translate="what_happened"
+            >
+              发生了什么？
+            </h2>
+            {% autoescape false %}
+            <p>{{whathappened}}</p>
+            {% endautoescape %}
+          </div>
 
+          <div
+            id="resolution-copy-section"
+            class="w-1/2 mt-6 text-15 leading-normal"
+          >
+            <h2
+              class="text-3xl leading-tight font-normal mb-4 text-black-dark antialiased"
+              data-translate="what_can_i_do"
+            >
+              我能做什么？
+            </h2>
+            <p>{{whatcanido}}</p>
+          </div>
+        </section>
 
-                <div id="resolution-copy-section" class="w-1/2 mt-6 text-15 leading-normal">
-                    <h2 class="text-3xl leading-tight font-normal mb-4 text-black-dark antialiased"
-                        data-translate="what_can_i_do">我能做什么？</h2>
-                    <p>{{whatcanido}}</p>
-                </div>
+        <div
+          class="cf-error-footer cf-wrapper w-240 lg:w-full py-10 sm:py-4 sm:px-8 mx-auto text-center sm:text-left border-solid border-0 border-t border-gray-300"
+        >
+          <p class="text-13">
+            <span
+              id="cf-footer-item-ip"
+              class="cf-footer-item hidden sm:block sm:mb-1"
+            >
+              IP地址:
+              <button
+                type="button"
+                id="cf-footer-ip-reveal"
+                class="cf-footer-ip-reveal-btn"
+              >
+                点击显示
+              </button>
+              <span class="hidden" id="cf-footer-ip">{{ip}}</span>
+              <br />
+            </span>
+            <span class="cf-footer-item sm:block sm:mb-1">{{footer}}</span>
+          </p>
+          <script>
+            (function () {
+              function d() {
+                var b = a.getElementById("cf-footer-item-ip"),
+                  c = a.getElementById("cf-footer-ip-reveal");
+                b &&
+                  "classList" in b &&
+                  (b.classList.remove("hidden"),
+                  c.addEventListener("click", function () {
+                    c.classList.add("hidden");
+                    a.getElementById("cf-footer-ip").classList.remove("hidden");
+                  }));
+              }
+              var a = document;
+              document.addEventListener &&
+                a.addEventListener("DOMContentLoaded", d);
+            })();
+          </script>
+          <script>
+            /* https://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize */
+            const tx = document.getElementsByTagName("textarea");
+            for (let i = 0; i < tx.length; i++) {
+              tx[i].setAttribute(
+                "style",
+                "height:" + tx[i].scrollHeight + "px;overflow-y:hidden;"
+              );
+              tx[i].addEventListener("input", OnInput, false);
+            }
 
-            </section>
-
-
-            <div
-                class="cf-error-footer cf-wrapper w-240 lg:w-full py-10 sm:py-4 sm:px-8 mx-auto text-center sm:text-left border-solid border-0 border-t border-gray-300">
-                <p class="text-13">
-                    <span id="cf-footer-item-ip" class="cf-footer-item hidden sm:block sm:mb-1">
-                        IP地址:
-                        <button type="button" id="cf-footer-ip-reveal" class="cf-footer-ip-reveal-btn">点击显示</button>
-                        <span class="hidden" id="cf-footer-ip">{{ip}}</span>
-                        <br>
-                    </span>
-                    <span class="cf-footer-item sm:block sm:mb-1">{{footer}}</span>
-
-                </p>
-                <script>
-                    (function () {
-                        function d() {
-                            var b = a.getElementById("cf-footer-item-ip"),
-                                c = a.getElementById("cf-footer-ip-reveal");
-                            b && "classList" in b && (b.classList.remove("hidden"), c.addEventListener("click", function () {
-                                c.classList.add("hidden");
-                                a.getElementById("cf-footer-ip").classList.remove("hidden")
-                            }))
-                        }
-                        var a = document;
-                        document.addEventListener && a.addEventListener("DOMContentLoaded", d)
-                    })();
-                </script>
-                <script>
-                    /* https://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize */
-                    const tx = document.getElementsByTagName("textarea");
-                    for (let i = 0; i < tx.length; i++) {
-                        tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
-                        tx[i].addEventListener("input", OnInput, false);
-                    }
-
-                    function OnInput() {
-                        this.style.height = 0;
-                        this.style.height = (this.scrollHeight) + "px";
-                    }
-                </script>
-            </div>
+            function OnInput() {
+              this.style.height = 0;
+              this.style.height = this.scrollHeight + "px";
+            }
+          </script>
         </div>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>

@@ -15,8 +15,8 @@ def verify_totp(secret, code):
     return totp.verify(code)
 
 
-if __name__ == '__main__':
-    secret = 'base32secret3232'
+if __name__ == "__main__":
+    secret = "base32secret3232"
     print(secret)
     uri = pyotp.totp.TOTP(secret).provisioning_uri("myuser")
     print(uri)

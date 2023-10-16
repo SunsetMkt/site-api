@@ -20,10 +20,14 @@ def toB():
         url = urllib.parse.unquote(url)
         # Remove host/api/url? from url
         url = url.replace(flask.request.host_url + "api/url?", "")
-    return flask.Response(pybs.encode_string(url), mimetype='text/plain')
+    return flask.Response(pybs.encode_string(url), mimetype="text/plain")
 
 
 def fromB(url):
     # 302
     url = urllib.parse.unquote(url)
-    return flask.Response(pybs.decode_string(url), status=302, headers={'Location': pybs.decode_string(url)})
+    return flask.Response(
+        pybs.decode_string(url),
+        status=302,
+        headers={"Location": pybs.decode_string(url)},
+    )
