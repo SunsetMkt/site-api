@@ -215,13 +215,12 @@ def config(base64=False, append_url=None):
         # "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/config.yaml", # 效果不佳。
         # "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/2/config.yaml", # 效果不佳。
         # "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/3/config.yaml", # 效果不佳。
-        "https://sub.sharecentre.online/sub",  # 信任 # https://t.me/ShareCentrePro
+        # "https://sub.sharecentre.online/sub",  # 效果不佳 # https://t.me/ShareCentrePro
         # "https://get.ooop.ink",  # 能用
-        "https://woc.ooop.ink",  # https://t.me/aries_init
+        # "https://woc.ooop.ink",  # https://t.me/aries_init
         # "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml" # 长期不更新
         # "https://github.com/yu-steven/openit" # 纪念
-        "https://sub.yxjnode.com/sub",  # 来自sharecentre # https://t.me/ShareCentrePro
-        "https://sub.pmsub.me/clash.yaml",  # 效果不佳，置后 # https://t.me/nodpai
+        "https://sub.pmsub.me/clash.yaml",  # # https://t.me/nodpai
     ]
 
     api_urls = [
