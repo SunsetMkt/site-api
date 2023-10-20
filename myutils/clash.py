@@ -221,6 +221,9 @@ def config(base64=False, append_url=None):
         # "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml" # 长期不更新
         # "https://github.com/yu-steven/openit" # 纪念
         "https://sub.pmsub.me/clash.yaml",  # # https://t.me/nodpai
+        # "https://gitlab.com/free9999/ipupdate/-/raw/master/clash.meta/config.yaml",
+        # "https://gitlab.com/free9999/ipupdate/-/raw/master/clash.meta/2/config.yaml",
+        # "https://gitlab.com/free9999/ipupdate/-/raw/master/clash.meta/3/config.yaml",
     ]
 
     api_urls = [
