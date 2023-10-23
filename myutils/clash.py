@@ -209,7 +209,7 @@ def config(base64=False, append_url=None):
     sub_urls = [
         # "https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml",
         "https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub",  # 能用
-        "https://raw.githubusercontent.com/openrunner/clash-freenode/main/clash.yaml",  # 效果不佳。
+        # "https://raw.githubusercontent.com/openrunner/clash-freenode/main/clash.yaml",  # 编码错误
         # "https://raw.githubusercontent.com/learnhard-cn/free_proxy_ss/main/config.yaml", # 效果不佳。
         # "https://raw.githubusercontent.com/learnhard-cn/free_proxy_ss/main/clash/config.yaml", # 效果不佳。
         # "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/config.yaml", # 效果不佳。
