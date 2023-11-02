@@ -16,7 +16,7 @@ def cfw():
     try:
         # Get latest release
         r = requests.get(
-            "https://api.github.com/repos/Fndroid/clash_for_windows_pkg/releases/latest",
+            "https://api.github.com/repos/zzzgydi/clash-verge/releases/latest",
             timeout=1,
         )
         r.raise_for_status()
@@ -28,10 +28,10 @@ def cfw():
         # Get name: url
         asset_urls = {asset["name"]: asset["browser_download_url"] for asset in assets}
 
-        # Return name Clash.for.Windows.Setup.x.xx.x.exe
+        # Return name Clash.Verge_1.3.8_x64-setup.exe
         # Check all names contains Setup
         for name in asset_urls:
-            if "Setup" in name and "ia32" not in name and "arm64" not in name:
+            if "x64-setup.exe" in name:
                 installer = name
 
         # Return url
@@ -49,7 +49,7 @@ def cfw_portable():
     try:
         # Get latest release
         r = requests.get(
-            "https://api.github.com/repos/Fndroid/clash_for_windows_pkg/releases/latest",
+            "https://api.github.com/repos/zzzgydi/clash-verge/releases/latest",
             timeout=1,
         )
         r.raise_for_status()
@@ -61,10 +61,10 @@ def cfw_portable():
         # Get name: url
         asset_urls = {asset["name"]: asset["browser_download_url"] for asset in assets}
 
-        # Return name Clash.for.Windows.Setup.x.xx.x.exe
+        # Return name Clash.Verge_1.3.8_x64_portable.zip
         # Check all names contains Setup
         for name in asset_urls:
-            if "win.7z" in name and "ia32" not in name and "arm64" not in name:
+            if "x64_portable.zip" in name:
                 installer = name
 
         # Return url
@@ -82,7 +82,7 @@ def cfa():
     try:
         # Get latest release
         r = requests.get(
-            "https://api.github.com/repos/Kr328/ClashForAndroid/releases/latest",
+            "https://api.github.com/repos/MetaCubeX/ClashMetaForAndroid/releases/latest",
             timeout=1,
         )
         r.raise_for_status()
@@ -94,10 +94,10 @@ def cfa():
         # Get name: url
         asset_urls = {asset["name"]: asset["browser_download_url"] for asset in assets}
 
-        # Return name Clash.for.Windows.Setup.x.xx.x.exe
+        # Return name cmfa-2.8.9-meta-universal-release.apk
         # Check all names contains Setup
         for name in asset_urls:
-            if "premium-universal-release" in name:
+            if "universal-release.apk" in name:
                 installer = name
 
         # Return url
