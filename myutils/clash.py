@@ -195,7 +195,6 @@ def render(china=False):
         subscribe_encoded_url=subscribe_encoded_url,
         china=chinaclass,
         date=dateStr,
-        mac=cfx(),
         ip=cfstyle.get_ip(),
     )
 
