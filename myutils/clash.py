@@ -16,7 +16,7 @@ def cfw():
     try:
         # Get latest release
         r = requests.get(
-            "https://api.github.com/repos/keiko233/clash-nyanpasu/releases/latest",
+            "https://api.github.com/repos/clash-verge-rev/clash-verge-rev/releases/latest",
             timeout=1,
         )
         r.raise_for_status()
@@ -49,7 +49,7 @@ def cfw_portable():
     try:
         # Get latest release
         r = requests.get(
-            "https://api.github.com/repos/keiko233/clash-nyanpasu/releases/latest",
+            "https://api.github.com/repos/clash-verge-rev/clash-verge-rev/releases/latest",
             timeout=1,
         )
         r.raise_for_status()
@@ -116,7 +116,7 @@ def cfx():
     try:
         # Get latest release
         r = requests.get(
-            "https://api.github.com/repos/yichengchen/clashX/releases/latest", timeout=1
+            "https://api.github.com/repos/clash-verge-rev/clash-verge-rev/releases/latest", timeout=1
         )
         r.raise_for_status()
         release = r.json()
