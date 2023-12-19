@@ -1537,3 +1537,22 @@ def api_v1_b23tv_parse():
     return flask.Response(
         myutils.b23tv.access_b23_url_and_return_real_url(url), mimetype="text/plain"
     )
+
+
+# /earthquakecn
+@urls_blueprint.route("/earthquakecn")
+def api_v1_earthquakecn():
+    """
+    chinaeew.cn API
+    chinaeew.cn
+    ---
+    tags:
+        - china
+    responses:
+        200:
+            description: JSON"""
+    url = base64.b64decode(
+        "aHR0cHM6Ly9tb2JpbGUtbmV3LmNoaW5hZWV3LmNuL3YxL2Vhcmx5d2FybmluZ3M/dXBkYXRlcz0zJnN0YXJ0X2F0PQ=="
+    ).decode("utf-8")
+    resp = requests.get(url).text
+    return flask.Response(resp, mimetype="application/json")
