@@ -104,7 +104,7 @@ def encWbi(params: dict, img_key: str, sub_key: str):
 
 def getWbiKeys() -> tuple[str, str]:
     "获取最新的 img_key 和 sub_key"
-    resp = requests.get("https://api.bilibili.com/x/web-interface/nav")
+    resp = requests.get("https://api.bilibili.com/x/web-interface/nav", headers=headers)
     resp.raise_for_status()
     json_content = resp.json()
     img_url: str = json_content["data"]["wbi_img"]["img_url"]
