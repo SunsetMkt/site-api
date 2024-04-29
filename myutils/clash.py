@@ -116,7 +116,8 @@ def cfx():
     try:
         # Get latest release
         r = requests.get(
-            "https://api.github.com/repos/clash-verge-rev/clash-verge-rev/releases/latest", timeout=1
+            "https://api.github.com/repos/clash-verge-rev/clash-verge-rev/releases/latest",
+            timeout=1,
         )
         r.raise_for_status()
         release = r.json()
@@ -151,7 +152,9 @@ def ios():
 def subscribe():
     # https://github.com/paimonhub/Paimonnode
     # https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml
-    subscribe_source_name = "所有分享节点和订阅的组织和个人，由API自动聚合（来源见项目源码）"
+    subscribe_source_name = (
+        "所有分享节点和订阅的组织和个人，由API自动聚合（来源见项目源码）"
+    )
     subscribe_source_url = "https://api.lwd-temp.top/api/dir/var/task/myutils/clash.py/"
     subscribe_url = (
         "https://api.lwd-temp.top/api/clash/config" + "?key=" + license.generate_key()
@@ -211,22 +214,22 @@ def config(base64=False, append_url=None):
         # "https://raw.githubusercontent.com/openrunner/clash-freenode/main/clash.yaml",  # 编码错误
         # "https://raw.githubusercontent.com/learnhard-cn/free_proxy_ss/main/config.yaml", # 效果不佳。
         # "https://raw.githubusercontent.com/learnhard-cn/free_proxy_ss/main/clash/config.yaml", # 效果不佳。
-        # "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/config.yaml", # 效果不佳。
-        # "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/2/config.yaml", # 效果不佳。
-        # "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/3/config.yaml", # 效果不佳。
-        # "https://sub.sharecentre.online/sub",  # 效果不佳 # https://t.me/ShareCentrePro
+        "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/config.yaml", # 效果不佳。
+        "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/2/config.yaml", # 效果不佳。
+        "https://gitlab.com/free9999/ipupdate/-/raw/master/clash/3/config.yaml", # 效果不佳。
+        "https://sub.sharecentre.online/sub",  # 效果不佳 # https://t.me/ShareCentrePro
         # "https://get.ooop.ink",  # 能用
         # "https://woc.ooop.ink",  # https://t.me/aries_init
         # "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml" # 长期不更新
         # "https://github.com/yu-steven/openit" # 纪念
         "https://sub.pmsub.me/clash.yaml",  # https://t.me/nodpai
-        # "https://gitlab.com/free9999/ipupdate/-/raw/master/clash.meta/config.yaml",
-        # "https://gitlab.com/free9999/ipupdate/-/raw/master/clash.meta/2/config.yaml",
-        # "https://gitlab.com/free9999/ipupdate/-/raw/master/clash.meta/3/config.yaml",
-        "https://fku-ppg.co.uk/",  # 未知来源
+        "https://gitlab.com/free9999/ipupdate/-/raw/master/clash.meta/config.yaml",
+        "https://gitlab.com/free9999/ipupdate/-/raw/master/clash.meta/2/config.yaml",
+        "https://gitlab.com/free9999/ipupdate/-/raw/master/clash.meta/3/config.yaml",
+        # "https://fku-ppg.co.uk/",  # 未知来源
         "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml",
-        "https://raw.githubusercontent.com/openrunner/clash-freenode/main/clash.yaml",
-        "https://raw.githubusercontent.com/learnhard-cn/free_proxy_ss/main/clash/config.yaml",
+        # "https://raw.githubusercontent.com/openrunner/clash-freenode/main/clash.yaml",
+        # "https://raw.githubusercontent.com/learnhard-cn/free_proxy_ss/main/clash/config.yaml",
     ]
 
     api_urls = [
