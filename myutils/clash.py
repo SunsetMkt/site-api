@@ -234,7 +234,7 @@ def config(base64=False, append_url=None):
 
     api_urls = [
         "https://sub.xeton.dev/sub",
-        "https://api.wcc.best/sub",
+        # "https://api.wcc.best/sub",
         "https://api.dler.io/sub",
         "https://api.sublink.dev/sub",
         "https://sub.id9.cc/sub",
