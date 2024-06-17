@@ -17,12 +17,17 @@ def api_dir(path):
         # Get files
         files = os.listdir(path)
         # Generate HTML code
-        html = "<html><head><title>Index of " + path + \
-            "</title></head><body><h1>Index of " + path + "</h1><hr><ul>"
+        html = (
+            "<html><head><title>Index of "
+            + path
+            + "</title></head><body><h1>Index of "
+            + path
+            + "</h1><hr><ul>"
+        )
         for file in files:
-            html += "<li><a href=\"" + file + "/" + "\">" + file + "</a></li>"
+            html += '<li><a href="' + file + "/" + '">' + file + "</a></li>"
         html += "</ul><hr></body></html>"
-        return flask.Response(html, mimetype='text/html')
+        return flask.Response(html, mimetype="text/html")
     # If path is a file, return it
     elif os.path.isfile(path):
         # Get file
@@ -44,12 +49,17 @@ def api_dir(path):
             # Get files
             files = os.listdir(path)
             # Generate HTML code
-            html = "<html><head><title>Index of " + path + \
-                "</title></head><body><h1>Index of " + path + "</h1><hr><ul>"
+            html = (
+                "<html><head><title>Index of "
+                + path
+                + "</title></head><body><h1>Index of "
+                + path
+                + "</h1><hr><ul>"
+            )
             for file in files:
-                html += "<li><a href=\"" + file + "/" + "\">" + file + "</a></li>"
+                html += '<li><a href="' + file + "/" + '">' + file + "</a></li>"
             html += "</ul><hr></body></html>"
-            return flask.Response(html, mimetype='text/html')
+            return flask.Response(html, mimetype="text/html")
         else:
             return flask.abort(404, path + " not found")
     # If path is not a file or directory, return 404
@@ -63,8 +73,10 @@ def api_dir_root1():
     # Get files
     files = os.listdir("/")
     # Generate HTML code
-    html = "<html><head><title>Index of /</title></head><body><h1>Index of /</h1><hr><ul>"
+    html = (
+        "<html><head><title>Index of /</title></head><body><h1>Index of /</h1><hr><ul>"
+    )
     for file in files:
-        html += "<li><a href=\"" + file + "/" + "\">" + file + "</a></li>"
+        html += '<li><a href="' + file + "/" + '">' + file + "</a></li>"
     html += "</ul><hr></body></html>"
-    return flask.Response(html, mimetype='text/html')
+    return flask.Response(html, mimetype="text/html")

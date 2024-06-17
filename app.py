@@ -38,12 +38,12 @@ except Exception:
     app.config["GIT_HASH"] = "unknown"
 
 swagger_config = flasgger.Swagger.DEFAULT_CONFIG
-swagger_config[
-    "swagger_ui_bundle_js"
-] = "//unpkg.com/swagger-ui-dist@4/swagger-ui-bundle.js"
-swagger_config[
-    "swagger_ui_standalone_preset_js"
-] = "//unpkg.com/swagger-ui-dist@4/swagger-ui-standalone-preset.js"
+swagger_config["swagger_ui_bundle_js"] = (
+    "//unpkg.com/swagger-ui-dist@4/swagger-ui-bundle.js"
+)
+swagger_config["swagger_ui_standalone_preset_js"] = (
+    "//unpkg.com/swagger-ui-dist@4/swagger-ui-standalone-preset.js"
+)
 swagger_config["jquery_js"] = "//unpkg.com/jquery@3.6.4/dist/jquery.min.js"
 swagger_config["swagger_ui_css"] = "//unpkg.com/swagger-ui-dist@4/swagger-ui.css"
 swagger_template = {
@@ -468,7 +468,9 @@ def api_clash_config():
         preview_content = (
             "```yaml" + "\n" + myutils.clash.config(append_url=appendURL) + "\n" + "```"
         )
-        return flask.render_template("gist.html", title="YAML预览", gist=preview_content)
+        return flask.render_template(
+            "gist.html", title="YAML预览", gist=preview_content
+        )
 
 
 # Handle /api/clash/base64

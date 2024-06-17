@@ -542,7 +542,7 @@ def api_v1_raiseHTTPError():
 # Check Freenom Domain Expiration Info
 
 
-@urls_blueprint.route("/freenom", methods=["GET"])
+# @urls_blueprint.route("/freenom", methods=["GET"])
 def api_v1_freenom():
     """
     Check Freenom Domain Expiration Info
@@ -579,7 +579,7 @@ def api_v1_freenom():
     )
 
 
-@urls_blueprint.route("/freenompost", methods=["POST"])
+# @urls_blueprint.route("/freenompost", methods=["POST"])
 def api_v1_freenompost():
     """
     Check Freenom Domain Expiration Info
@@ -628,7 +628,7 @@ if myutils.verceldetect.isVercel():
     # exec api
     # Get posted Python code and execute it.
     # Return the result.
-    @urls_blueprint.route("/exec", methods=["POST"])
+    # @urls_blueprint.route("/exec", methods=["POST"])
     def api_v1_exec():
         """
         Get posted Python code and execute it.
@@ -857,7 +857,7 @@ def api_v1_china_strict():
 
 # dxx api
 # Return the latest fake dxx share page
-@urls_blueprint.route("/dxx")
+# @urls_blueprint.route("/dxx")
 def api_v1_dxx():
     """
     Return the latest fake dxx share page
@@ -975,7 +975,7 @@ def api_v1_unvcode():
 
 # sixty-four api
 # with China IP check
-@urls_blueprint.route("/sixty-four")
+# @urls_blueprint.route("/sixty-four")
 def api_v1_sixty_four():
     """
     sixty-four
@@ -1034,7 +1034,7 @@ def api_v1_firefox():
 
 
 # Get Kaspersky Internet Security zh-Hans Installer
-@urls_blueprint.route("/kaspersky")
+# @urls_blueprint.route("/kaspersky")
 def api_v1_kaspersky():
     """
     Get Kaspersky Internet Security Installer
@@ -1072,7 +1072,7 @@ def api_v1_kaspersky():
 # Not working, seems that Google needs more args to build a functionable installer
 # https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B00000000-0000-0000-0000-000000000000%7D%26lang%3Dzh-CN%26browser%3D0%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/chrome/install/ChromeStandaloneSetup64.exe
 # Fxxk Google
-@urls_blueprint.route("/chrome")
+# @urls_blueprint.route("/chrome")
 def api_v1_chrome():
     """
     Get Chrome Offline Installer for Windows x64
@@ -1236,7 +1236,7 @@ def api_v1_hmcl():
 
 
 # Get COVID-19 report from China CDC
-@urls_blueprint.route("/chinacovid19")
+# @urls_blueprint.route("/chinacovid19")
 def api_v1_chinacovid19():
     """
     Get COVID-19 report from China CDC
@@ -1260,7 +1260,7 @@ def api_v1_chinacovid19():
 
 
 # Get rustdesl executable
-@urls_blueprint.route("/rustdesk")
+# @urls_blueprint.route("/rustdesk")
 def api_v1_rustdesk():
     """
     Get rustdesk executable
@@ -1304,7 +1304,7 @@ def api_v1_rustdesk():
 
 
 # Get license key
-@urls_blueprint.route("/license")
+# @urls_blueprint.route("/license")
 def api_v1_license():
     """
     Get API license key
@@ -1334,7 +1334,7 @@ def api_v1_hitokoto():
 
 
 # thispersondoesnotexist
-@urls_blueprint.route("/thispersondoesnotexist")
+# @urls_blueprint.route("/thispersondoesnotexist")
 def api_v1_thispersondoesnotexist():
     """
     this-person-does-not-exist.com API
@@ -1416,7 +1416,7 @@ def api_v1_thispersondoesnotexist():
 
 
 # awesome_free_chatgpt
-@urls_blueprint.route("/awesome_free_chatgpt")
+# @urls_blueprint.route("/awesome_free_chatgpt")
 def api_v1_awesome_free_chatgpt():
     """
     awesome_free_chatgpt API
@@ -1431,7 +1431,7 @@ def api_v1_awesome_free_chatgpt():
 
 
 # agefans
-@urls_blueprint.route("/agefans")
+# @urls_blueprint.route("/agefans")
 def api_v1_agefans():
     """
     agefans API
@@ -1446,11 +1446,13 @@ def api_v1_agefans():
         "https://raw.githubusercontent.com/agefanscom/website/main/README.md"
     )
     markdown_content.raise_for_status()
-    return flask.render_template("gist.html", gist=markdown_content.text, title="AGE动漫")
+    return flask.render_template(
+        "gist.html", gist=markdown_content.text, title="AGE动漫"
+    )
 
 
 # /blocky/check
-@urls_blueprint.route("/blocky/check")
+# @urls_blueprint.route("/blocky/check")
 def api_v1_blocky_check():
     """
     Blocky Test Now API
@@ -1472,7 +1474,7 @@ def api_v1_blocky_check():
 
 
 # /blocky/report
-@urls_blueprint.route("/blocky/report")
+# @urls_blueprint.route("/blocky/report")
 def api_v1_blocky_report():
     """
     Blocky Report API
@@ -1494,7 +1496,7 @@ def api_v1_blocky_report():
 
 
 # /b23tv/get
-@urls_blueprint.route("/b23tv/get")
+# @urls_blueprint.route("/b23tv/get")
 def api_v1_b23tv_get():
     """
     Get b23.tv link for a given Bilibili URL
@@ -1516,7 +1518,7 @@ def api_v1_b23tv_get():
 
 
 # /b23tv/parse
-@urls_blueprint.route("/b23tv/parse")
+# @urls_blueprint.route("/b23tv/parse")
 def api_v1_b23tv_parse():
     """
     Get Bilibili URL link for a given b23.tv

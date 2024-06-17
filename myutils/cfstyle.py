@@ -140,11 +140,13 @@ Form:
 {form_str}"""
     return html
 
+
 def isProduction():
     try:
         return flask.current_app.config["DEBUG"] == False
     except:
         return True
+
 
 def cfstyle(
     title="标题",
@@ -166,11 +168,11 @@ def cfstyle(
         + sys.version
     )
     # Get Debug mode
-    #debug_mode = app.config["DEBUG"]
+    # debug_mode = app.config["DEBUG"]
     # Get develpoment mode
-    #development_mode = app.config["ENV"] == "development"
+    # development_mode = app.config["ENV"] == "development"
     # Get production mode
-    #production_mode = app.config["ENV"] == "production"
+    # production_mode = app.config["ENV"] == "production"
     # timestamp
     timestamp = time.time()
     if isProduction():
